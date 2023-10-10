@@ -29,7 +29,13 @@ import java.sql.Statement;
 		
 		protected ImageIcon logo; 
 		protected JLabel logo2;
+		protected ImageIcon logout = new ImageIcon("logout.png");
+		protected JButton botonLogOut = new JButton(logout);
+		protected ImageIcon user= new ImageIcon("user.png");
+		protected JButton user2= new JButton(user);
+		protected ImageIcon image;
 		public Inicio () {
+			ImageIcon image = new ImageIcon("logot.jpg");
 			String imagenFondo = "fondoo.jpg";
 			Image fondo = new ImageIcon(imagenFondo).getImage();
 
@@ -38,7 +44,7 @@ import java.sql.Statement;
 				protected void paintComponent(Graphics g) {
 					super.paintComponent(g);
 					this.setBackground(Color.white);
-					g.drawImage(fondo, 0, 220, getWidth(), getHeight(), this);
+					g.drawImage(fondo, 0, 150, getWidth(), 800, this);
 				}
 			});
 			
@@ -48,21 +54,40 @@ import java.sql.Statement;
 			
 			System.out.println("Existo!!");
 		
-			this.setVisible(true);
 			
-			logo= new ImageIcon ("Logo_BOOK4U-removebg-preview.png");
+			
+			logo= new ImageIcon ("logo.png");
 			logo2= new JLabel(); 
-			
 			logo2.setIcon(logo);
-			logo2.setBounds(695, 0, 420, 270);
+			logo2.setBounds(725, -150, 500, 500);
+			botonLogOut.setBorderPainted(false);
+			botonLogOut.setOpaque(false);
+			botonLogOut.setContentAreaFilled(false);
+			botonLogOut.setBounds(20, 40, 100, 100);
+			botonLogOut.addActionListener(this);
+			user2.setBorderPainted(false);
+			user2.setOpaque(false);
+			user2.setContentAreaFilled(false);
+			user2.setBounds(1800,40,100,100);
+			user2.addActionListener(this);
+			
 			this.add(logo2);
+			this.add(botonLogOut);
+			this.add(user2);
+			this.setIconImage(image.getImage());
+			this.setVisible(true);
 		}
 		
 		
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			if (e.getSource()== botonLogOut) {
+				this.dispose();
+			}
+			if (e.getSource()== user2) {
+				this.dispose();
+			}
 			
 		}
 		
