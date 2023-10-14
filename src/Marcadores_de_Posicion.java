@@ -7,7 +7,7 @@ public class Marcadores_de_Posicion {
 
     public static void Cambio1(JTextField caja, String palabra) {
     	caja.setText(palabra);
-    	caja.setForeground(Color.GRAY);
+    	caja.setForeground(Color.BLACK);
 
     	caja.addFocusListener(new FocusListener() {
             @Override
