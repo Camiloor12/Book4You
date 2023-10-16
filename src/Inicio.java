@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -158,15 +159,49 @@ public class Inicio extends JFrame implements ActionListener {
         this.add(Busqueda);
         this.setIconImage(image.getImage());
         this.setVisible(true);
+        this.setResizable(false);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+    
         if (e.getSource() == botonLogOut) {
             this.dispose();
         }
         if (e.getSource() == user2) {
             this.dispose();
         }
-    }
-}
+        if (e.getSource()== Busqueda) {
+        	String Entrada = (String) mes.getSelectedItem();
+            int Dia_Entrada = (int) Dia.getSelectedItem();
+            String Salida = (String) mes2.getSelectedItem();
+            int Dia_Salida = (int) Dia2.getSelectedItem();
+            
+            if (Entrada.equals("Febrero") && Dia_Entrada > 28) {
+                JOptionPane.showMessageDialog(this, " Fecha de entrada: Febrero solo tiene 28 días.");
+            } else if ((Entrada.equals("Abril") || Entrada.equals("Junio") || Entrada.equals("Septiembre") || Entrada.equals("Noviembre"))
+                    && Dia_Entrada == 31) {
+            	JOptionPane.showMessageDialog(this, "Fecha de entrada: Este mes  solo tiene 30 días.");
+            } 
+            else   if (Salida.equals("Febrero") && Dia_Salida > 28) {
+                JOptionPane.showMessageDialog(this, "Fecha de Salida: Febrero solo tiene 28 días." );
+            } else if ((Salida.equals("Abril") || Salida.equals("Junio") || Salida.equals("Septiembre") || Salida.equals("Noviembre"))
+                    && Dia_Salida == 31) {
+            	JOptionPane.showMessageDialog(this, "Fecha de Salida: Este mes  solo tiene 30 días.");
+            	
+            }
+            boolean esFechaValidaEntrada = Marcadores_de_Posicion.Fecha(Entrada, Dia_Entrada);
+            boolean esFechaValidaSalida = Marcadores_de_Posicion.Fecha(Salida, Dia_Salida);
+
+            if (!esFechaValidaEntrada ) {
+                JOptionPane.showMessageDialog(this, "Fecha Entrada: Fecha Invalida, La fecha ya ha pasado");
+            } 
+            else if (!esFechaValidaSalida) {
+            	  JOptionPane.showMessageDialog(this, "Fecha Salida: Fecha Invalida, La fecha ya ha pasado");
+			}
+            else {
+                // Perform your search or other action here.
+            }
+            
+        
+}}}
