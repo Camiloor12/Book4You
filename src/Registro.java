@@ -1,33 +1,25 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JButton;
 
-public class Registro extends JFrame {
-
+public class Registro implements ActionListener{
+	  private ImageIcon volver = new ImageIcon("cap.jpg");
+	  private JButton botonVolver = new JButton(volver);
 	public Registro() {
-		ImageIcon image = new ImageIcon("logot.jpg");
-        String imagenFondo = "fondoo.jpg";
-        Image fondo = new ImageIcon(imagenFondo).getImage();
+		Base b = new Base();
+		botonVolver.setBorderPainted(false);
+        botonVolver.setOpaque(false);
+        botonVolver.setContentAreaFilled(false);
+        botonVolver.addActionListener(this);
+        botonVolver.setBounds(10, 35, 100, 77);
+        b.add(botonVolver);   
+	}
 
-        setContentPane(new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                this.setBackground(Color.white);
-                g.drawImage(fondo, 0, 130, getWidth(), 400, this);
-            }
-        });
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(1000, 600);
-        this.setLayout(null);
-        this.setTitle("BOOK4YOU");
-        this.setIconImage(image.getImage());
-        this.setVisible(true);
-        this.setResizable(false);
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
