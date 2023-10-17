@@ -51,9 +51,7 @@ public class Base extends JFrame implements ActionListener{
 	  
 	  
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == botonVolver) {
-			
-		}
+		
         
     }
 }

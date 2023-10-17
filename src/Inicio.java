@@ -60,6 +60,8 @@ public class Inicio extends JFrame implements ActionListener {
         this.setLayout(null);
         this.setTitle("BOOK4YOU");
 
+        System.out.println("Existo!!");
+
         logo = new ImageIcon("logo.png");
         logo2 = new JLabel();
         logo2.setIcon(logo);
