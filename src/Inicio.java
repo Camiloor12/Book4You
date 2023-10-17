@@ -23,17 +23,16 @@ public class Inicio extends JFrame implements ActionListener {
     private ImageIcon user = new ImageIcon("user.png");
     private JButton user2 = new JButton(user);
     private ImageIcon image;
-    private String[] meses = {"Enero", "Febrero", "Marzo", "Abril",
-    		"Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     private JComboBox<String> mes;
     private JComboBox<String> mes2;
-    private Integer [] Dias= {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
+    private Integer[] Dias = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
     private JComboBox<Integer> Dia;
     private JComboBox<Integer> Dia2;
-    private Integer [] Años= {2023,2024};
+    private Integer[] Años = {2023, 2024};
     private JComboBox<Integer> Año;
     private JComboBox<Integer> Año2;
-    private Integer [] Personas= {1,2,3,4,5,6,7,8};
+    private Integer[] Personas = {1, 2, 3, 4, 5, 6, 7, 8};
     private JComboBox<Integer> Adultos;
     private JComboBox<Integer> Niños;
     private JTextField lugar;
@@ -55,7 +54,7 @@ public class Inicio extends JFrame implements ActionListener {
             }
         });
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(1000, 600); 
+        this.setSize(1000, 600);
         this.setLayout(null);
         this.setTitle("BOOK4YOU");
 
@@ -64,9 +63,9 @@ public class Inicio extends JFrame implements ActionListener {
         logo = new ImageIcon("logo.png");
         logo2 = new JLabel();
         logo2.setIcon(logo);
-        logo2.setBounds(300,-15, 300, 200);
+        logo2.setBounds(300, -15, 300, 200);
 
-        botonLogOut.setBorderPainted (false);
+        botonLogOut.setBorderPainted(false);
         botonLogOut.setOpaque(false);
         botonLogOut.setContentAreaFilled(false);
         botonLogOut.setBounds(0, 20, 100, 100);
@@ -85,57 +84,57 @@ public class Inicio extends JFrame implements ActionListener {
 
         lugar = new JTextField();
         lugar.setForeground(Color.BLACK);
-        lugar.setBounds(45, 360, 200, 35);
+        lugar.setBounds(10, 360, 200, 35);
         Marcadores_de_Posicion.Cambio1(lugar, "¿Dónde quieres ir?");
-        
+
         JLabel lblLugar = new JLabel("Lugar:");
         lblLugar.setForeground(Color.white);
-        lblLugar.setBounds(45, 330, 100, 30);
-        
+        lblLugar.setBounds(10, 330, 100, 30);
+
         mes = new JComboBox<>(meses);
-        mes.setBounds(260, 360, 100, 35);
+        mes.setBounds(220, 360, 100, 35);
         
         JLabel lblFechaEntrada = new JLabel("Fecha de Entrada:");
         lblFechaEntrada.setForeground(Color.white);
-        lblFechaEntrada.setBounds(260, 330, 200, 30);
-        
+        lblFechaEntrada.setBounds(230, 330, 200, 30);
+
         Dia = new JComboBox<>(Dias);
-        Dia.setBounds(360,360,50,35);
-        
+        Dia.setBounds(320, 360, 50, 35);
+
         Año = new JComboBox<>(Años);
-        Año.setBounds(410,360,70,35);
-        
+        Año.setBounds(370, 360, 70, 35);
+
         mes2 = new JComboBox<>(meses);
-        mes2.setBounds(495, 360, 100, 35);
-        
+        mes2.setBounds(465, 360, 100, 35);
+
         JLabel lblFechaSalida = new JLabel("Fecha de Salida:");
         lblFechaSalida.setForeground(Color.white);
-        lblFechaSalida.setBounds(495, 330, 200, 30);
-        
+        lblFechaSalida.setBounds(465, 330, 200, 30);
+
         Dia2 = new JComboBox<>(Dias);
-        Dia2.setBounds(595,360,50,35);
-        
+        Dia2.setBounds(565, 360, 50, 35);
+
         Año2 = new JComboBox<>(Años);
-        Año2.setBounds(645,360,70,35);
-        
+        Año2.setBounds(615, 360, 70, 35);
+
         Adultos = new JComboBox<>(Personas);
-        Adultos.setBounds(730,360,70,35);
-        
+        Adultos.setBounds(700, 360, 70, 35);
+
         JLabel lblAdultos = new JLabel("Adultos:");
         lblAdultos.setForeground(Color.white);
-        lblAdultos.setBounds(730, 330, 100, 30);
-        
+        lblAdultos.setBounds(700, 330, 100, 30);
+
         Niños = new JComboBox<>(Personas);
-        Niños.setBounds(815,360,70,35);
-        
+        Niños.setBounds(785, 360, 70, 35);
+
         JLabel lblNiños = new JLabel("Niños:");
         lblNiños.setForeground(Color.white);
-        lblNiños.setBounds(815, 330, 100, 30);
-        
-        Busqueda.setBorderPainted (false);
+        lblNiños.setBounds(785, 330, 100, 30);
+
+        Busqueda.setBorderPainted(false);
         Busqueda.setOpaque(false);
         Busqueda.setContentAreaFilled(false);
-        Busqueda.setBounds(330,320, 300, 300);
+        Busqueda.setBounds(870, 360, 100, 35);
         Busqueda.addActionListener(this);
 
         this.add(logo2);
@@ -164,44 +163,42 @@ public class Inicio extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-    
+
         if (e.getSource() == botonLogOut) {
             this.dispose();
         }
         if (e.getSource() == user2) {
             this.dispose();
         }
-        if (e.getSource()== Busqueda) {
-        	String Entrada = (String) mes.getSelectedItem();
+        if (e.getSource() == Busqueda) {
+            String Entrada = (String) mes.getSelectedItem();
             int Dia_Entrada = (int) Dia.getSelectedItem();
             String Salida = (String) mes2.getSelectedItem();
             int Dia_Salida = (int) Dia2.getSelectedItem();
-            
+
             if (Entrada.equals("Febrero") && Dia_Entrada > 28) {
                 JOptionPane.showMessageDialog(this, " Fecha de entrada: Febrero solo tiene 28 días.");
             } else if ((Entrada.equals("Abril") || Entrada.equals("Junio") || Entrada.equals("Septiembre") || Entrada.equals("Noviembre"))
                     && Dia_Entrada == 31) {
-            	JOptionPane.showMessageDialog(this, "Fecha de entrada: Este mes  solo tiene 30 días.");
-            } 
-            else   if (Salida.equals("Febrero") && Dia_Salida > 28) {
-                JOptionPane.showMessageDialog(this, "Fecha de Salida: Febrero solo tiene 28 días." );
+                JOptionPane.showMessageDialog(this, "Fecha de entrada: Este mes  solo tiene 30 días.");
+            } else if (Salida.equals("Febrero") && Dia_Salida > 28) {
+                JOptionPane.showMessageDialog(this, "Fecha de Salida: Febrero solo tiene 28 días.");
             } else if ((Salida.equals("Abril") || Salida.equals("Junio") || Salida.equals("Septiembre") || Salida.equals("Noviembre"))
                     && Dia_Salida == 31) {
-            	JOptionPane.showMessageDialog(this, "Fecha de Salida: Este mes  solo tiene 30 días.");
-            	
+                JOptionPane.showMessageDialog(this, "Fecha de Salida: Este mes  solo tiene 30 días.");
             }
             boolean esFechaValidaEntrada = Marcadores_de_Posicion.Fecha(Entrada, Dia_Entrada);
             boolean esFechaValidaSalida = Marcadores_de_Posicion.Fecha(Salida, Dia_Salida);
 
-            if (!esFechaValidaEntrada ) {
+            if (!esFechaValidaEntrada) {
                 JOptionPane.showMessageDialog(this, "Fecha Entrada: Fecha Invalida, La fecha ya ha pasado");
-            } 
-            else if (!esFechaValidaSalida) {
-            	  JOptionPane.showMessageDialog(this, "Fecha Salida: Fecha Invalida, La fecha ya ha pasado");
-			}
-            else {
+            } else if (!esFechaValidaSalida) {
+                JOptionPane.showMessageDialog(this, "Fecha Salida: Fecha Invalida, La fecha ya ha pasado");
+            } else {
                 // Perform your search or other action here.
             }
-            
-        
-}}}
+        }
+    }
+
+   
+}
