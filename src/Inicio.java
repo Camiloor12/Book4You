@@ -32,12 +32,14 @@ public class Inicio extends JFrame implements ActionListener {
     private Integer[] Años = {2023, 2024};
     private JComboBox<Integer> Año;
     private JComboBox<Integer> Año2;
-    private Integer[] Personas = {1, 2, 3, 4, 5, 6, 7, 8};
+    private Integer[] Personas = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     private JComboBox<Integer> Adultos;
     private JComboBox<Integer> Niños;
     private JTextField lugar;
     private ImageIcon Buscar = new ImageIcon("Buscar.png");
     private JButton Busqueda = new JButton(Buscar);
+    private JButton iniciarSesionButton = new JButton("Iniciar Sesion");
+    private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
     private Font fuente = new Font("Hammersmith One", Font.ITALIC, 60);
 
     public Inicio() {
@@ -71,11 +73,16 @@ public class Inicio extends JFrame implements ActionListener {
         botonLogOut.setBounds(0, 20, 100, 100);
         botonLogOut.addActionListener(this);
 
-        user2.setBorderPainted(false);
-        user2.setOpaque(false);
-        user2.setContentAreaFilled(false);
-        user2.setBounds(850, 20, 100, 100);
-        user2.addActionListener(this);
+        iniciarSesionButton.setBounds(820, 40, 150, 35);
+        iniciarSesionButton.setOpaque(false);
+        iniciarSesionButton.setContentAreaFilled(false);
+        iniciarSesionButton.addActionListener(this);
+
+        crearCuentaButton.setBounds(820, 80, 150, 35);
+        crearCuentaButton.setOpaque(false);
+        crearCuentaButton.setContentAreaFilled(false);
+        crearCuentaButton.addActionListener(this);
+        crearCuentaButton.setForeground(Color.BLACK);
 
         x = new JLabel("Elije tu nueva aventura...");
         x.setForeground(Color.white);
@@ -156,6 +163,8 @@ public class Inicio extends JFrame implements ActionListener {
         this.add(Niños);
         this.add(lblNiños);
         this.add(Busqueda);
+        this.add(crearCuentaButton);
+        this.add(iniciarSesionButton);
         this.setIconImage(image.getImage());
         this.setVisible(true);
         this.setResizable(false);
@@ -198,6 +207,12 @@ public class Inicio extends JFrame implements ActionListener {
                 // Perform your search or other action here.
             }
         }
+        if (e.getSource()==iniciarSesionButton) {
+			
+		}
+        if (e.getSource()==crearCuentaButton) {
+			
+		}
     }
 
    
