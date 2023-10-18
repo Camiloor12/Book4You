@@ -77,12 +77,14 @@ public class Inicio extends JFrame implements ActionListener {
         iniciarSesionButton.setOpaque(false);
         iniciarSesionButton.setContentAreaFilled(false);
         iniciarSesionButton.addActionListener(this);
+        
+
 
         crearCuentaButton.setBounds(820, 80, 150, 35);
         crearCuentaButton.setOpaque(false);
         crearCuentaButton.setContentAreaFilled(false);
         crearCuentaButton.addActionListener(this);
-        crearCuentaButton.setForeground(Color.BLACK);
+      
 
         x = new JLabel("Elije tu nueva aventura...");
         x.setForeground(Color.white);
