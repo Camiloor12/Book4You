@@ -186,6 +186,8 @@ public class Inicio extends JFrame implements ActionListener {
             int Dia_Entrada = (int) Dia.getSelectedItem();
             String Salida = (String) mes2.getSelectedItem();
             int Dia_Salida = (int) Dia2.getSelectedItem();
+            int Año_Entrada = (int) Año.getSelectedItem();
+            int Año_Salida = (int) Año2.getSelectedItem();
 
             if (Entrada.equals("Febrero") && Dia_Entrada > 28) {
                 JOptionPane.showMessageDialog(this, " Fecha de entrada: Febrero solo tiene 28 días.");
@@ -200,12 +202,25 @@ public class Inicio extends JFrame implements ActionListener {
             }
             boolean esFechaValidaEntrada = Marcadores_de_Posicion.Fecha(Entrada, Dia_Entrada);
             boolean esFechaValidaSalida = Marcadores_de_Posicion.Fecha(Salida, Dia_Salida);
-
+            if (Año_Salida==2024 || Año_Entrada==2024) {
+            	esFechaValidaEntrada= true;
+            	esFechaValidaSalida=true;}
             if (!esFechaValidaEntrada) {
                 JOptionPane.showMessageDialog(this, "Fecha Entrada: Fecha Invalida, La fecha ya ha pasado");
             } else if (!esFechaValidaSalida) {
                 JOptionPane.showMessageDialog(this, "Fecha Salida: Fecha Invalida, La fecha ya ha pasado");
-            } else {
+            }
+            boolean Valida = Marcadores_de_Posicion.Fecha2(Entrada,Dia_Entrada,Año_Entrada,Salida,Dia_Salida,Año_Salida);
+         
+            if (!Valida) {
+                JOptionPane.showMessageDialog(this, "La Fecha de salida no puede ser posterior a la entrada");
+            } 
+            
+            if (lugar.getText().equals("¿Dónde quieres ir?")) {
+					JOptionPane.showMessageDialog(this, "No has escogido ningun destino");
+				}
+            
+            else {
                 // Perform your search or other action here.
             }
         }

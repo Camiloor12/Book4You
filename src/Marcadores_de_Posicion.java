@@ -75,6 +75,25 @@ public class Marcadores_de_Posicion {
 	 private static  int añoactual() {
          return Calendar.getInstance().get(Calendar.YEAR);
      }
+	 
+	 
+	 public static boolean Fecha2(String meses_entrada, int dia_entrada, int año_entrada,String meses_salida, int dia_salida, int año_salida) {
+	        SimpleDateFormat Formato = new SimpleDateFormat("MM/dd/yyyy");
+	        try {
+	            String Fecha1 = Mes(meses_entrada) + "/" + dia_entrada + "/" + año_entrada;
+	            java.util.Date Primera = Formato.parse(Fecha1);
+	            String Fecha2 = Mes(meses_salida) + "/" + dia_salida + "/" + año_salida;
+	            java.util.Date Segunda = Formato.parse(Fecha2);
+	            if (Segunda.before(Primera) ) {
+	                return false;
+	            } else {
+	                return true;
+	            }
+	        } catch (ParseException e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+	    }
        
     }
 
