@@ -4,10 +4,16 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class Inicio extends JFrame implements ActionListener {
+public class Pantalla_Principal extends JFrame implements ActionListener {
 
     private ImageIcon logo;
     private JLabel logo2;
@@ -30,19 +36,13 @@ public class Inicio extends JFrame implements ActionListener {
     private JComboBox<Integer> Adultos;
     private JComboBox<Integer> Niños;
     private JTextField lugar;
-    private JButton Busqueda = new JButton("Buscar");
+    private ImageIcon Buscar = new ImageIcon("Buscar.png");
+    private JButton Busqueda = new JButton(Buscar);
     private JButton iniciarSesionButton = new JButton("Iniciar Sesion");
     private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
-    private Font fuente = new Font("Oswald", Font.PLAIN, 60);
-    private Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
+    private Font fuente = new Font("Hammersmith One", Font.ITALIC, 65);
 
-    public Inicio() {
-        try {
-            UIManager.setLookAndFeel(new NimbusLookAndFeel());
-        } catch (UnsupportedLookAndFeelException e) {
-            // Manejar la excepción de LookAndFeel si es necesario
-        }
-
+    public Pantalla_Principal() {
         ImageIcon image = new ImageIcon("logot.jpg");
         String imagenFondo = "fondoo.jpg";
         Image fondo = new ImageIcon(imagenFondo).getImage();
@@ -56,12 +56,10 @@ public class Inicio extends JFrame implements ActionListener {
             }
         });
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(1000, 600);
+        this.setSize(1200, 620);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setTitle("BOOK4YOU");
-
-        System.out.println("Existo!!");
 
         logo = new ImageIcon("logo.png");
         logo2 = new JLabel();
@@ -77,57 +75,46 @@ public class Inicio extends JFrame implements ActionListener {
         botonLogOut.setBounds(0, 20, 100, 100);
         botonLogOut.addActionListener(this);
 
-        iniciarSesionButton.setBounds(820, 40, 150, 35);
-        iniciarSesionButton.addActionListener(this);
+        iniciarSesionButton.setBounds(1020, 40, 150, 35);
         Marcadores_de_Posicion.estiloBoton(iniciarSesionButton);
-        
-        crearCuentaButton.setBounds(820, 80, 150, 35);
-        crearCuentaButton.addActionListener(this);
-        Marcadores_de_Posicion.estiloBoton(crearCuentaButton);
+        iniciarSesionButton.addActionListener(this);
 
-        x = new JLabel("Elije tu nueva aventura...");
+        crearCuentaButton.setBounds(1020, 80, 150, 35);
+        Marcadores_de_Posicion.estiloBoton(crearCuentaButton);
+        crearCuentaButton.addActionListener(this);
+      
+
+        x = new JLabel("Reserva Ahora...");
         x.setForeground(Color.white);
         x.setFont(fuente);
-        x.setBounds(10, 250, 700, 80);
+        x.setBounds(10, 160, 700, 80);
 
         lugar = new JTextField();
         lugar.setForeground(Color.BLACK);
-        lugar.setBackground(new Color(240, 240, 240));
-        lugar.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100))); 
-        lugar.setBounds(10, 360, 200, 35);
+        lugar.setBounds(10, 265, 220, 35);
         Marcadores_de_Posicion.Cambio1(lugar, "¿Dónde quieres ir?");
-        lugar.setFont(fuente2);
 
         JLabel lblLugar = new JLabel("Lugar:");
-        lblLugar.setFont(fuente2);
         lblLugar.setForeground(Color.white);
-        lblLugar.setBounds(10, 330, 100, 30);
-
+        lblLugar.setBounds(10, 240, 100, 30);
 
         mes = new JComboBox<>(meses);
-        mes.setBounds(220, 360, 100, 35);
-        mes.setFont(fuente2);
-
+        mes.setBounds(220, 400, 100, 35);
+        
         JLabel lblFechaEntrada = new JLabel("Fecha de Entrada:");
-        lblFechaEntrada.setFont(fuente2);
         lblFechaEntrada.setForeground(Color.white);
         lblFechaEntrada.setBounds(230, 330, 200, 30);
 
         Dia = new JComboBox<>(Dias);
-        Dia.setBounds(320, 360, 50, 35);
-        Dia.setFont(fuente2);
+        Dia.setBounds(320, 400, 50, 35);
 
         Año = new JComboBox<>(Años);
         Año.setBounds(370, 360, 70, 35);
-        Año.setFont(fuente2);
-        
 
         mes2 = new JComboBox<>(meses);
-        mes2.setBounds(465, 360, 100, 35);
-        mes2.setFont(fuente2);
+        mes2.setBounds(465, 400, 100, 35);
 
         JLabel lblFechaSalida = new JLabel("Fecha de Salida:");
-        lblFechaSalida.setFont(fuente2);
         lblFechaSalida.setForeground(Color.white);
         lblFechaSalida.setBounds(465, 330, 200, 30);
 
@@ -136,31 +123,25 @@ public class Inicio extends JFrame implements ActionListener {
 
         Año2 = new JComboBox<>(Años);
         Año2.setBounds(615, 360, 70, 35);
-        Año2.setFont(fuente2);
 
         Adultos = new JComboBox<>(Personas);
         Adultos.setBounds(700, 360, 70, 35);
-        Adultos.setFont(fuente2);
 
         JLabel lblAdultos = new JLabel("Adultos:");
-        lblAdultos.setFont(fuente2);
         lblAdultos.setForeground(Color.white);
         lblAdultos.setBounds(700, 330, 100, 30);
 
         Niños = new JComboBox<>(Personas);
         Niños.setBounds(785, 360, 70, 35);
-        Niños.setFont(fuente2);
-        
 
         JLabel lblNiños = new JLabel("Niños:");
-        lblNiños.setFont(fuente2);
         lblNiños.setForeground(Color.white);
         lblNiños.setBounds(785, 330, 100, 30);
 
-        Busqueda.setBounds(870, 360, 100, 30);
-        Marcadores_de_Posicion.estiloBoton(Busqueda);
-        Busqueda.setForeground(Color.BLACK);
-        Busqueda.setContentAreaFilled(true);
+        Busqueda.setBorderPainted(false);
+        Busqueda.setOpaque(false);
+        Busqueda.setContentAreaFilled(false);
+        Busqueda.setBounds(870, 360, 100, 35);
         Busqueda.addActionListener(this);
 
         this.add(logo2);
@@ -191,6 +172,7 @@ public class Inicio extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if (e.getSource() == botonLogOut) {
             this.dispose();
         }
@@ -218,32 +200,35 @@ public class Inicio extends JFrame implements ActionListener {
             }
             boolean esFechaValidaEntrada = Marcadores_de_Posicion.Fecha(Entrada, Dia_Entrada);
             boolean esFechaValidaSalida = Marcadores_de_Posicion.Fecha(Salida, Dia_Salida);
-            if (Año_Salida == 2024 || Año_Entrada == 2024) {
-                esFechaValidaEntrada = true;
-                esFechaValidaSalida = true;
-            }
+            if (Año_Salida==2024 || Año_Entrada==2024) {
+            	esFechaValidaEntrada= true;
+            	esFechaValidaSalida=true;}
             if (!esFechaValidaEntrada) {
                 JOptionPane.showMessageDialog(this, "Fecha Entrada: Fecha Invalida, La fecha ya ha pasado");
             } else if (!esFechaValidaSalida) {
                 JOptionPane.showMessageDialog(this, "Fecha Salida: Fecha Invalida, La fecha ya ha pasado");
             }
-            boolean Valida = Marcadores_de_Posicion.Fecha2(Entrada, Dia_Entrada, Año_Entrada, Salida, Dia_Salida, Año_Salida);
-
+            boolean Valida = Marcadores_de_Posicion.Fecha2(Entrada,Dia_Entrada,Año_Entrada,Salida,Dia_Salida,Año_Salida);
+         
             if (!Valida) {
                 JOptionPane.showMessageDialog(this, "La Fecha de salida no puede ser posterior a la entrada");
-            }
-
+            } 
+            
             if (lugar.getText().equals("¿Dónde quieres ir?")) {
-                JOptionPane.showMessageDialog(this, "No has escogido ningún destino");
-            } else {
-                new Pantalla_Principal();
+					JOptionPane.showMessageDialog(this, "No has escogido ningun destino");
+				}
+            
+            else {
+                // Perform your search or other action here.
             }
         }
-        if (e.getSource() == iniciarSesionButton) {
-        	System.out.println("Me has presionado");
-        }
-        if (e.getSource() == crearCuentaButton) {
-
-        }
+        if (e.getSource()==iniciarSesionButton) {
+			
+		}
+        if (e.getSource()==crearCuentaButton) {
+			
+		}
     }
+
+   
 }

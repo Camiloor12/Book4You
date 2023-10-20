@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class Base extends JFrame implements ActionListener{
 	  private ImageIcon logo;
@@ -29,27 +30,42 @@ public class Base extends JFrame implements ActionListener{
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                this.setBackground(Color.white);
+                this.setBackground(Color.WHITE);
                 g.drawImage(fondo, 0, 135, getWidth(), 500, this);
             }
         });
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(1000, 600);
-             
+        this.setSize(1000, 600);             
         this.setLayout(null);
         this.setTitle("BOOK4YOU");
         this.setIconImage(image.getImage());
-        base1.setBackground(Color.white);
+        base1.setBackground(Color.WHITE);
         base1.setBounds(10, 138, getWidth() - 35 , 500);
         
         base1.setLayout(null);
         this.add(base1);
+        this.setLocationRelativeTo(null);
         this.add(logo2);
-        this.setVisible(true);
         this.setResizable(false);
+        this.setVisible(true);
 	}
 	  
-	  
+	public JPanel getBase1() {
+		return base1;
+	}
+
+	public void setBase1(JPanel base1) {
+		this.base1 = base1;
+	}
+
+	public void addComponent(JLabel l) {
+		base1.add(l);
+		l.setVisible(true);
+	}
+	public void addComponent(JTextField l) {
+		base1.add(l);
+		l.setVisible(true);
+	}
 	public void actionPerformed(ActionEvent e) {
 		
         

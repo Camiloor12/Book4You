@@ -1,8 +1,10 @@
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,6 +21,7 @@ public class Marcadores_de_Posicion {
                 if (caja.getText().equals(palabra)) {
                 	caja.setText("");
                 	caja.setForeground(Color.BLACK);
+                	caja.setFont(new Font("Oswald", Font.PLAIN, 13));
                 }
             }
 
@@ -27,6 +30,7 @@ public class Marcadores_de_Posicion {
                 if (caja.getText().isEmpty()) {
                 	caja.setText(palabra);
                 	caja.setForeground(Color.GRAY);
+                	
                 }
             }
         });
@@ -75,8 +79,36 @@ public class Marcadores_de_Posicion {
 	 private static  int añoactual() {
          return Calendar.getInstance().get(Calendar.YEAR);
      }
+	 
+	 
+	 public static boolean Fecha2(String meses_entrada, int dia_entrada, int año_entrada,String meses_salida, int dia_salida, int año_salida) {
+	        SimpleDateFormat Formato = new SimpleDateFormat("MM/dd/yyyy");
+	        try {
+	            String Fecha1 = Mes(meses_entrada) + "/" + dia_entrada + "/" + año_entrada;
+	            java.util.Date Primera = Formato.parse(Fecha1);
+	            String Fecha2 = Mes(meses_salida) + "/" + dia_salida + "/" + año_salida;
+	            java.util.Date Segunda = Formato.parse(Fecha2);
+	            if (Segunda.before(Primera) ) {
+	                return false;
+	            } else {
+	                return true;
+	            }
+	        } catch (ParseException e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+	    }
+	 
+	 public static void estiloBoton(JButton boton) {
+		 boton.setFont(new Font("Oswald", Font.PLAIN, 13));
+		    boton.setForeground(Color.BLACK);
+		    boton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); 
+		    boton.setFocusPainted(false);
+		    boton.setContentAreaFilled(false);
+
+	    }
+
        
     }
-
 
 
