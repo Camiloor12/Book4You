@@ -30,8 +30,7 @@ public class Inicio extends JFrame implements ActionListener {
     private JComboBox<Integer> Adultos;
     private JComboBox<Integer> Niños;
     private JTextField lugar;
-    private ImageIcon Buscar = new ImageIcon("Buscar.png");
-    private JButton Busqueda = new JButton(Buscar);
+    private JButton Busqueda = new JButton("Buscar");
     private JButton iniciarSesionButton = new JButton("Iniciar Sesion");
     private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
     private Font fuente = new Font("Oswald", Font.PLAIN, 60);
@@ -79,14 +78,10 @@ public class Inicio extends JFrame implements ActionListener {
         botonLogOut.addActionListener(this);
 
         iniciarSesionButton.setBounds(820, 40, 150, 35);
-        iniciarSesionButton.setOpaque(false);
-        iniciarSesionButton.setContentAreaFilled(false);
         iniciarSesionButton.addActionListener(this);
         Marcadores_de_Posicion.estiloBoton(iniciarSesionButton);
         
         crearCuentaButton.setBounds(820, 80, 150, 35);
-        crearCuentaButton.setOpaque(false);
-        crearCuentaButton.setContentAreaFilled(false);
         crearCuentaButton.addActionListener(this);
         Marcadores_de_Posicion.estiloBoton(crearCuentaButton);
 
@@ -162,10 +157,8 @@ public class Inicio extends JFrame implements ActionListener {
         lblNiños.setForeground(Color.white);
         lblNiños.setBounds(785, 330, 100, 30);
 
-        Busqueda.setBorderPainted(false);
-        Busqueda.setOpaque(false);
-        Busqueda.setContentAreaFilled(false);
-        Busqueda.setBounds(870, 360, 100, 35);
+        Busqueda.setBounds(870, 360, 100, 30);
+        Marcadores_de_Posicion.estiloBoton(Busqueda);
         Busqueda.addActionListener(this);
 
         this.add(logo2);
