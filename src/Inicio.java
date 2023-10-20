@@ -57,6 +57,7 @@ public class Inicio extends JFrame implements ActionListener {
         });
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(1000, 600);
+        this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setTitle("BOOK4YOU");
 
@@ -89,7 +90,7 @@ public class Inicio extends JFrame implements ActionListener {
         x = new JLabel("Elije tu nueva aventura...");
         x.setForeground(Color.white);
         x.setFont(fuente);
-        x.setBounds(45, 250, 700, 80);
+        x.setBounds(10, 250, 700, 80);
 
         lugar = new JTextField();
         lugar.setForeground(Color.BLACK);
