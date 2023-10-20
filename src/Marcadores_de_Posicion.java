@@ -103,9 +103,10 @@ public class Marcadores_de_Posicion {
 	 public static void estiloBoton(JButton boton) {
 		 boton.setFont(new Font("Oswald", Font.PLAIN, 13));
 		    boton.setForeground(Color.BLACK);
-		    boton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); // Agrega un borde negro
+		    boton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); 
 		    boton.setFocusPainted(false);
 		    boton.setContentAreaFilled(false);
+
 	    }
 
        

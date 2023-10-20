@@ -159,6 +159,8 @@ public class Inicio extends JFrame implements ActionListener {
 
         Busqueda.setBounds(870, 360, 100, 30);
         Marcadores_de_Posicion.estiloBoton(Busqueda);
+        Busqueda.setForeground(Color.BLACK);
+        Busqueda.setContentAreaFilled(true);
         Busqueda.addActionListener(this);
 
         this.add(logo2);
