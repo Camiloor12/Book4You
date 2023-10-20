@@ -1,5 +1,8 @@
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.sql.Date;
@@ -19,6 +22,7 @@ public class Marcadores_de_Posicion {
                 if (caja.getText().equals(palabra)) {
                 	caja.setText("");
                 	caja.setForeground(Color.BLACK);
+                	caja.setFont(new Font("Oswald", Font.PLAIN, 13));
                 }
             }
 
@@ -27,6 +31,7 @@ public class Marcadores_de_Posicion {
                 if (caja.getText().isEmpty()) {
                 	caja.setText(palabra);
                 	caja.setForeground(Color.GRAY);
+                	
                 }
             }
         });
@@ -94,6 +99,15 @@ public class Marcadores_de_Posicion {
 	            return false;
 	        }
 	    }
+	 
+	 public static void estiloBoton(JButton boton) {
+		 boton.setFont(new Font("Oswald", Font.PLAIN, 13));
+		    boton.setForeground(Color.BLACK);
+		    boton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); // Agrega un borde negro
+		    boton.setFocusPainted(false);
+		    boton.setContentAreaFilled(false);
+	    }
+
        
     }
 
