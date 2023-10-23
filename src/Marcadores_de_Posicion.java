@@ -8,6 +8,7 @@ import java.awt.event.FocusListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Marcadores_de_Posicion {
 
@@ -106,6 +107,21 @@ public class Marcadores_de_Posicion {
 		    boton.setFocusPainted(false);
 		    boton.setContentAreaFilled(false);
 
+	    }
+	 
+	 
+	 public static Date Fecha3 (String meses, int dia, int año ) {
+	        SimpleDateFormat Formato = new SimpleDateFormat("MM/dd/yyyy");
+	        java.util.Date Actual = null;
+	        try {
+	            String Fecha = Mes(meses) + "/" + dia + "/" + año ;
+	          Actual = Formato.parse(Fecha);
+	          
+	        } catch (ParseException e) {
+	            e.printStackTrace();
+	           
+	        }
+			return Actual;
 	    }
 
        

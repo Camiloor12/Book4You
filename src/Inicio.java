@@ -33,7 +33,7 @@ public class Inicio extends JFrame implements ActionListener {
     private JButton Busqueda = new JButton("Buscar");
     private JButton iniciarSesionButton = new JButton("Iniciar Sesion");
     private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
-    private Font fuente = new Font("Oswald", Font.PLAIN, 60);
+    private Font fuente = new Font("c", Font.PLAIN, 60);
     private Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
 
     public Inicio() {
@@ -240,7 +240,7 @@ public class Inicio extends JFrame implements ActionListener {
             }
         }
         if (e.getSource() == iniciarSesionButton) {
-        	new IniciarSesion();
+        	new Iniciar_Sesion();
         	this.dispose();
         }
         if (e.getSource() == crearCuentaButton) {
