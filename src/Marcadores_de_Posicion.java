@@ -110,20 +110,7 @@ public class Marcadores_de_Posicion {
 	    }
 	 
 	 
-	 public static Date Fecha3 (String meses, int dia, int año ) {
-	        SimpleDateFormat Formato = new SimpleDateFormat("MM/dd/yyyy");
-	        java.util.Date Actual = null;
-	        try {
-	            String Fecha = Mes(meses) + "/" + dia + "/" + año ;
-	          Actual = Formato.parse(Fecha);
-	          
-	        } catch (ParseException e) {
-	            e.printStackTrace();
-	           
-	        }
-			return Actual;
-	    }
-
+	
        
     }
 

@@ -108,27 +108,7 @@ public class Registro implements ActionListener{
 		    botonVolver.setVisible(true);
 		}
 	  
-	  private void DarAlta() {
-		  String Mes = (String) mes.getSelectedItem();
-          int Dia1 = (int) Dia.getSelectedItem();
-          int Telefono = 000000000;
-          int Año1 = (int) Año.getSelectedItem();
-          if (!TelefonoT.getText().equals("Ej : 674 324 115")) {
-			Telefono = Integer.parseInt(TelefonoT.getText());
-		}
-          Date Fecha= (Date) Marcadores_de_Posicion.Fecha3(Mes, Dia1, Año1);
-			String sql = "INSERT INTO USUARIO VALUES('" + EmailT.getText() + "','" + nombreApellidos.getText() + "','" + Fecha + "','" +
-          "','" + Telefono + "','"+ String.valueOf(passwordT.getPassword()) + "')";
-			//*try {
-				//*Statement st = Login.con.createStatement();
-				//*st.execute(sql);
-				//*JOptionPane.showMessageDialog(this, "Usuario creado con exito! " + nombreApellidos.getText());
-				//*System.out.println("Persona dada de alta correctamente !");
-				
-			//*} catch (SQLException e2) {
-				//*System.out.println("Ha habido un error en el Insert " + e2);
-			//*}
-		}
+	 
 
 
 	@Override
@@ -139,14 +119,12 @@ public class Registro implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Password Field must be filled", "Information", JOptionPane.INFORMATION_MESSAGE);
 			}else if (nombreApellidos.getText().equals("Ej : Federic Gonzalez")) {
 				JOptionPane.showMessageDialog(null, "Name Field must be filled", "Information", JOptionPane.INFORMATION_MESSAGE);
-			}
-			
-			else {
-				if(!EmailT.getText().contains("@" ) || !EmailT.getText().endsWith(".com")) {
+			}else if(!EmailT.getText().contains("@" ) || !EmailT.getText().endsWith(".com")) {
 					JOptionPane.showMessageDialog(null, "Invalid email address. Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-				
+			}else {
+				DarAlta();
 			}
+
 		}else if(botonVolver == e.getSource()) {
 			new Inicio();
 			b.dispose();
@@ -154,5 +132,29 @@ public class Registro implements ActionListener{
 		
 		
 	}
+	private  boolean DarAlta() {
+	    String Mes = (String) mes.getSelectedItem();
+	    int Dia1 = (int) Dia.getSelectedItem();
+	    int Telefono = 0; 
+	    int Año1 = (int) Año.getSelectedItem();
+	    String fecha = Mes + "/"+Dia1 +"/"+ Año1;
+	    if (!TelefonoT.getText().equals("Ej : 674 324 115")) {
+	        Telefono = Integer.parseInt(TelefonoT.getText());
+	    }
+	    String sql = "INSERT INTO USUARIO (E_MAIL, NOMBRE_APELLIDO, FECHA_DE_NACIMIENTO, TELEFONO, CONTRASEÑA, QUEVEDOS) " +
+	             "VALUES ('" + EmailT.getText() + "','" + nombreApellidos.getText() + "', TO_DATE('" + fecha  + "', 'MM/DD/YYYY'), '" + Telefono + "','" +
+	             String.valueOf(passwordT.getPassword()) + "', 0)";
+
+	    try {
+	        Statement st = Main.con.createStatement();
+	        st.execute(sql);
+	        JOptionPane.showMessageDialog(null, "Usuario Creado con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+	        return true;
+	    } catch (SQLException e2) {
+	        System.out.println("Ha habido un error en el Insert " + e2);
+	    }
+		return false;
+	}
+
 	
 }
