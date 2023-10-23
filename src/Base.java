@@ -16,7 +16,7 @@ public class Base extends JFrame implements ActionListener{
 	  private ImageIcon logo;
 	  private JPanel base1 = new JPanel();
 
-	  public Base() {
+	  public Base(int width, int height) {
 		ImageIcon image = new ImageIcon("logot.jpg");
 		
 		ImageIcon imagenFondo = new ImageIcon("fondoo.jpg");
@@ -24,7 +24,7 @@ public class Base extends JFrame implements ActionListener{
         logo = new ImageIcon("logo.png");
         JLabel logo2 = new JLabel();
         logo2.setIcon(logo);
-        logo2.setBounds(300, -15, 300, 200);
+        logo2.setBounds(185, -15, 300, 200);
         
         setContentPane(new JPanel() {
             @Override
@@ -35,7 +35,7 @@ public class Base extends JFrame implements ActionListener{
             }
         });
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(1000, 600);             
+        this.setSize(width, height);             
         this.setLayout(null);
         this.setTitle("BOOK4YOU");
         this.setIconImage(image.getImage());
@@ -49,7 +49,39 @@ public class Base extends JFrame implements ActionListener{
         this.setResizable(false);
         this.setVisible(true);
 	}
+	  public Base() {
+			ImageIcon image = new ImageIcon("logot.jpg");			
+			ImageIcon imagenFondo = new ImageIcon("fondoo.jpg");
+	        Image fondo = imagenFondo.getImage();
+	        logo = new ImageIcon("logo.png");
+	        JLabel logo2 = new JLabel();
+	        logo2.setIcon(logo);
+	        logo2.setBounds(120, -15, 300, 200);
+	        setContentPane(new JPanel() {
+	            @Override
+	            protected void paintComponent(Graphics g) {
+	                super.paintComponent(g);
+	                this.setBackground(Color.white);
+	            }
+	        });
+	        this.setBackground(Color.white);
+	        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	        this.setSize(1000, 175);             
+	        this.setLayout(null);
+	        this.setTitle("BOOK4YOU");
+	        this.setIconImage(image.getImage());	     
+	        this.setLocationRelativeTo(null);
+	        this.add(logo2);
+	        this.setResizable(false);
+	        this.setVisible(true);
+		}
 	  
+	public ImageIcon getLogo() {
+		return logo;
+	}
+	public void setLogo(ImageIcon logo) {
+		this.logo = logo;
+	}
 	public JPanel getBase1() {
 		return base1;
 	}

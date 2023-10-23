@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 public class Pantalla_Principal extends JFrame implements ActionListener {
 
     private ImageIcon logo;
+    
     private JLabel logo2;
     private JLabel x;
     private ImageIcon logout = new ImageIcon("logout.png");

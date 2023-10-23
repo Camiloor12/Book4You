@@ -11,6 +11,7 @@ public class Inicio extends JFrame implements ActionListener {
 
     private ImageIcon logo;
     private JLabel logo2;
+    public static boolean InicioS;
     private JLabel x;
     private ImageIcon logout = new ImageIcon("logout.png");
     private JButton botonLogOut = new JButton(logout);
@@ -37,6 +38,10 @@ public class Inicio extends JFrame implements ActionListener {
     private Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
 
     public Inicio() {
+    	if(InicioS) { //Si se ha iniciado sesion
+    		iniciarSesionButton.setVisible(false);
+    		crearCuentaButton.setVisible(false);
+    	}
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
         } catch (UnsupportedLookAndFeelException e) {
@@ -111,7 +116,7 @@ public class Inicio extends JFrame implements ActionListener {
         JLabel lblFechaEntrada = new JLabel("Fecha de Entrada:");
         lblFechaEntrada.setFont(fuente2);
         lblFechaEntrada.setForeground(Color.white);
-        lblFechaEntrada.setBounds(230, 330, 200, 30);
+        lblFechaEntrada.setBounds(220, 330, 200, 30);
 
         Dia = new JComboBox<>(Dias);
         Dia.setBounds(320, 360, 50, 35);
@@ -240,7 +245,7 @@ public class Inicio extends JFrame implements ActionListener {
             }
         }
         if (e.getSource() == iniciarSesionButton) {
-        	new Iniciar_Sesion();
+        	new IniciarSesion();
         	this.dispose();
         }
         if (e.getSource() == crearCuentaButton) {

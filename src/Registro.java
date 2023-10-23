@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 
 public class Registro implements ActionListener{
-	  private Base b = new Base();
+	  private Base b = new Base(760, 530);
 	  private int start = 1900;
 	  private ImageIcon volver = new ImageIcon("cap.jpg");
 	  private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
@@ -122,7 +122,9 @@ public class Registro implements ActionListener{
 			}else if(!EmailT.getText().contains("@" ) || !EmailT.getText().endsWith(".com")) {
 					JOptionPane.showMessageDialog(null, "Invalid email address. Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
 			}else {
-				DarAlta();
+				Inicio.InicioS = DarAlta();
+				new Inicio();
+				b.dispose();
 			}
 
 		}else if(botonVolver == e.getSource()) {
