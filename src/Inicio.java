@@ -243,7 +243,7 @@ public class Inicio extends JFrame implements ActionListener {
         	System.out.println("Me has presionado");
         }
         if (e.getSource() == crearCuentaButton) {
-
+        	new Registro();
         }
     }
 }

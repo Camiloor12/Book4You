@@ -226,8 +226,9 @@ public class Pantalla_Principal extends JFrame implements ActionListener {
 			
 		}
         if (e.getSource()==crearCuentaButton) {
-			
-		}
+			new Registro();
+			this.dispose();
+        }
     }
 
    
