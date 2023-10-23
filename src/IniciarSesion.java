@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 public class IniciarSesion implements ActionListener {
 	private Base b = new Base();
-	private ImageIcon volver = new ImageIcon("cap.jpg");
+	private ImageIcon volver = new ImageIcon("cap.png");
 	private JButton botonVolver = new JButton(volver);
 	private JButton IniciarS = new JButton("Sign in");
 	private JButton CrearC = new JButton("Create Account");
@@ -33,19 +33,19 @@ public class IniciarSesion implements ActionListener {
 		botonVolver.setOpaque(false);
 		botonVolver.setContentAreaFilled(false);
 		botonVolver.addActionListener(this);
-		botonVolver.setBounds(10, 35, 100, 77);
-		IniciarS.setBounds(740, 85, 200, 35);
+		botonVolver.setBounds(8, (175/2)-35, 40, 40);
+		IniciarS.setBounds(540, 85, 200, 35);
 		IniciarS.addActionListener(this);
 		CrearC.addActionListener(this);
-		CrearC.setBounds(530, 85, 200, 35);
+		CrearC.setBounds(330, 85, 200, 35);
 		Marcadores_de_Posicion.estiloBoton(IniciarS);
 		Marcadores_de_Posicion.estiloBoton(CrearC);
-		Email.setBounds(530, 5, 200, 35);
+		Email.setBounds(330, 5, 200, 35);
 		Email.setFont(fuente);
-		EmailT.setBounds(530, 35, 200, 35);
+		EmailT.setBounds(330, 35, 200, 35);
 		EmailT.setFont(fuente);
-		password.setBounds(740, 5, 200, 35);
-		passwordT.setBounds(740, 35, 200, 35);
+		password.setBounds(540, 5, 200, 35);
+		passwordT.setBounds(540, 35, 200, 35);
 		b.add(Email);
 		b.add(EmailT);
 		b.add(password);

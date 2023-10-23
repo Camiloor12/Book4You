@@ -56,7 +56,7 @@ public class Base extends JFrame implements ActionListener{
 	        logo = new ImageIcon("logo.png");
 	        JLabel logo2 = new JLabel();
 	        logo2.setIcon(logo);
-	        logo2.setBounds(120, -15, 300, 200);
+	        logo2.setBounds(20, -15, 300, 200);
 	        setContentPane(new JPanel() {
 	            @Override
 	            protected void paintComponent(Graphics g) {
@@ -66,7 +66,7 @@ public class Base extends JFrame implements ActionListener{
 	        });
 	        this.setBackground(Color.white);
 	        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-	        this.setSize(1000, 175);             
+	        this.setSize(800, 175);             
 	        this.setLayout(null);
 	        this.setTitle("BOOK4YOU");
 	        this.setIconImage(image.getImage());	     

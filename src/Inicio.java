@@ -57,7 +57,7 @@ public class Inicio extends JFrame implements ActionListener {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 this.setBackground(Color.white);
-                g.drawImage(fondo, 0, 130, getWidth(), 400, this);
+                g.drawImage(fondo, 0, 140, getWidth(), 380, this);
             }
         });
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -74,7 +74,7 @@ public class Inicio extends JFrame implements ActionListener {
         int frameWidth = this.getWidth();
         int logoWidth = logo.getIconWidth();
         int logoX = (frameWidth - logoWidth) / 2;
-        logo2.setBounds(logoX, -15, logoWidth, 200);
+        logo2.setBounds(logoX, -10, logoWidth, 200);
 
         botonLogOut.setBorderPainted(false);
         botonLogOut.setOpaque(false);

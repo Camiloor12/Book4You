@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 public class Registro implements ActionListener{
 	  private Base b = new Base(760, 530);
 	  private int start = 1900;
-	  private ImageIcon volver = new ImageIcon("cap.jpg");
+	  private ImageIcon volver = new ImageIcon("cap.png");
 	  private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 	  private JComboBox<String> mes = new JComboBox<>(meses);
 	  private Integer[] Dias = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
@@ -67,7 +67,7 @@ public class Registro implements ActionListener{
 		    botonVolver.setOpaque(false);
 		    botonVolver.setContentAreaFilled(false);
 		    botonVolver.addActionListener(this);
-		    botonVolver.setBounds(10, 35, 100, 77);
+		    botonVolver.setBounds(6, 8, 40, 40);
 		    
 		    // Add the text fields to the base1 panel
 		    nombreApellidos.setBounds((p.getWidth() / 2) - 115, 25, 200, 35);
@@ -104,7 +104,7 @@ public class Registro implements ActionListener{
 		    Marcadores_de_Posicion.Cambio1(EmailT, "Ej : federicgonz@gmail.com");
 		    Marcadores_de_Posicion.Cambio1(TelefonoT, "Ej : 674 324 115");
 		    
-		    b.add(botonVolver);
+		    p.add(botonVolver);
 		    botonVolver.setVisible(true);
 		}
 	  
