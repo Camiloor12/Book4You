@@ -240,10 +240,12 @@ public class Inicio extends JFrame implements ActionListener {
             }
         }
         if (e.getSource() == iniciarSesionButton) {
-        	System.out.println("Me has presionado");
+        	new IniciarSesion();
+        	this.dispose();
         }
         if (e.getSource() == crearCuentaButton) {
-
+        	new Registro();
+        	this.dispose();
         }
     }
 }
