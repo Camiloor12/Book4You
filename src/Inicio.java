@@ -258,13 +258,13 @@ public class Inicio extends JFrame implements ActionListener {
     }
     private void InicioSesion() {
     	if(InicioS) { //Si se ha iniciado sesion  
-    		user2.setVisible(false);
+    		user2.setVisible(true);
     		iniciarSesionButton.setVisible(false);
     		crearCuentaButton.setVisible(false);
     	}else {
-    		iniciarSesionButton.setVisible(false);
-    		crearCuentaButton.setVisible(false);
-    		user2.setVisible(true);
+    		iniciarSesionButton.setVisible(true);
+    		crearCuentaButton.setVisible(true);
+    		user2.setVisible(false);
     	}
     }
 }
