@@ -24,7 +24,7 @@ public class IniciarSesion implements ActionListener {
 	private JButton CrearC = new JButton("Create Account");
 	private Font fuente = new Font("Oswald", Font.ITALIC, 15);
 	private JLabel Email = new JLabel("Email:");
-	private JTextField EmailT = new JTextField("");
+	protected static JTextField EmailT = new JTextField("");
 	private JLabel password = new JLabel("Password:");
 	private ImageIcon Hide = new ImageIcon("hide.png");
 	private ImageIcon Show = new ImageIcon("show.png");
