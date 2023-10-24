@@ -8,6 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -37,7 +41,7 @@ public class User extends JFrame implements ActionListener{
 	  private ImageIcon volver = new ImageIcon("cap.png");	 
 	  private JButton botonVolver = new JButton(volver);
 	  private Font fuente = new Font("Oswald", Font.ITALIC, 15);
-	  private JTextField nombreApellidos = new JTextField("");
+	  private JTextField nombre = new JTextField("");
 	  private JLabel nameSurn = new JLabel("Nombre Apellidos:");
 	  private JLabel Fecha = new JLabel("Fecha Nacimiento:");
 	  private JLabel Email = new JLabel("Email:");
@@ -54,8 +58,18 @@ public class User extends JFrame implements ActionListener{
 	  private ImageIcon Show = new ImageIcon("show.png");
 	  private JButton ShowHideButton = new JButton(Show);
 	  private JPasswordField passwordField = new JPasswordField(15);
+	 private  String nombreApellidos = "";
+	 private int telefono2=0;
+	 private int quevedos=0;
+	  
+	  
 	  
 	  public User() {
+		Marcadores_de_Posicion.devolverUsuarioInfo(nombreApellidos, telefono2, quevedos);
+		Marcadores_de_Posicion.Cambio1(nombre, nombreApellidos);
+		Marcadores_de_Posicion.Cambio1(EmailT, IniciarSesion.EmailT.getText());
+		Marcadores_de_Posicion.Cambio1(TelefonoT, String.valueOf(telefono2) );
+		Marcadores_de_Posicion.Cambio1(FondosT, String.valueOf(quevedos));
 		mes.setFont(fuente);
 	  	passwordT.setFont(fuente);
 	  	Dia.setFont(fuente);				  	
@@ -107,8 +121,8 @@ public class User extends JFrame implements ActionListener{
 	    botonVolver.setContentAreaFilled(false);
 	    botonVolver.addActionListener(this);
 	    botonVolver.setBounds(10, 55, 40, 40);
-	    nombreApellidos.setBounds((base1.getWidth() / 2) - 270, 25, 200, 35);
-	    nombreApellidos.setFont(fuente);
+	    nombre.setBounds((base1.getWidth() / 2) - 270, 25, 200, 35);
+	    nombre.setFont(fuente);
 	    Fecha.setBounds((base1.getWidth() / 2) + 55, 0, 200, 35);
 	    Fecha.setFont(fuente);
 	    Email.setBounds((base1.getWidth() / 2) - 270, 75, 200, 35);
@@ -153,7 +167,7 @@ public class User extends JFrame implements ActionListener{
 	    base1.add(nameSurn);
 	    base1.add(Fondos);
 	    base1.add(FondosT);
-	    base1.add(nombreApellidos);
+	    base1.add(nombre);
 	    base1.add(Fecha);
 	    base1.add(Año);
 	    base1.add(mes);
@@ -167,6 +181,10 @@ public class User extends JFrame implements ActionListener{
 	    base1.add(addFondos);
 	    this.add(botonVolver);
 		}
+
+		
+		
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(botonVolver == e.getSource()) {
@@ -190,7 +208,6 @@ public class User extends JFrame implements ActionListener{
         String password = "your_actual_password"; // Set your actual password here
         JDialog confirmationDialog = new JDialog(this, "Confirmation", true);
         confirmationDialog.setLayout(new FlowLayout());
-        
         confirmationDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         JButton confirmButton = new JButton("Confirm");
         JButton cancelButton = new JButton("Cancel");
@@ -233,8 +250,6 @@ public class User extends JFrame implements ActionListener{
         confirmationDialog.add(confirmButton);
         confirmationDialog.add(cancelButton);
         confirmationDialog.pack();
-        confirmationDialog.setBackground(Color.WHITE);
-        confirmationDialog.setResizable(false);
         confirmationDialog.setLocationRelativeTo(null);
         confirmationDialog.setVisible(true);
     }
@@ -258,4 +273,8 @@ public class User extends JFrame implements ActionListener{
 	    });
 	    return textField;
 	}
+	
+	
+	
+
 }
