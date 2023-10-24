@@ -190,6 +190,7 @@ public class User extends JFrame implements ActionListener{
         String password = "your_actual_password"; // Set your actual password here
         JDialog confirmationDialog = new JDialog(this, "Confirmation", true);
         confirmationDialog.setLayout(new FlowLayout());
+        
         confirmationDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         JButton confirmButton = new JButton("Confirm");
         JButton cancelButton = new JButton("Cancel");
@@ -232,6 +233,8 @@ public class User extends JFrame implements ActionListener{
         confirmationDialog.add(confirmButton);
         confirmationDialog.add(cancelButton);
         confirmationDialog.pack();
+        confirmationDialog.setBackground(Color.WHITE);
+        confirmationDialog.setResizable(false);
         confirmationDialog.setLocationRelativeTo(null);
         confirmationDialog.setVisible(true);
     }

@@ -11,7 +11,7 @@ public class Inicio extends JFrame implements ActionListener {
 
     private ImageIcon logo;
     private JLabel logo2;
-    public static boolean InicioS;
+    public static boolean InicioS = false;
     private JLabel x;
     private ImageIcon logout = new ImageIcon("logout.png");
     private JButton botonLogOut = new JButton(logout);
@@ -47,7 +47,6 @@ public class Inicio extends JFrame implements ActionListener {
         } catch (UnsupportedLookAndFeelException e) {
             // Manejar la excepción de LookAndFeel si es necesario
         }
-
         ImageIcon image = new ImageIcon("logot.jpg");
         String imagenFondo = "fondoo.jpg";
         Image fondo = new ImageIcon(imagenFondo).getImage();
@@ -197,9 +196,13 @@ public class Inicio extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == botonLogOut) {
-        	InicioS = false;        	
-        	JOptionPane.showMessageDialog(null, "Logged out succesfully !", "Information", JOptionPane.INFORMATION_MESSAGE);
-        	InicioSesion();
+        	if(!InicioS) {
+        		JOptionPane.showMessageDialog(null, "Try and log in or create an account first !", "Information", JOptionPane.INFORMATION_MESSAGE);
+        	}else {
+        		JOptionPane.showMessageDialog(null, "Logged out succesfully !", "Information", JOptionPane.INFORMATION_MESSAGE);
+        		InicioS = false;
+        		InicioSesion();
+        	}        	
         }
         if (e.getSource() == user2) {
         	this.dispose();
