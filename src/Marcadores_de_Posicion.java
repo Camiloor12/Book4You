@@ -111,7 +111,11 @@ public class Marcadores_de_Posicion {
 		    boton.setContentAreaFilled(false);
 
 	    }
-	 public static String devolverUsuarioInfo(String nombreCompleto, int telefono, int quevedos) {
+	 public static String devolverUsuarioInfo() {
+		 String nombreCompleto ="";
+		 int telefono = 0;
+		 int quevedos = 0;
+		 
 		    String sql = "SELECT NOMBRE_APELLIDO, TELEFONO, QUEVEDOS FROM USUARIO WHERE E_MAIL = '"+ IniciarSesion.EmailT.getText() +"'";
 		    try {
 		        Statement st = Main.con.createStatement();
@@ -129,7 +133,7 @@ public class Marcadores_de_Posicion {
 		        System.out.println("Ha habido un error en el SELECT " + e2);
 		    }
 		    
-		    return null;
+		    return nombreCompleto +","+telefono+","+quevedos;
 		}
 
 	 

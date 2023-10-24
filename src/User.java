@@ -58,18 +58,16 @@ public class User extends JFrame implements ActionListener{
 	  private ImageIcon Show = new ImageIcon("show.png");
 	  private JButton ShowHideButton = new JButton(Show);
 	  private JPasswordField passwordField = new JPasswordField(15);
-	 private  String nombreApellidos = "";
-	 private int telefono2=0;
-	 private int quevedos=0;
-	  
-	  
-	  
+	 
 	  public User() {
-		Marcadores_de_Posicion.devolverUsuarioInfo(nombreApellidos, telefono2, quevedos);
-		Marcadores_de_Posicion.Cambio1(nombre, nombreApellidos);
+		String devuelto = Marcadores_de_Posicion.devolverUsuarioInfo();
+		String[] valores = devuelto.split(",");
+		nombre.setText(valores[0]);
+		TelefonoT.setText(valores[1]);
+		Marcadores_de_Posicion.Cambio1(nombre, nombre.getText());
 		Marcadores_de_Posicion.Cambio1(EmailT, IniciarSesion.EmailT.getText());
-		Marcadores_de_Posicion.Cambio1(TelefonoT, String.valueOf(telefono2) );
-		Marcadores_de_Posicion.Cambio1(FondosT, String.valueOf(quevedos));
+		Marcadores_de_Posicion.Cambio1(TelefonoT, String.valueOf(TelefonoT.getText()) );
+		Marcadores_de_Posicion.Cambio1(FondosT, String.valueOf(valores[2]));
 		mes.setFont(fuente);
 	  	passwordT.setFont(fuente);
 	  	Dia.setFont(fuente);				  	
