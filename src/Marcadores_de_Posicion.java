@@ -5,6 +5,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -108,7 +111,27 @@ public class Marcadores_de_Posicion {
 		    boton.setContentAreaFilled(false);
 
 	    }
-	 
+	 public static String devolverUsuarioInfo(String nombreCompleto, int telefono, int quevedos) {
+		    String sql = "SELECT NOMBRE_APELLIDO, TELEFONO, QUEVEDOS FROM USUARIO WHERE E_MAIL = '"+ IniciarSesion.EmailT.getText() +"'";
+		    try {
+		        Statement st = Main.con.createStatement();
+		        ResultSet rs = st.executeQuery(sql);
+		        if (rs.isBeforeFirst()) {
+		            while (rs.next()) {
+		                 nombreCompleto = rs.getString("NOMBRE_APELLIDO");
+		                 telefono = rs.getInt("TELEFONO");
+		                 quevedos = rs.getInt("QUEVEDOS");
+		            }
+		        } else {
+		            System.out.println("No se encontró nada.");
+		        }
+		    } catch (SQLException e2) {
+		        System.out.println("Ha habido un error en el SELECT " + e2);
+		    }
+		    
+		    return null;
+		}
+
 	 
 	
        
