@@ -17,7 +17,6 @@ public class Inicio extends JFrame implements ActionListener {
     private JButton botonLogOut = new JButton(logout);
     private ImageIcon user = new ImageIcon("user.png");
     private JButton user2 = new JButton(user);
-    private ImageIcon image;
     private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     private JComboBox<String> mes;
     private JComboBox<String> mes2;
@@ -38,10 +37,11 @@ public class Inicio extends JFrame implements ActionListener {
     private Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
 
     public Inicio() {
-    	if(InicioS) { //Si se ha iniciado sesion
-    		iniciarSesionButton.setVisible(false);
-    		crearCuentaButton.setVisible(false);
-    	}
+    	user2.setBounds(890, 45, 60, 60);    	
+    	user2.setBorderPainted(false);
+		user2.setOpaque(false);
+        user2.setContentAreaFilled(false);  
+        InicioSesion();
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
         } catch (UnsupportedLookAndFeelException e) {
@@ -79,7 +79,7 @@ public class Inicio extends JFrame implements ActionListener {
         botonLogOut.setBorderPainted(false);
         botonLogOut.setOpaque(false);
         botonLogOut.setContentAreaFilled(false);
-        botonLogOut.setBounds(0, 20, 100, 100);
+        botonLogOut.setBounds(3, 20, 100, 100);
         botonLogOut.addActionListener(this);
 
         iniciarSesionButton.setBounds(820, 40, 150, 35);
@@ -167,7 +167,7 @@ public class Inicio extends JFrame implements ActionListener {
         Busqueda.setForeground(Color.BLACK);
         Busqueda.setContentAreaFilled(true);
         Busqueda.addActionListener(this);
-
+        user2.addActionListener(this);
         this.add(logo2);
         this.add(botonLogOut);
         this.add(user2);
@@ -197,10 +197,13 @@ public class Inicio extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == botonLogOut) {
-            this.dispose();
+        	InicioS = false;        	
+        	JOptionPane.showMessageDialog(null, "Logged out succesfully !", "Information", JOptionPane.INFORMATION_MESSAGE);
+        	InicioSesion();
         }
         if (e.getSource() == user2) {
-            this.dispose();
+        	this.dispose();
+        	new User();//Frame user
         }
         if (e.getSource() == Busqueda) {
             String Entrada = (String) mes.getSelectedItem();
@@ -252,5 +255,16 @@ public class Inicio extends JFrame implements ActionListener {
         	new Registro();
         	this.dispose();
         }
+    }
+    private void InicioSesion() {
+    	if(InicioS) { //Si se ha iniciado sesion  
+    		user2.setVisible(false);
+    		iniciarSesionButton.setVisible(false);
+    		crearCuentaButton.setVisible(false);
+    	}else {
+    		iniciarSesionButton.setVisible(false);
+    		crearCuentaButton.setVisible(false);
+    		user2.setVisible(true);
+    	}
     }
 }

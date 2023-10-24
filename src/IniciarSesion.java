@@ -2,6 +2,8 @@
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +26,9 @@ public class IniciarSesion implements ActionListener {
 	private JLabel Email = new JLabel("Email:");
 	private JTextField EmailT = new JTextField("");
 	private JLabel password = new JLabel("Password:");
+	private ImageIcon Hide = new ImageIcon("hide.png");
+	private ImageIcon Show = new ImageIcon("show.png");
+	private JButton ShowHideButton = new JButton(Show);
 	private JPasswordField passwordT = new JPasswordField("");
 
 	public IniciarSesion() {
@@ -37,6 +42,7 @@ public class IniciarSesion implements ActionListener {
 		IniciarS.setBounds(540, 85, 200, 35);
 		IniciarS.addActionListener(this);
 		CrearC.addActionListener(this);
+		ShowHideButton.addActionListener(this);
 		CrearC.setBounds(330, 85, 200, 35);
 		Marcadores_de_Posicion.estiloBoton(IniciarS);
 		Marcadores_de_Posicion.estiloBoton(CrearC);
@@ -46,6 +52,10 @@ public class IniciarSesion implements ActionListener {
 		EmailT.setFont(fuente);
 		password.setBounds(540, 5, 200, 35);
 		passwordT.setBounds(540, 35, 200, 35);
+		ShowHideButton.setBorderPainted(false);
+		ShowHideButton.setOpaque(false);
+		ShowHideButton.setContentAreaFilled(false);
+		ShowHideButton.setBounds(744, 38, 30, 30);
 		b.add(Email);
 		b.add(EmailT);
 		b.add(password);
@@ -53,7 +63,19 @@ public class IniciarSesion implements ActionListener {
 		b.add(IniciarS);
 		b.add(CrearC);
 		b.add(botonVolver);
+		b.add(ShowHideButton);
 		botonVolver.setVisible(true);
+		passwordT.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    IniciarS.doClick(); 
+                }
+            }
+        });
+		
+
+
 	}
 
 	@Override
@@ -69,7 +91,13 @@ public class IniciarSesion implements ActionListener {
 		} else if (CrearC == e.getSource()) {
 			new Registro();
 			b.dispose();
-		}
+		}else if (passwordT.getEchoChar() == 0) {//Ocultar password
+            passwordT.setEchoChar('*');
+            ShowHideButton.setIcon(Show);
+        } else {//Mostrar password
+            passwordT.setEchoChar((char) 0);
+            ShowHideButton.setIcon(Hide);
+        }
 
 	}
 
