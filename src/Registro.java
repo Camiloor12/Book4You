@@ -30,7 +30,7 @@ public class Registro implements ActionListener{
       private JComboBox<Integer> Año;
       private JButton registerN = new JButton("Registrate");
 	  private JButton botonVolver = new JButton(volver);
-	  private Font fuente = new Font("Oswald", Font.ITALIC, 15);
+	  private Font fuente = new Font("Oswald", Font.PLAIN, 15);
 	  private JTextField nombreApellidos = new JTextField("");
 	  private JLabel nameSurn = new JLabel("Nombre Apellidos:");
 	  private JLabel Fecha = new JLabel("Fecha Nacimiento:");

@@ -22,14 +22,14 @@ public class IniciarSesion implements ActionListener {
 	private JButton botonVolver = new JButton(volver);
 	private JButton IniciarS = new JButton("Sign in");
 	private JButton CrearC = new JButton("Create Account");
-	private Font fuente = new Font("Oswald", Font.ITALIC, 15);
+	private Font fuente = new Font("Oswald", Font.PLAIN, 15);
 	private JLabel Email = new JLabel("Email:");
-	public static JTextField EmailT = new JTextField("");
+	public static JTextField EmailT = new JTextField("bordesalex8@gmail.com");
 	private JLabel password = new JLabel("Password:");
 	private ImageIcon Hide = new ImageIcon("hide.png");
 	private ImageIcon Show = new ImageIcon("show.png");
 	private JButton ShowHideButton = new JButton(Show);
-	private JPasswordField passwordT = new JPasswordField("");
+	private JPasswordField passwordT = new JPasswordField("Alex");
 
 	public IniciarSesion() {
 		password.setFont(fuente);
