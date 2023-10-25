@@ -40,7 +40,7 @@ public class User extends JFrame implements ActionListener{
 	  private JComboBox<Integer> Año;
 	  private ImageIcon volver = new ImageIcon("cap.png");	 
 	  private JButton botonVolver = new JButton(volver);
-	  private Font fuente = new Font("Oswald", Font.ITALIC, 15);
+	  private Font fuente = new Font("Oswald", Font.PLAIN, 15);
 	  private JTextField nombre = new JTextField("");
 	  private JLabel nameSurn = new JLabel("Nombre Apellidos:");
 	  private JLabel Fecha = new JLabel("Fecha Nacimiento:");
@@ -115,6 +115,13 @@ public class User extends JFrame implements ActionListener{
         base1.setBounds(10, 138, getWidth() - 35 , 407);     
         base1.setLayout(null);
 	    this.add(base1);
+	    String Fecha2= (String.valueOf(valores[3]));
+		String[] Data = Fecha2.split("-");
+		Año.setSelectedItem(Integer.parseInt(Data[0]));
+        int a=Integer.parseInt(Data[1]);
+		String Mes3= Marcadores_de_Posicion.Mes2(a);
+		mes.setSelectedItem(Mes3);
+		Dia.setSelectedItem(Integer.parseInt(Data[2]));
 	    nameSurn.setForeground(Color.black);
 	    nameSurn.setBounds((base1.getWidth() / 2) - 270, 0, 200, 35);
 	    nameSurn.setFont(fuente);
@@ -165,6 +172,7 @@ public class User extends JFrame implements ActionListener{
                 }
             }
         });
+	   
 	    base1.add(nameSurn);
 	    base1.add(Fondos);
 	    base1.add(FondosT);

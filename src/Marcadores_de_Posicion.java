@@ -79,6 +79,24 @@ public class Marcadores_de_Posicion {
         }
         
     }
+	public  static String Mes2(int meses) {
+        switch (meses) {
+            case 1: return "Enero";
+            case 2: return "Febrero";
+            case 3: return "Marzo";
+            case 4: return  "Abril";
+            case 5: return  "Mayo";
+            case 6: return "Junio";
+            case 7: return "Julio";
+            case 8: return "Agosto";
+            case 9: return "Septiembre";
+            case 10: return "Octubre";
+            case 11: return "Noviembre";
+            case 12: return "Diciembre";
+            default: return ""; // o
+        }
+        
+    }
 
 
 	 
@@ -112,7 +130,8 @@ public class Marcadores_de_Posicion {
 		 String nombreCompleto ="";
 		 int telefono = 0;
 		 int quevedos = 0;
-		    String sql = "SELECT NOMBRE_APELLIDO, TELEFONO, QUEVEDOS FROM USUARIO WHERE E_MAIL = '"+Inicio.correo +"'";
+		 Date Fechadenacimiento = null;
+		    String sql = "SELECT NOMBRE_APELLIDO, TELEFONO, QUEVEDOS,FECHA_DE_NACIMIENTO FROM USUARIO WHERE E_MAIL = '"+Inicio.correo +"'";
 		    try {
 		        Statement st = Main.con.createStatement();
 		        ResultSet rs = st.executeQuery(sql);
@@ -121,6 +140,8 @@ public class Marcadores_de_Posicion {
 		                 nombreCompleto = rs.getString("NOMBRE_APELLIDO");
 		                 telefono = rs.getInt("TELEFONO");
 		                 quevedos = rs.getInt("QUEVEDOS");
+		                 Fechadenacimiento=rs.getDate("FECHA_DE_NACIMIENTO");
+		                 System.out.println(Fechadenacimiento);
 		            }
 		        } else {
 		            System.out.println("No se encontró nada.");
@@ -129,7 +150,7 @@ public class Marcadores_de_Posicion {
 		        System.out.println("Ha habido un error en el SELECT " + e2);
 		    }
 		    
-		    return nombreCompleto +","+telefono+","+quevedos;
+		    return nombreCompleto +","+telefono+","+quevedos+ "," + Fechadenacimiento;
 		}
 
 	 public static boolean actualizarQuevedos() {

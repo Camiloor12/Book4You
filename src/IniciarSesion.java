@@ -22,7 +22,7 @@ public class IniciarSesion implements ActionListener {
 	private JButton botonVolver = new JButton(volver);
 	private JButton IniciarS = new JButton("Sign in");
 	private JButton CrearC = new JButton("Create Account");
-	private Font fuente = new Font("Oswald", Font.ITALIC, 15);
+	private Font fuente = new Font("Oswald", Font.PLAIN, 15);
 	private JLabel Email = new JLabel("Email:");
 	public static JTextField EmailT = new JTextField("");
 	private JLabel password = new JLabel("Password:");
