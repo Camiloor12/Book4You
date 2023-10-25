@@ -40,11 +40,11 @@ public class Marcadores_de_Posicion {
         });
     }
     
-    public static boolean Fecha(String meses, int dia) {
+    public static boolean Fecha(String meses, int dia, int Año) {
         SimpleDateFormat Formato = new SimpleDateFormat("MM/dd/yyyy");
         java.util.Date FechaActual = new java.util.Date();
         try {
-            String Fecha = Mes(meses) + "/" + dia + "/" + añoactual();
+            String Fecha = Mes(meses) + "/" + dia + "/" +Año;
             java.util.Date Actual = Formato.parse(Fecha);
             if (Actual.before(FechaActual) ) {
                 return false;
@@ -61,7 +61,7 @@ public class Marcadores_de_Posicion {
 
 
     
-	private static int Mes(String meses) {
+	protected static int Mes(String meses) {
         switch (meses) {
             case "Enero": return 1;
             case "Febrero": return 2;
@@ -80,10 +80,7 @@ public class Marcadores_de_Posicion {
         
     }
 
-	 private static  int añoactual() {
-         return Calendar.getInstance().get(Calendar.YEAR);
-     }
-	 
+
 	 
 	 public static boolean Fecha2(String meses_entrada, int dia_entrada, int año_entrada,String meses_salida, int dia_salida, int año_salida) {
 	        SimpleDateFormat Formato = new SimpleDateFormat("MM/dd/yyyy");
@@ -115,8 +112,7 @@ public class Marcadores_de_Posicion {
 		 String nombreCompleto ="";
 		 int telefono = 0;
 		 int quevedos = 0;
-		 
-		    String sql = "SELECT NOMBRE_APELLIDO, TELEFONO, QUEVEDOS FROM USUARIO WHERE E_MAIL = '"+ IniciarSesion.EmailT.getText() +"'";
+		    String sql = "SELECT NOMBRE_APELLIDO, TELEFONO, QUEVEDOS FROM USUARIO WHERE E_MAIL = '"+Inicio.correo +"'";
 		    try {
 		        Statement st = Main.con.createStatement();
 		        ResultSet rs = st.executeQuery(sql);
@@ -136,7 +132,20 @@ public class Marcadores_de_Posicion {
 		    return nombreCompleto +","+telefono+","+quevedos;
 		}
 
-	 
+	 public static boolean actualizarQuevedos() {
+		 int nuevaCantidadQuevedos= User.Quevedosn + User.Quevedos;
+		    String sql = "UPDATE USUARIO SET QUEVEDOS = " + nuevaCantidadQuevedos + " WHERE E_MAIL = '" + Inicio.correo + "'";
+		    try {
+		        Statement st = Main.con.createStatement();
+		        st.executeUpdate(sql);
+		        System.out.println("Cantidad de Quevedos actualizada exitosamente.");
+		        return true;
+		    } catch (SQLException e) {
+		        System.out.println("Error al actualizar Quevedos: " + e);
+		        return false;
+		    }
+		}
+
 	
        
     }

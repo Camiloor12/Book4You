@@ -199,8 +199,8 @@ public class Pantalla_Principal extends JFrame implements ActionListener {
                     && Dia_Salida == 31) {
                 JOptionPane.showMessageDialog(this, "Fecha de Salida: Este mes  solo tiene 30 días.");
             }
-            boolean esFechaValidaEntrada = Marcadores_de_Posicion.Fecha(Entrada, Dia_Entrada);
-            boolean esFechaValidaSalida = Marcadores_de_Posicion.Fecha(Salida, Dia_Salida);
+            boolean esFechaValidaEntrada = Marcadores_de_Posicion.Fecha(Entrada, Dia_Entrada, Año_Entrada);
+            boolean esFechaValidaSalida = Marcadores_de_Posicion.Fecha(Salida, Dia_Salida,Año_Salida);
             if (Año_Salida==2024 || Año_Entrada==2024) {
             	esFechaValidaEntrada= true;
             	esFechaValidaSalida=true;}

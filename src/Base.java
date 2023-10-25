@@ -41,9 +41,11 @@ public class Base extends JFrame implements ActionListener{
         this.setIconImage(image.getImage());
         base1.setBackground(Color.WHITE);
         base1.setBounds(10, 138, getWidth() - 35 , 500);
+   
         
         base1.setLayout(null);
         this.add(base1);
+      
         this.setLocationRelativeTo(null);
         this.add(logo2);
         this.setResizable(false);
@@ -98,6 +100,9 @@ public class Base extends JFrame implements ActionListener{
 		base1.add(l);
 		l.setVisible(true);
 	}
+
+	
+	
 	public void actionPerformed(ActionEvent e) {
 		
         

@@ -35,7 +35,7 @@ public class Registro implements ActionListener{
 	  private JLabel nameSurn = new JLabel("Nombre Apellidos:");
 	  private JLabel Fecha = new JLabel("Fecha Nacimiento:");
 	  private JLabel Email = new JLabel("Email:");
-	  private JTextField EmailT = new JTextField("");
+	  protected static  JTextField EmailT = new JTextField("");
 	  private JLabel Telefono = new JLabel("Telefono:");
 	  private JTextField TelefonoT = new JTextField("");
 	  private JLabel password = new JLabel("Contraseña:");
@@ -122,7 +122,7 @@ public class Registro implements ActionListener{
 			}else if(!EmailT.getText().contains("@" ) || !EmailT.getText().endsWith(".com")) {
 					JOptionPane.showMessageDialog(null, "Invalid email address. Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
 			}else {
-				Inicio.InicioS = DarAlta();
+				Inicio.Inicio2 = DarAlta();
 				new Inicio();
 				b.dispose();
 			}

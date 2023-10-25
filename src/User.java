@@ -58,6 +58,8 @@ public class User extends JFrame implements ActionListener{
 	  private ImageIcon Show = new ImageIcon("show.png");
 	  private JButton ShowHideButton = new JButton(Show);
 	  private JPasswordField passwordField = new JPasswordField(15);
+	  protected static int Quevedosn=0;
+	  protected static int Quevedos=0;
 	 
 	  public User() {
 		String devuelto = Marcadores_de_Posicion.devolverUsuarioInfo();
@@ -65,9 +67,10 @@ public class User extends JFrame implements ActionListener{
 		nombre.setText(valores[0]);
 		TelefonoT.setText(valores[1]);
 		Marcadores_de_Posicion.Cambio1(nombre, nombre.getText());
-		Marcadores_de_Posicion.Cambio1(EmailT, IniciarSesion.EmailT.getText());
+		Marcadores_de_Posicion.Cambio1(EmailT,Inicio.correo);
 		Marcadores_de_Posicion.Cambio1(TelefonoT, String.valueOf(TelefonoT.getText()) );
 		Marcadores_de_Posicion.Cambio1(FondosT, String.valueOf(valores[2]));
+		Quevedos = Integer.parseInt(String.valueOf(valores[2]));
 		mes.setFont(fuente);
 	  	passwordT.setFont(fuente);
 	  	Dia.setFont(fuente);				  	
@@ -189,8 +192,13 @@ public class User extends JFrame implements ActionListener{
 			new Inicio();
 			this.dispose();
 		}else if(addFondos == e.getSource()) {
-			
-		}else if(actualizarDatos == e.getSource()) {
+			Quevedosn= Integer.parseInt(FondosT.getText());
+			double x = Double.parseDouble(FondosT.getText()) * 10;
+			 int opcion = JOptionPane.showConfirmDialog(null, "¿Desea Recargar? " + Quevedosn + " Q Equivalentes a: "+ x + "€"  , "Confirmación", JOptionPane.YES_NO_OPTION);
+			 if (opcion == JOptionPane.YES_OPTION) {
+			new Recarga();
+			this.dispose();}
+			}else if(actualizarDatos == e.getSource()) {
 			showConfirmationDialog();
 		}else if(historialReservas == e.getSource()) {
 			
@@ -252,7 +260,7 @@ public class User extends JFrame implements ActionListener{
         confirmationDialog.setVisible(true);
     }
 
-	private JTextField createNumericTextField(int columns) {
+	protected static JTextField createNumericTextField(int columns) {
 	    JTextField textField = new JTextField(columns);
 	    PlainDocument doc = (PlainDocument) textField.getDocument();
 	    doc.setDocumentFilter(new DocumentFilter() {
