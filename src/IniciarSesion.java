@@ -113,11 +113,11 @@ public class IniciarSesion implements ActionListener {
 					String Contraseña = rs.getString("CONTRASEÑA");
 					if (Contraseña.equals(String.valueOf(passwordT.getPassword()))) { // Contraseña correcta
 						String email = EmailT.getText();
-						JOptionPane.showMessageDialog(null, "Welcome back "+ email+ "!", "WELCOME", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Actualización Correcta "+ email+ "!", "Actualización", JOptionPane.INFORMATION_MESSAGE);
 						Inicio.InicioS = true;
 						return true;
 					} else {
-						JOptionPane.showMessageDialog(null, "Incorrect password. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Actualización Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 
 				}

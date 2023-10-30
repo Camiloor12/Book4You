@@ -17,7 +17,7 @@ public class Marcadores_de_Posicion {
 
     public static void Cambio1(JTextField caja, String palabra) {
     	caja.setText(palabra);
-    	caja.setForeground(Color.BLACK);
+    	caja.setForeground(Color.GRAY);
 
     	caja.addFocusListener(new FocusListener() {
             @Override
@@ -166,7 +166,26 @@ public class Marcadores_de_Posicion {
 		        return false;
 		    }
 		}
+		public static boolean Cambio_Datos(String Correo_id, String nombre,String Correo,String Contra,int Telefono ) {
+			String sql =  "BEGIN actualizar_informacion("+
+							   " p_correo =>"+ Correo_id + ","+
+							   " p_nuevo_nombre => '" +nombre + "'," +
+							   "p_nuevo_telefono => '" +Telefono +"',"+
+							    "p_nuevo_correo => '" +Correo +"',"+
+							    "p_nueva_contrasena => '" + Contra +"');" +
+							  "COMMIT; "
+							  + "END;" ;
+			try {
+				Statement st = Main.con.createStatement();
+				 st.execute(sql);
+				 return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
 
+		}	
 	
        
     }
