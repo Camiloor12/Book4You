@@ -245,11 +245,11 @@ public class User extends JFrame implements ActionListener{
 	            boolean passwordCorrect = selectLogin(Inicio.correo, enteredPassword);
 
 	            if (passwordCorrect) {
-	                // Agrega aquí la lógica para actualizar los datos del usuario
-	          
+	            	Marcadores_de_Posicion.Cambio_Datos(Inicio.correo, nombre.getText(), EmailT.getText(), enteredPasswordStr, Integer.parseInt(TelefonoT.getText()));
+	            	JOptionPane.showMessageDialog(null, "Changes done!", "CHANGES", JOptionPane.INFORMATION_MESSAGE);          
 	                confirmationDialog.dispose();
 	            } else {
-	                JOptionPane.showMessageDialog(confirmationDialog, "Incorrect password. Try again.");
+	                
 	            }
 	        }
 	    });
@@ -307,16 +307,12 @@ public class User extends JFrame implements ActionListener{
 	    try {
 	        Statement st = Main.con.createStatement();
 	        ResultSet rs = st.executeQuery(sql);
-
 	        if (rs.isBeforeFirst()) {
 	            while (rs.next()) {
 	                String storedPassword = rs.getString("CONTRASEÑA");
-	                
-	               
 	                String enteredPasswordStr = new String(enteredPassword);
-	                if (enteredPasswordStr.equals(storedPassword)) {
-	                    String email = EmailT.getText();
-	                    JOptionPane.showMessageDialog(null, "Welcome back " + email + "!", "WELCOME", JOptionPane.INFORMATION_MESSAGE);
+	                if (enteredPasswordStr.equals(storedPassword)) {	                  
+	                    
 	                    Inicio.InicioS = true;
 	                    return true;
 	                } else {
