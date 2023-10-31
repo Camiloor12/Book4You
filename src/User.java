@@ -59,16 +59,23 @@ public class User extends JFrame implements ActionListener{
 	  private ImageIcon Show = new ImageIcon("show.png");
 	  private JButton ShowHideButton = new JButton(Show);
 	  private JPasswordField passwordField = new JPasswordField(15);
-	 
+	  protected static int Quevedosn=0;
+	  protected static int Quevedos=0;
+	  protected static String nom= "";
+	  protected static String Tele= "";
+	  protected static String password="";
 	  public User() {
 		String devuelto = Marcadores_de_Posicion.devolverUsuarioInfo();
 		String[] valores = devuelto.split(",");
 		nombre.setText(valores[0]);
+		 nom= valores[0];
 		TelefonoT.setText(valores[1]);
+		 Tele= valores[1];
 		Marcadores_de_Posicion.Cambio1(nombre, nombre.getText());
-		Marcadores_de_Posicion.Cambio1(EmailT, IniciarSesion.EmailT.getText());
+		Marcadores_de_Posicion.Cambio1(EmailT,Inicio.correo);
 		Marcadores_de_Posicion.Cambio1(TelefonoT, String.valueOf(TelefonoT.getText()) );
 		Marcadores_de_Posicion.Cambio1(FondosT, String.valueOf(valores[2]));
+		Quevedos = Integer.parseInt(String.valueOf(valores[2]));
 		mes.setFont(fuente);
 	  	passwordT.setFont(fuente);
 	  	Dia.setFont(fuente);				  	
@@ -113,6 +120,13 @@ public class User extends JFrame implements ActionListener{
         base1.setBounds(10, 138, getWidth() - 35 , 407);     
         base1.setLayout(null);
 	    this.add(base1);
+	    String Fecha2= (String.valueOf(valores[3]));
+		String[] Data = Fecha2.split("-");
+		Año.setSelectedItem(Integer.parseInt(Data[0]));
+        int a=Integer.parseInt(Data[1]);
+		String Mes3= Marcadores_de_Posicion.Mes2(a);
+		mes.setSelectedItem(Mes3);
+		Dia.setSelectedItem(Integer.parseInt(Data[2]));
 	    nameSurn.setForeground(Color.black);
 	    nameSurn.setBounds((base1.getWidth() / 2) - 270, 0, 200, 35);
 	    nameSurn.setFont(fuente);
@@ -167,6 +181,7 @@ public class User extends JFrame implements ActionListener{
                 }
             }
         });
+	   
 	    base1.add(nameSurn);
 	    base1.add(Fondos);
 	    base1.add(FondosT);
@@ -194,8 +209,13 @@ public class User extends JFrame implements ActionListener{
 			new Inicio();
 			this.dispose();
 		}else if(addFondos == e.getSource()) {
-			
-		}else if(actualizarDatos == e.getSource()) {
+			Quevedosn= Integer.parseInt(FondosT.getText());
+			double x = Double.parseDouble(FondosT.getText()) * 10;
+			 int opcion = JOptionPane.showConfirmDialog(null, "¿Desea Recargar? " + Quevedosn + " Q Equivalentes a: "+ x + "€"  , "Confirmación", JOptionPane.YES_NO_OPTION);
+			 if (opcion == JOptionPane.YES_OPTION) {
+			new Recarga();
+			this.dispose();}
+			}else if(actualizarDatos == e.getSource()) {
 			showConfirmationDialog();
 		}else if(historialReservas == e.getSource()) {
 			
@@ -208,56 +228,60 @@ public class User extends JFrame implements ActionListener{
         }
 	}
 	private void showConfirmationDialog() {
-        String password = "your_actual_password"; // Set your actual password here
-        JDialog confirmationDialog = new JDialog(this, "Confirmation", true);
-        confirmationDialog.setLayout(new FlowLayout());
-        confirmationDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        JButton confirmButton = new JButton("Confirm");
-        JButton cancelButton = new JButton("Cancel");
+	    JDialog confirmationDialog = new JDialog(this, "Confirmation", true);
+	    confirmationDialog.setLayout(new FlowLayout());
+	    confirmationDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	    JButton confirmButton = new JButton("Confirm");
+	    JButton cancelButton = new JButton("Cancel");
 
-        // Add ActionListener to the Confirm button
-        confirmButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                char[] enteredPassword = passwordField.getPassword();
-                String enteredPasswordStr = new String(enteredPassword);
-                if (enteredPasswordStr.equals(password)) {
-                    // Password is correct, proceed with the update
-                    confirmationDialog.dispose();
-                 // Add your code to update the data here
-                } else {
-                    JOptionPane.showMessageDialog(confirmationDialog, "Incorrect password. Try again.");
-                }
-            }
-        });
+	    // Add ActionListener to the Confirm button
+	    confirmButton.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            char[] enteredPassword = passwordField.getPassword();
+	            String enteredPasswordStr = new String(enteredPassword);
 
-        // Add ActionListener to the Cancel button
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                confirmationDialog.dispose();
-            }
-        });
-        passwordField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    confirmButton.doClick();
-                }
-            }
-        });
+	            // Llama a selectLogin para comprobar la contraseña
+	            boolean passwordCorrect = selectLogin(Inicio.correo, enteredPassword);
 
-        confirmationDialog.add(new JLabel("Enter password: "));
-        confirmationDialog.add(passwordField);
-        confirmationDialog.add(ShowHideButton);
-        confirmationDialog.add(confirmButton);
-        confirmationDialog.add(cancelButton);
-        confirmationDialog.pack();
-        confirmationDialog.setLocationRelativeTo(null);
-        confirmationDialog.setVisible(true);
-    }
+	            if (passwordCorrect) {
+	                // Agrega aquí la lógica para actualizar los datos del usuario
+	          
+	                confirmationDialog.dispose();
+	            } else {
+	                JOptionPane.showMessageDialog(confirmationDialog, "Incorrect password. Try again.");
+	            }
+	        }
+	    });
 
-	private JTextField createNumericTextField(int columns) {
+	    // Add ActionListener to the Cancel button
+	    cancelButton.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            confirmationDialog.dispose();
+	        }
+	    });
+
+	    passwordField.addKeyListener(new KeyAdapter() {
+	        @Override
+	        public void keyPressed(KeyEvent e) {
+	            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+	                confirmButton.doClick();
+	            }
+	        }
+	    });
+
+	    confirmationDialog.add(new JLabel("Enter password: "));
+	    confirmationDialog.add(passwordField);
+	    confirmationDialog.add(ShowHideButton);
+	    confirmationDialog.add(confirmButton);
+	    confirmationDialog.add(cancelButton);
+	    confirmationDialog.pack();
+	    confirmationDialog.setLocationRelativeTo(null);
+	    confirmationDialog.setVisible(true);
+	}
+
+	protected static JTextField createNumericTextField(int columns) {
 	    JTextField textField = new JTextField(columns);
 	    PlainDocument doc = (PlainDocument) textField.getDocument();
 	    doc.setDocumentFilter(new DocumentFilter() {
@@ -277,7 +301,37 @@ public class User extends JFrame implements ActionListener{
 	    return textField;
 	}
 	
-	
+	public boolean selectLogin(String emailP, char[] enteredPassword) {
+	    String sql = "SELECT CONTRASEÑA FROM USUARIO WHERE E_MAIL = '" + emailP + "'";
+
+	    try {
+	        Statement st = Main.con.createStatement();
+	        ResultSet rs = st.executeQuery(sql);
+
+	        if (rs.isBeforeFirst()) {
+	            while (rs.next()) {
+	                String storedPassword = rs.getString("CONTRASEÑA");
+	                
+	               
+	                String enteredPasswordStr = new String(enteredPassword);
+	                if (enteredPasswordStr.equals(storedPassword)) {
+	                    String email = EmailT.getText();
+	                    JOptionPane.showMessageDialog(null, "Welcome back " + email + "!", "WELCOME", JOptionPane.INFORMATION_MESSAGE);
+	                    Inicio.InicioS = true;
+	                    return true;
+	                } else {
+	                    JOptionPane.showMessageDialog(null, "Incorrect password. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+	                }
+	            }
+	        } else {
+	            JOptionPane.showMessageDialog(null, "We couldn't find your Book4u account.", "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false;
+	}
+
 	
 
 }

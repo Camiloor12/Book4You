@@ -12,6 +12,7 @@ public class Inicio extends JFrame implements ActionListener {
     private ImageIcon logo;
     private JLabel logo2;
     public static boolean InicioS = false;
+    public static boolean Inicio2 = false;
     private JLabel x;
     private ImageIcon logout = new ImageIcon("logout.png");
     private JButton botonLogOut = new JButton(logout);
@@ -34,7 +35,8 @@ public class Inicio extends JFrame implements ActionListener {
     private JButton iniciarSesionButton = new JButton("Iniciar Sesion");
     private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
     private Font fuente = new Font("c", Font.PLAIN, 60);
-    private Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
+    public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
+    protected static String correo = " ";
 
     public Inicio() {
     	user2.setBounds(890, 45, 60, 60);    	
@@ -227,8 +229,8 @@ public class Inicio extends JFrame implements ActionListener {
                     && Dia_Salida == 31) {
                 JOptionPane.showMessageDialog(this, "Fecha de Salida: Este mes  solo tiene 30 días.");
             }
-            boolean esFechaValidaEntrada = Marcadores_de_Posicion.Fecha(Entrada, Dia_Entrada);
-            boolean esFechaValidaSalida = Marcadores_de_Posicion.Fecha(Salida, Dia_Salida);
+            boolean esFechaValidaEntrada = Marcadores_de_Posicion.Fecha(Entrada, Dia_Entrada, Año_Entrada);
+            boolean esFechaValidaSalida = Marcadores_de_Posicion.Fecha(Salida, Dia_Salida, Año_Entrada);
             if (Año_Salida == 2024 || Año_Entrada == 2024) {
                 esFechaValidaEntrada = true;
                 esFechaValidaSalida = true;
@@ -253,18 +255,26 @@ public class Inicio extends JFrame implements ActionListener {
         if (e.getSource() == iniciarSesionButton) {
         	new IniciarSesion();
         	this.dispose();
+        	
         }
         if (e.getSource() == crearCuentaButton) {
         	new Registro();
         	this.dispose();
         }
     }
-    private void InicioSesion() {
-    	if(InicioS) { //Si se ha iniciado sesion  
+    protected   void  InicioSesion() {
+    	if(InicioS) { //Si se ha iniciado sesion 
+    		correo = IniciarSesion.EmailT.getText();
     		user2.setVisible(true);
     		iniciarSesionButton.setVisible(false);
     		crearCuentaButton.setVisible(false);
-    	}else {
+    	}
+    	else if(Inicio2) { //Si se ha iniciado sesion  
+    		user2.setVisible(true);
+    		correo= Registro.EmailT.getText();
+    		iniciarSesionButton.setVisible(false);
+    		crearCuentaButton.setVisible(false);} 
+    		else {
     		iniciarSesionButton.setVisible(true);
     		crearCuentaButton.setVisible(true);
     		user2.setVisible(false);
