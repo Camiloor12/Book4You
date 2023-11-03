@@ -27,17 +27,18 @@ public class Inicio extends JFrame implements ActionListener {
     private Integer[] Años = {2023, 2024};
     private JComboBox<Integer> Año;
     private JComboBox<Integer> Año2;
-    private Integer[] Personas = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+    private Integer[] Personas = {0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     private JComboBox<Integer> Adultos;
     private JComboBox<Integer> Niños;
     private JTextField lugar;
+    public static  JLabel creditos=  new JLabel();
     private JButton Busqueda = new JButton("Buscar");
     private JButton iniciarSesionButton = new JButton("Iniciar Sesion");
     private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
     private Font fuente = new Font("c", Font.PLAIN, 60);
     public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
     protected static String correo = " ";
-
+   
     public Inicio() {
     	user2.setBounds(890, 45, 60, 60);    	
     	user2.setBorderPainted(false);
@@ -80,8 +81,9 @@ public class Inicio extends JFrame implements ActionListener {
         botonLogOut.setBorderPainted(false);
         botonLogOut.setOpaque(false);
         botonLogOut.setContentAreaFilled(false);
-        botonLogOut.setBounds(3, 20, 100, 100);
+        botonLogOut.setBounds(3, 25, 100, 100);
         botonLogOut.addActionListener(this);
+        
 
         iniciarSesionButton.setBounds(820, 40, 150, 35);
         iniciarSesionButton.addActionListener(this);
@@ -169,11 +171,17 @@ public class Inicio extends JFrame implements ActionListener {
         Busqueda.setContentAreaFilled(true);
         Busqueda.addActionListener(this);
         user2.addActionListener(this);
+        
+        
+        creditos.setBounds(875, 90, 140, 60);
+        creditos.setFont(fuente2);
+        
         this.add(logo2);
         this.add(botonLogOut);
         this.add(user2);
         this.add(x);
         this.add(lugar);
+        this.add(creditos);
         this.add(lblLugar);
         this.add(mes);
         this.add(lblFechaEntrada);
@@ -198,7 +206,7 @@ public class Inicio extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == botonLogOut) {
-        	if(!InicioS) {
+        	if(!InicioS || Inicio2) {
         		JOptionPane.showMessageDialog(null, "Try and log in or create an account first !", "Information", JOptionPane.INFORMATION_MESSAGE);
         	}else {
         		JOptionPane.showMessageDialog(null, "Logged out succesfully !", "Information", JOptionPane.INFORMATION_MESSAGE);
@@ -268,16 +276,28 @@ public class Inicio extends JFrame implements ActionListener {
     		user2.setVisible(true);
     		iniciarSesionButton.setVisible(false);
     		crearCuentaButton.setVisible(false);
-    	}
+    		botonLogOut.setVisible(true);
+    		creditos.setVisible(true);
+    		}
+    	
     	else if(Inicio2) { //Si se ha iniciado sesion  
     		user2.setVisible(true);
     		correo= Registro.EmailT.getText();
     		iniciarSesionButton.setVisible(false);
-    		crearCuentaButton.setVisible(false);} 
+    		crearCuentaButton.setVisible(false);
+    		botonLogOut.setVisible(true);
+    		creditos.setVisible(true);
+    		
+    		} 
+    	
+    	
     		else {
     		iniciarSesionButton.setVisible(true);
     		crearCuentaButton.setVisible(true);
     		user2.setVisible(false);
+    		botonLogOut.setVisible(false);
+    		creditos.setVisible(false);
+
     	}
     }
 }

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -52,30 +53,32 @@ public class User extends JFrame implements ActionListener{
 	  private JButton addFondos = new JButton("AÑADIR QUEVEDOS");
 	  private JButton actualizarDatos = new JButton("Actualizar Datos");
 	  private JButton historialReservas = new JButton("Historial de reservas");
-	  private JTextField FondosT = createNumericTextField(10);;
-	  private JLabel Fondos = new JLabel("FONDOS:");
+	  private JLabel FondosT;
+	  private JLabel Fondos = new JLabel("Fondos Actuales:");
 	  private JPasswordField passwordT = new JPasswordField("");
 	  private ImageIcon Hide = new ImageIcon("hide.png");
 	  private ImageIcon Show = new ImageIcon("show.png");
 	  private JButton ShowHideButton = new JButton(Show);
 	  private JPasswordField passwordField = new JPasswordField(15);
+	  private JTextField Fondos2= new JTextField();
+	  private JLabel Fondos22= new JLabel("Añadir Fondos");
 	  protected static int Quevedosn=0;
 	  protected static int Quevedos=0;
 	  protected static String nom= "";
 	  protected static String Tele= "";
 	  protected static String password="";
 	  public User() {
-		String devuelto = Marcadores_de_Posicion.devolverUsuarioInfo();
-		String[] valores = devuelto.split(",");
+		String devolver = Marcadores_de_Posicion.devolverUsuarioInfo();
+		String[] valores = devolver.split(",");
 		nombre.setText(valores[0]);
-		 nom= valores[0];
+		nom= valores[0];
 		TelefonoT.setText(valores[1]);
-		 Tele= valores[1];
+		Tele= valores[1];
+		JLabel FondosT = new JLabel(String.valueOf(valores[2]));
+		Quevedos = Integer.parseInt(String.valueOf(valores[2]));
 		Marcadores_de_Posicion.Cambio1(nombre, nombre.getText());
 		Marcadores_de_Posicion.Cambio1(EmailT,Inicio.correo);
 		Marcadores_de_Posicion.Cambio1(TelefonoT, String.valueOf(TelefonoT.getText()) );
-		Marcadores_de_Posicion.Cambio1(FondosT, String.valueOf(valores[2]));
-		Quevedos = Integer.parseInt(String.valueOf(valores[2]));
 		mes.setFont(fuente);
 	  	passwordT.setFont(fuente);
 	  	Dia.setFont(fuente);				  	
@@ -136,23 +139,27 @@ public class User extends JFrame implements ActionListener{
 	    botonVolver.setBounds(10, 55, 40, 40);
 	    nombre.setBounds((base1.getWidth() / 2) - 270, 25, 200, 35);
 	    nombre.setFont(fuente2);
-	    nombre.setForeground(Color.GRAY);
 	    Fecha.setBounds((base1.getWidth() / 2) + 55, 0, 200, 35);
 	    Fecha.setFont(fuente);
 	    Email.setBounds((base1.getWidth() / 2) - 270, 75, 200, 35);
 	    Email.setFont(fuente);
 	    EmailT.setBounds((base1.getWidth() / 2) - 270, 100, 200, 35);
 	    EmailT.setFont(fuente2);
-	    EmailT.setForeground(Color.GRAY);
 	    Telefono.setBounds((base1.getWidth() / 2) + 55, 75, 200, 35);
 	    Telefono.setFont(fuente);
 	    TelefonoT.setFont(fuente2);	
-	    TelefonoT.setForeground(Color.GRAY);
 	    Fondos.setFont(fuente);
-	    Fondos.setBounds((base1.getWidth() / 2)-30, 245, 200, 30); 
+	    Fondos.setBounds((base1.getWidth() / 2)-275, 245, 200, 30); 
 	    FondosT.setFont(fuente2);	
-	    FondosT.setForeground(Color.GRAY);
-	    FondosT.setBounds((base1.getWidth() / 2) - 270, 275, 200, 35); 
+	    FondosT.setBounds((base1.getWidth() / 2) - 275, 275, 100, 35); 
+	    Fondos22.setFont(fuente2);
+	    Fondos22.setBounds((base1.getWidth() / 2)-125, 245, 200, 30); 
+	    Fondos.setBounds((base1.getWidth() / 2)-275, 245, 120, 30); 
+	    Fondos2.setFont(fuente2);
+	    FondosT.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
+	    Marcadores_de_Posicion.Cambio1(Fondos2, "0");
+	    Fondos2.setBounds((base1.getWidth() / 2) - 125, 275, 160, 35); 
+	    Fondos2.setForeground(Color.BLACK);
 	    TelefonoT.setBounds((base1.getWidth() / 2) + 55, 100, 200, 35);
 	    Marcadores_de_Posicion.estiloBoton(addFondos);
 	    addFondos.addActionListener(this);	  
@@ -197,6 +204,8 @@ public class User extends JFrame implements ActionListener{
 	    base1.add(actualizarDatos);
 	    base1.add(historialReservas);
 	    base1.add(addFondos);
+	    base1.add(Fondos2);
+	    base1.add(Fondos22);
 	    this.add(botonVolver);
 		}
 
@@ -209,8 +218,8 @@ public class User extends JFrame implements ActionListener{
 			new Inicio();
 			this.dispose();
 		}else if(addFondos == e.getSource()) {
-			Quevedosn= Integer.parseInt(FondosT.getText());
-			double x = Double.parseDouble(FondosT.getText()) * 10;
+			Quevedosn= Integer.parseInt(Fondos2.getText());
+			double x = Double.parseDouble(Fondos2.getText()) * 10;
 			 int opcion = JOptionPane.showConfirmDialog(null, "¿Desea Recargar? " + Quevedosn + " Q Equivalentes a: "+ x + "€"  , "Confirmación", JOptionPane.YES_NO_OPTION);
 			 if (opcion == JOptionPane.YES_OPTION) {
 			new Recarga();

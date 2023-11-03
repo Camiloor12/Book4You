@@ -30,8 +30,10 @@ public class IniciarSesion implements ActionListener {
 	private ImageIcon Show = new ImageIcon("show.png");
 	private JButton ShowHideButton = new JButton(Show);
 	private JPasswordField passwordT = new JPasswordField("Alex");
+	
 
 	public IniciarSesion() {
+		Marcadores_de_Posicion.Obtener();
 		password.setFont(fuente);
 		passwordT.setFont(fuente);
 		botonVolver.setBorderPainted(false);

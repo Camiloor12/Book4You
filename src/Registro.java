@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 
 public class Registro implements ActionListener{
-	  private Base b = new Base(760, 530);
+	  private Base b = new Base(760, 620);
 	  private int start = 1900;
 	  private ImageIcon volver = new ImageIcon("cap.png");
 	  private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
@@ -40,6 +40,8 @@ public class Registro implements ActionListener{
 	  private JTextField TelefonoT = new JTextField("");
 	  private JLabel password = new JLabel("Contraseña:");
 	  private JPasswordField passwordT = new JPasswordField("");
+	  private JLabel password2 = new JLabel("Repetir Contraseña:");
+	  private JPasswordField passwordT2 = new JPasswordField("");
 
 	  public Registro() {
 		  	mes.setFont(fuente);
@@ -61,9 +63,11 @@ public class Registro implements ActionListener{
 		    nameSurn.setFont(fuente);
 		    password.setBounds((p.getWidth() / 2) - 115, 230, 200, 35);
 		    passwordT.setBounds((p.getWidth() / 2) - 115, 255, 200, 35);
-		    registerN.setBounds((p.getWidth() / 2) - 115, 300, 200, 35);
+		    password2.setBounds((p.getWidth() / 2) - 115, 285, 200, 35);
+		    password2.setFont(fuente);
+		    passwordT2.setBounds((p.getWidth() / 2) - 115, 310, 200, 35);
+		    registerN.setBounds((p.getWidth() / 2) - 115, 365, 200, 35);
 		    Marcadores_de_Posicion.estiloBoton(registerN);
-		    
 		    botonVolver.setOpaque(false);
 		    botonVolver.setContentAreaFilled(false);
 		    botonVolver.addActionListener(this);
@@ -99,6 +103,8 @@ public class Registro implements ActionListener{
 		    p.add(registerN);
 		    p.add(password);
 		    p.add(passwordT);
+		    p.add(password2);
+		    p.add(passwordT2);
 		    
 		    Marcadores_de_Posicion.Cambio1(nombreApellidos, "Ej : Federic Gonzalez");
 		    Marcadores_de_Posicion.Cambio1(EmailT, "Ej : federicgonz@gmail.com");
@@ -113,15 +119,22 @@ public class Registro implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(registerN == e.getSource()) {
+		if(registerN == e.getSource()) { 
 			char [] password  = passwordT.getPassword();
+			String p1= String.valueOf(passwordT.getPassword());
+			String p2= String.valueOf(passwordT2.getPassword());
 			if(password.length == 0) {
 				JOptionPane.showMessageDialog(null, "Password Field must be filled", "Information", JOptionPane.INFORMATION_MESSAGE);
 			}else if (nombreApellidos.getText().equals("Ej : Federic Gonzalez")) {
 				JOptionPane.showMessageDialog(null, "Name Field must be filled", "Information", JOptionPane.INFORMATION_MESSAGE);
 			}else if(!EmailT.getText().contains("@" ) || !EmailT.getText().endsWith(".com")) {
 					JOptionPane.showMessageDialog(null, "Invalid email address. Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
-			}else {
+			}
+			else if (!p1.equals(p2)) {
+				JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Information", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+			else {
 				Inicio.Inicio2 = DarAlta();
 				new Inicio();
 				b.dispose();

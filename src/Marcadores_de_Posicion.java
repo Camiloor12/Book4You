@@ -17,7 +17,8 @@ public class Marcadores_de_Posicion {
 
 	public static void Cambio1(JTextField caja, String palabra) {
 		caja.setText(palabra);
-		caja.setForeground(Color.GRAY);
+		caja.setForeground(Color.GRAY );
+		caja.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
 
 		caja.addFocusListener(new FocusListener() {
 			@Override
@@ -155,7 +156,7 @@ public class Marcadores_de_Posicion {
 		int quevedos = 0;
 		Date Fechadenacimiento = null;
 		String sql = "SELECT NOMBRE_APELLIDO, TELEFONO, QUEVEDOS,FECHA_DE_NACIMIENTO FROM USUARIO WHERE E_MAIL = '"
-				+ Inicio.correo + "'";
+				+ IniciarSesion.EmailT.getText() + "'";
 		try {
 			Statement st = Main.con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -179,6 +180,7 @@ public class Marcadores_de_Posicion {
 
 	public static boolean actualizarQuevedos() {
 		int nuevaCantidadQuevedos = User.Quevedosn + User.Quevedos;
+		Inicio.creditos.setText("Saldo Actual: " + (String.valueOf(nuevaCantidadQuevedos) + " Q"));
 		String sql = "UPDATE USUARIO SET QUEVEDOS = " + nuevaCantidadQuevedos + " WHERE E_MAIL = '" + Inicio.correo
 				+ "'";
 		try {
@@ -204,6 +206,11 @@ public class Marcadores_de_Posicion {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	public static void Obtener () {
+		String devolver = devolverUsuarioInfo();
+		String[] valores = devolver.split(",");
+		Inicio.creditos.setText("Saldo Actual: " + (String.valueOf(valores[2]) + " Q"));
 	}
 
 }
