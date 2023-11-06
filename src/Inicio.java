@@ -32,12 +32,14 @@ public class Inicio extends JFrame implements ActionListener {
     private JComboBox<Integer> Niños;
     private JTextField lugar;
     public static  JLabel creditos=  new JLabel();
+    public static  JLabel nom=  new JLabel();
     private JButton Busqueda = new JButton("Buscar");
     private JButton iniciarSesionButton = new JButton("Iniciar Sesion");
     private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
     private Font fuente = new Font("c", Font.PLAIN, 60);
     public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
     protected static String correo = " ";
+    
    
     public Inicio() {
     	user2.setBounds(890, 45, 60, 60);    	
@@ -173,9 +175,10 @@ public class Inicio extends JFrame implements ActionListener {
         user2.addActionListener(this);
         
         
-        creditos.setBounds(875, 90, 140, 60);
+        creditos.setBounds(875, 100, 140, 60);
         creditos.setFont(fuente2);
-        
+        nom.setBounds(875, 85, 140, 60);
+        nom.setFont(fuente2);
         this.add(logo2);
         this.add(botonLogOut);
         this.add(user2);
@@ -198,6 +201,7 @@ public class Inicio extends JFrame implements ActionListener {
         this.add(Busqueda);
         this.add(crearCuentaButton);
         this.add(iniciarSesionButton);
+        this.add(nom);
         this.setIconImage(image.getImage());
         this.setVisible(true);
         this.setResizable(false);

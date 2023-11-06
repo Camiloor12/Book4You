@@ -1,10 +1,12 @@
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -39,6 +41,11 @@ public class Marcadores_de_Posicion {
 				}
 			}
 		});
+	}
+	public static void Cambio2 (JLabel marca) {
+		marca.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
+		marca.setBackground(Color.BLACK);
+		marca.setFont(new Font("Oswald", Font.PLAIN, 13));
 	}
 
 	public static boolean Fecha(String meses, int dia, int Año) {
@@ -166,7 +173,6 @@ public class Marcadores_de_Posicion {
 					telefono = rs.getInt("TELEFONO");
 					quevedos = rs.getInt("QUEVEDOS");
 					Fechadenacimiento = rs.getDate("FECHA_DE_NACIMIENTO");
-					System.out.println(Fechadenacimiento);
 				}
 			} else {
 				System.out.println("No se encontró nada.");
@@ -195,22 +201,37 @@ public class Marcadores_de_Posicion {
 	}
 
 	public static boolean Cambio_Datos(String Correo_id, String nombre, String Correo, String Contra, int Telefono) {
-		String sql = "BEGIN actualizar_informacion(" + Correo_id + ",'" + nombre + "'," + Telefono + ",'" + Correo + "','"
-				+ Contra + "');" +"END;";
-		try {
-			Statement st = Main.con.createStatement();
-			st.execute(sql);
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
+	    String sql = "BEGIN actualizar_informacion(" +
+	            " p_correo => ?," +
+	            " p_nuevo_nombre => ?," +
+	            " p_nuevo_telefono => ?," +
+	            " p_nuevo_correo => ?," +
+	            " p_nueva_contrasena => ?);" +
+	            " COMMIT; END;";
+
+	    try {
+	        PreparedStatement pstmt = Main.con.prepareStatement(sql);
+	        pstmt.setString(1, Correo_id);
+	        pstmt.setString(2, nombre);
+	        pstmt.setInt(3, Telefono);
+	        pstmt.setString(4, Correo);
+	        pstmt.setString(5, Contra);
+
+	        pstmt.execute();
+	        return true;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false;
 	}
+
+
+	
 	public static void Obtener () {
 		String devolver = devolverUsuarioInfo();
 		String[] valores = devolver.split(",");
 		Inicio.creditos.setText("Saldo Actual: " + (String.valueOf(valores[2]) + " Q"));
+		Inicio.nom.setText ((String.valueOf(valores[0])));
 	}
 
 }

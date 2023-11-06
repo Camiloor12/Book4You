@@ -52,6 +52,7 @@ public class User extends JFrame implements ActionListener{
 	  private JTextField TelefonoT = createNumericTextField(10);;
 	  private JButton addFondos = new JButton("AÑADIR QUEVEDOS");
 	  private JButton actualizarDatos = new JButton("Actualizar Datos");
+	  private JButton Cambio_Datos2  = new JButton("Finalizar");
 	  private JButton historialReservas = new JButton("Historial de reservas");
 	  private JLabel FondosT;
 	  private JLabel Fondos = new JLabel("Fondos Actuales:");
@@ -67,21 +68,25 @@ public class User extends JFrame implements ActionListener{
 	  protected static String nom= "";
 	  protected static String Tele= "";
 	  protected static String password="";
+	  protected static JLabel Nombre2;
+	  protected static JLabel Email2;
+	  protected static JLabel Telefono2;
+	  protected static JLabel Fecha3;
+	  protected static JPasswordField Contra = new JPasswordField (2) ;
+	  protected JLabel Contra2= new JLabel("Pon tu Nueva Contraseña: ");
+
 	  public User() {
 		String devolver = Marcadores_de_Posicion.devolverUsuarioInfo();
 		String[] valores = devolver.split(",");
-		nombre.setText(valores[0]);
-		nom= valores[0];
-		TelefonoT.setText(valores[1]);
-		Tele= valores[1];
 		JLabel FondosT = new JLabel(String.valueOf(valores[2]));
 		Quevedos = Integer.parseInt(String.valueOf(valores[2]));
-		Marcadores_de_Posicion.Cambio1(nombre, nombre.getText());
-		Marcadores_de_Posicion.Cambio1(EmailT,Inicio.correo);
-		Marcadores_de_Posicion.Cambio1(TelefonoT, String.valueOf(TelefonoT.getText()) );
 		mes.setFont(fuente);
 	  	passwordT.setFont(fuente);
 	  	Dia.setFont(fuente);				  	
+	  	Nombre2= new JLabel (valores[0]);
+	  	Email2= new JLabel(Inicio.correo);
+	  	Telefono2= new JLabel (valores[1]);
+	  	Fecha3= new JLabel (valores[3]);
 	  	for (int i = 0; i < Años.length; i++) {
 	  		if(start != 2023) {
 	  			Años[i]= start++;
@@ -139,15 +144,26 @@ public class User extends JFrame implements ActionListener{
 	    botonVolver.setBounds(10, 55, 40, 40);
 	    nombre.setBounds((base1.getWidth() / 2) - 270, 25, 200, 35);
 	    nombre.setFont(fuente2);
+	    nombre.setVisible(false);
+	    Marcadores_de_Posicion.Cambio2(Nombre2);
+	    Nombre2.setBounds((base1.getWidth() / 2) - 270, 25, 200, 35);
 	    Fecha.setBounds((base1.getWidth() / 2) + 55, 0, 200, 35);
 	    Fecha.setFont(fuente);
 	    Email.setBounds((base1.getWidth() / 2) - 270, 75, 200, 35);
 	    Email.setFont(fuente);
 	    EmailT.setBounds((base1.getWidth() / 2) - 270, 100, 200, 35);
 	    EmailT.setFont(fuente2);
+	    EmailT.setVisible(false);
+	    Marcadores_de_Posicion.Cambio2(Email2);
+	    Email2.setBounds((base1.getWidth() / 2) - 270, 100, 200, 35);
 	    Telefono.setBounds((base1.getWidth() / 2) + 55, 75, 200, 35);
 	    Telefono.setFont(fuente);
 	    TelefonoT.setFont(fuente2);	
+	    TelefonoT.setBounds((base1.getWidth() / 2) + 55, 100, 200, 35);
+	    TelefonoT.setVisible(false);
+	    TelefonoT.setText("0");
+	    Marcadores_de_Posicion.Cambio2(Telefono2);
+	    Telefono2.setBounds((base1.getWidth() / 2) + 55, 100, 200, 35);
 	    Fondos.setFont(fuente);
 	    Fondos.setBounds((base1.getWidth() / 2)-275, 245, 200, 30); 
 	    FondosT.setFont(fuente2);	
@@ -160,19 +176,28 @@ public class User extends JFrame implements ActionListener{
 	    Marcadores_de_Posicion.Cambio1(Fondos2, "0");
 	    Fondos2.setBounds((base1.getWidth() / 2) - 125, 275, 160, 35); 
 	    Fondos2.setForeground(Color.BLACK);
-	    TelefonoT.setBounds((base1.getWidth() / 2) + 55, 100, 200, 35);
 	    Marcadores_de_Posicion.estiloBoton(addFondos);
 	    addFondos.addActionListener(this);	  
 	    Marcadores_de_Posicion.estiloBoton(historialReservas);
 	    historialReservas.addActionListener(this);	  
 	    Marcadores_de_Posicion.estiloBoton(actualizarDatos);
+	    Marcadores_de_Posicion.estiloBoton(Cambio_Datos2);
 	    actualizarDatos.addActionListener(this);  
-	    mes.setBounds((base1.getWidth() / 2) + 110, 25, 90, 30);
-	    Dia.setBounds((base1.getWidth() / 2) + 55, 25, 55, 30);
-	    Año.setBounds((base1.getWidth() / 2) + 200, 25, 65, 30);
+	    Cambio_Datos2.addActionListener(this); 
+	    Cambio_Datos2.setVisible(false);
+	    Marcadores_de_Posicion.Cambio2(Fecha3);
+	    Fecha3.setBounds((base1.getWidth() / 2) + 55, 25, 200, 35);
 	    actualizarDatos.setBounds((base1.getWidth() / 2) - 105, 145, 200, 30);
+	    Cambio_Datos2.setBounds((base1.getWidth() / 2) - 105, 145, 200, 30);
 	    historialReservas.setBounds((base1.getWidth() / 2) - 133, 190, 255, 30); 
 	    addFondos.setBounds((base1.getWidth() / 2) + 55, 275, 200, 35); 
+	    Contra.setFont(fuente);
+	    Contra.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
+	    Contra.setBounds((base1.getWidth() / 2) + 55, 25, 200, 35);
+	    Contra2.setBounds((base1.getWidth() / 2) + 55, 0, 200, 35);
+	    Contra2.setFont(fuente);
+	    Contra.setVisible(false);
+	    Contra2.setVisible(false);
 	    ShowHideButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -194,18 +219,22 @@ public class User extends JFrame implements ActionListener{
 	    base1.add(FondosT);
 	    base1.add(nombre);
 	    base1.add(Fecha);
-	    base1.add(Año);
-	    base1.add(mes);
-	    base1.add(Dia);
 	    base1.add(Email);
 	    base1.add(EmailT);
 	    base1.add(Telefono);
 	    base1.add(TelefonoT);
 	    base1.add(actualizarDatos);
+	    base1.add(Cambio_Datos2);
 	    base1.add(historialReservas);
 	    base1.add(addFondos);
 	    base1.add(Fondos2);
 	    base1.add(Fondos22);
+	    base1.add(Nombre2);
+	    base1.add(Email2);
+	    base1.add(Telefono2);
+	    base1.add(Fecha3);
+	    base1.add(Contra2);
+	    base1.add(Contra);
 	    this.add(botonVolver);
 		}
 
@@ -225,8 +254,35 @@ public class User extends JFrame implements ActionListener{
 			new Recarga();
 			this.dispose();}
 			}else if(actualizarDatos == e.getSource()) {
+			Nombre2.setVisible(false);	
+			Email2.setVisible(false);	
+			Telefono2.setVisible(false);
+			Fecha3.setVisible(false);
+			Fecha.setVisible(false);
+			actualizarDatos.setVisible(false);
+			nombre.setVisible(true);
+			EmailT.setVisible(true);
+			TelefonoT.setVisible(true);
+			Cambio_Datos2.setVisible(true);
+			Contra.setVisible(true);
+			Contra2.setVisible(true);
+		}else if(Cambio_Datos2 == e.getSource()) {
 			showConfirmationDialog();
-		}else if(historialReservas == e.getSource()) {
+			Nombre2.setVisible(true);	
+			Email2.setVisible(true);	
+			Telefono2.setVisible(true);
+			Fecha3.setVisible(true);
+			actualizarDatos.setVisible(true);
+			Fecha3.setVisible(true);
+			Fecha.setVisible(true);
+			nombre.setVisible(false);
+			EmailT.setVisible(false);
+			TelefonoT.setVisible(false);
+			Cambio_Datos2.setVisible(false);
+			Contra.setVisible(false);
+			Contra2.setVisible(false);
+		}
+			else if(historialReservas == e.getSource()) {
 			
 		}else if (passwordT.getEchoChar() == 0) {//Ocultar password
             passwordT.setEchoChar('*');
@@ -254,11 +310,13 @@ public class User extends JFrame implements ActionListener{
 	            boolean passwordCorrect = selectLogin(Inicio.correo, enteredPassword);
 
 	            if (passwordCorrect) {
-	            	Marcadores_de_Posicion.Cambio_Datos(Inicio.correo, nombre.getText(), EmailT.getText(), enteredPasswordStr, Integer.parseInt(TelefonoT.getText()));
+	            	int Tel=0;
+	            	 Tel= Integer.parseInt(TelefonoT.getText());
+	            	Marcadores_de_Posicion.Cambio_Datos(Inicio.correo, nombre.getText(), EmailT.getText(), String.valueOf(Contra.getPassword()) ,Tel);
 	            	JOptionPane.showMessageDialog(null, "Changes done!", "CHANGES", JOptionPane.INFORMATION_MESSAGE);          
 	                confirmationDialog.dispose();
 	            } else {
-	                
+	            	JOptionPane.showMessageDialog(null, "Cambios no generados!", "CHANGES", JOptionPane.INFORMATION_MESSAGE); 
 	            }
 	        }
 	    });
@@ -321,7 +379,6 @@ public class User extends JFrame implements ActionListener{
 	                String storedPassword = rs.getString("CONTRASEÑA");
 	                String enteredPasswordStr = new String(enteredPassword);
 	                if (enteredPasswordStr.equals(storedPassword)) {	                  
-	                    
 	                    Inicio.InicioS = true;
 	                    return true;
 	                } else {
