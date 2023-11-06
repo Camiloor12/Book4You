@@ -33,7 +33,6 @@ public class IniciarSesion implements ActionListener {
 	
 
 	public IniciarSesion() {
-		Marcadores_de_Posicion.Obtener();
 		password.setFont(fuente);
 		passwordT.setFont(fuente);
 		botonVolver.setBorderPainted(false);
@@ -115,11 +114,11 @@ public class IniciarSesion implements ActionListener {
 					String Contraseña = rs.getString("CONTRASEÑA");
 					if (Contraseña.equals(String.valueOf(passwordT.getPassword()))) { // Contraseña correcta
 						String email = EmailT.getText();
-						JOptionPane.showMessageDialog(null, "Actualización Correcta "+ email+ "!", "Actualización", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Welcome Back!!"+ email+ "!", "Actualización", JOptionPane.INFORMATION_MESSAGE);
 						Inicio.InicioS = true;
 						return true;
 					} else {
-						JOptionPane.showMessageDialog(null, "Actualización Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Incorret Password o Email", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 
 				}

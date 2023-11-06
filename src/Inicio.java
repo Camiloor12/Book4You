@@ -38,7 +38,7 @@ public class Inicio extends JFrame implements ActionListener {
     private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
     private Font fuente = new Font("c", Font.PLAIN, 60);
     public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
-    protected static String correo = " ";
+    protected static String correo = "";
     
    
     public Inicio() {
@@ -277,21 +277,25 @@ public class Inicio extends JFrame implements ActionListener {
     protected   void  InicioSesion() {
     	if(InicioS) { //Si se ha iniciado sesion 
     		correo = IniciarSesion.EmailT.getText();
+    		Marcadores_de_Posicion.Obtener();
     		user2.setVisible(true);
     		iniciarSesionButton.setVisible(false);
     		crearCuentaButton.setVisible(false);
     		botonLogOut.setVisible(true);
     		creditos.setVisible(true);
+    		nom.setVisible(true);
     		}
     	
     	else if(Inicio2) { //Si se ha iniciado sesion  
-    		user2.setVisible(true);
     		correo= Registro.EmailT.getText();
+    		Marcadores_de_Posicion.Obtener();
+    		user2.setVisible(true);
+    		Marcadores_de_Posicion.Obtener();
     		iniciarSesionButton.setVisible(false);
     		crearCuentaButton.setVisible(false);
     		botonLogOut.setVisible(true);
     		creditos.setVisible(true);
-    		
+    		nom.setVisible(true);
     		} 
     	
     	
@@ -301,6 +305,7 @@ public class Inicio extends JFrame implements ActionListener {
     		user2.setVisible(false);
     		botonLogOut.setVisible(false);
     		creditos.setVisible(false);
+    		nom.setVisible(false);
 
     	}
     }

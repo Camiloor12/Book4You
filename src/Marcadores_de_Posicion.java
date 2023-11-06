@@ -163,7 +163,7 @@ public class Marcadores_de_Posicion {
 		int quevedos = 0;
 		Date Fechadenacimiento = null;
 		String sql = "SELECT NOMBRE_APELLIDO, TELEFONO, QUEVEDOS,FECHA_DE_NACIMIENTO FROM USUARIO WHERE E_MAIL = '"
-				+ IniciarSesion.EmailT.getText() + "'";
+				+ Inicio.correo + "'";
 		try {
 			Statement st = Main.con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -231,7 +231,7 @@ public class Marcadores_de_Posicion {
 		String devolver = devolverUsuarioInfo();
 		String[] valores = devolver.split(",");
 		Inicio.creditos.setText("Saldo Actual: " + (String.valueOf(valores[2]) + " Q"));
-		Inicio.nom.setText ((String.valueOf(valores[0])));
+		Inicio.nom.setText ( "Usuario: " + (String.valueOf(valores[0])));
 	}
 
 }
