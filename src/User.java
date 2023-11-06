@@ -279,7 +279,7 @@ public class User extends JFrame implements ActionListener{
 			nombre.setVisible(false);
 			nombre.setText("");
 			EmailT.setVisible(false);
-			Email.setText("");
+			EmailT.setText("");
 			TelefonoT.setVisible(false);
 			Cambio_Datos2.setVisible(false);
 			Contra.setVisible(false);
@@ -317,9 +317,6 @@ public class User extends JFrame implements ActionListener{
 	            if (passwordCorrect) {
 	            	int Tel=0;
 	            	 Tel= Integer.parseInt(TelefonoT.getText());
-	            	 if (Tel==0  ) {
-						Tel= Integer.parseInt(Telefono2.getText());
-					}
 	            	Marcadores_de_Posicion.Cambio_Datos(Inicio.correo, nombre.getText(), EmailT.getText(), String.valueOf(Contra.getPassword()) ,Tel);
 	            	JOptionPane.showMessageDialog(null, "Changes done!", "CHANGES", JOptionPane.INFORMATION_MESSAGE);       
 	                confirmationDialog.dispose();
