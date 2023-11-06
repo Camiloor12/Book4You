@@ -161,7 +161,7 @@ public class User extends JFrame implements ActionListener{
 	    TelefonoT.setFont(fuente2);	
 	    TelefonoT.setBounds((base1.getWidth() / 2) + 55, 100, 200, 35);
 	    TelefonoT.setVisible(false);
-	    TelefonoT.setText("0");
+	    Marcadores_de_Posicion.Cambio1(TelefonoT, "0");
 	    Marcadores_de_Posicion.Cambio2(Telefono2);
 	    Telefono2.setBounds((base1.getWidth() / 2) + 55, 100, 200, 35);
 	    Fondos.setFont(fuente);
@@ -275,11 +275,16 @@ public class User extends JFrame implements ActionListener{
 			actualizarDatos.setVisible(true);
 			Fecha3.setVisible(true);
 			Fecha.setVisible(true);
+			A();
 			nombre.setVisible(false);
+			nombre.setText("");
 			EmailT.setVisible(false);
+			Email.setText("");
 			TelefonoT.setVisible(false);
 			Cambio_Datos2.setVisible(false);
 			Contra.setVisible(false);
+			Contra.setText("");
+			passwordField.setText("");
 			Contra2.setVisible(false);
 		}
 			else if(historialReservas == e.getSource()) {
@@ -312,8 +317,11 @@ public class User extends JFrame implements ActionListener{
 	            if (passwordCorrect) {
 	            	int Tel=0;
 	            	 Tel= Integer.parseInt(TelefonoT.getText());
+	            	 if (Tel==0  ) {
+						Tel= Integer.parseInt(Telefono2.getText());
+					}
 	            	Marcadores_de_Posicion.Cambio_Datos(Inicio.correo, nombre.getText(), EmailT.getText(), String.valueOf(Contra.getPassword()) ,Tel);
-	            	JOptionPane.showMessageDialog(null, "Changes done!", "CHANGES", JOptionPane.INFORMATION_MESSAGE);          
+	            	JOptionPane.showMessageDialog(null, "Changes done!", "CHANGES", JOptionPane.INFORMATION_MESSAGE);       
 	                confirmationDialog.dispose();
 	            } else {
 	            	JOptionPane.showMessageDialog(null, "Cambios no generados!", "CHANGES", JOptionPane.INFORMATION_MESSAGE); 
@@ -394,6 +402,15 @@ public class User extends JFrame implements ActionListener{
 	    return false;
 	}
 
-	
+	public static void A (){
+		String devolver = Marcadores_de_Posicion.devolverUsuarioInfo();
+		String[] valores = devolver.split(",");
+		JLabel FondosT = new JLabel(String.valueOf(valores[2]));
+		Quevedos = Integer.parseInt(String.valueOf(valores[2]));				  	
+	  	Nombre2.setText(valores[0]);
+	  	Email2.setText(Inicio.correo);
+	  	Telefono2.setText(valores[1]);
+	  	
+	}
 
 }
