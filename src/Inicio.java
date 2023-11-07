@@ -1,15 +1,19 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class Inicio extends JFrame implements ActionListener {
 	private Timer textAnimationTimer;
 	private ImageIcon logo;
+	private int opacity = 0;
+    private Timer fadeInTimer;
 	private int textX, textY;
 	private int textYtf;
 	private int TextY2;
@@ -33,6 +37,7 @@ public class Inicio extends JFrame implements ActionListener {
 	private Integer[] Dias = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
 			25, 26, 27, 28, 29, 30, 31 };
 	private JComboBox<Integer> Dia;
+	
 	private JComboBox<Integer> Dia2;
 	private Integer[] Años = { 2023, 2024 };
 	private JComboBox<Integer> Año;
@@ -40,6 +45,10 @@ public class Inicio extends JFrame implements ActionListener {
 	private Integer[] Personas = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 	private JComboBox<Integer> Adultos;
 	private JComboBox<Integer> Niños;
+	private int height = 360;
+	private Image fondo;
+	private JPanel divContainer; // Panel to hold divs
+    private JScrollPane scrollPane; 
 	private JTextField lugar;
 	public static JLabel creditos = new JLabel();
 	public static JLabel nom = new JLabel();
@@ -56,23 +65,12 @@ public class Inicio extends JFrame implements ActionListener {
 		user2.setOpaque(false);
 		user2.setContentAreaFilled(false);
 		textYtf = 360;
-		try {
-			UIManager.setLookAndFeel(new NimbusLookAndFeel());
-		} catch (UnsupportedLookAndFeelException e) {
-			// Manejar la excepción de LookAndFeel si es necesario
-		}
+		FlatLightLaf.setup();
 		ImageIcon image = new ImageIcon("logot.jpg");
 		String imagenFondo = "fondoo.jpg";
-		Image fondo = new ImageIcon(imagenFondo).getImage();
-
-		setContentPane(new JPanel() {
-			@Override
-			protected void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				this.setBackground(Color.white);
-				g.drawImage(fondo, 0, 140, getWidth(), 360, this);
-			}
-		});
+		fondo = new ImageIcon(imagenFondo).getImage();
+		
+		pintarVerde();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(1000, 600);
 		this.setLocationRelativeTo(null);
@@ -132,7 +130,15 @@ public class Inicio extends JFrame implements ActionListener {
 		lblFechaEntrada.setFont(fuente2);
 		lblFechaEntrada.setForeground(Color.white);
 		lblFechaEntrada.setBounds(220, TextY2, 200, 30);
+		
+		divContainer = new JPanel(new GridLayout(0, 1));
+        divContainer.setOpaque(true); // Make it transparent
+        divContainer.setPreferredSize(new Dimension(getWidth(), 140)); // Initial size, adjust as needed
 
+       
+        scrollPane = new JScrollPane(divContainer);
+        scrollPane = new JScrollPane(divContainer, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setBounds(10, 282, 960, 275);
 		Dia = new JComboBox<>(Dias);
 		Dia.setBounds(320, textYtf, 50, 35);
 		Dia.setFont(fuente2);
@@ -160,7 +166,18 @@ public class Inicio extends JFrame implements ActionListener {
 		Adultos = new JComboBox<>(Personas);
 		Adultos.setBounds(700, 360, 70, 35);
 		Adultos.setFont(fuente2);
-
+		fadeInTimer = new Timer(10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (opacity < 255) {
+                    opacity += 5; // Adjust this value for the fade speed
+                    divContainer.repaint();
+                } else {
+                    // Stop the timer when opacity reaches 255
+                    fadeInTimer.stop();
+                }
+            }
+        });
 		lblAdultos = new JLabel("Adultos:");
 		lblAdultos.setFont(fuente2);
 		lblAdultos.setForeground(Color.white);
@@ -182,7 +199,7 @@ public class Inicio extends JFrame implements ActionListener {
 		Busqueda.addActionListener(this);
 		user2.addActionListener(this);
 		textAnimationTimer = new Timer(8, this); // Adjust the delay as needed
-		
+		scrollPane.setVisible(false);
 		Inicio.creditos.setBounds(875, 100, 140, 60);
 		Inicio.creditos.setFont(fuente2);
 		Inicio.nom.setBounds(875, 85, 140, 60);
@@ -209,12 +226,50 @@ public class Inicio extends JFrame implements ActionListener {
 		this.add(Busqueda);
 		this.add(crearCuentaButton);
 		this.add(iniciarSesionButton);
+		this.add(scrollPane);
 		this.add(Inicio.nom);
 		this.setIconImage(image.getImage());
 		this.setVisible(true);
 		this.setResizable(false);
 	}
+	private JPanel createDiv(String text) {
+	    JPanel div = new JPanel() {
+	        @Override
+	        protected void paintComponent(Graphics g) {
+	            super.paintComponent(g);
+	            g.setColor(new Color(0, 255, 0, opacity));
+	            g.fillRect(0, 0, getWidth(), getHeight());
+	        }
+	    };
+	    div.add(new JLabel(text)); // Add content as needed
+	    div.setPreferredSize(new Dimension(getWidth(), 60)); // Increase the height as needed
+	    return div;
+	}
 
+
+	private void addDivsToContainer() {
+		scrollPane.setVisible(true);
+		 divContainer.setLayout(new GridLayout(0, 1)); 
+        for (int i = 0; i < 10; i++) { // Add 10 divs as an example
+            JPanel div = createDiv("Apartment " + i);
+            div.setPreferredSize(new Dimension(getWidth(),100));
+            divContainer.add(div);
+            if( i < 9) {
+            	 divContainer.add(Box.createVerticalStrut(30));
+            }
+        }
+        divContainer.revalidate(); // Refresh layout
+    }
+	private void pintarVerde() {
+		setContentPane(new JPanel() {
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				this.setBackground(Color.white);
+				g.drawImage(fondo, 0, 140, getWidth(), height, this);
+			}
+		});
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == textAnimationTimer) {
@@ -238,10 +293,12 @@ public class Inicio extends JFrame implements ActionListener {
 			Niños.setLocation(785, textYtf);
 			Busqueda.setLocation(870, textYtf);
 			this.repaint();
-
+			height++;
 			
 			if (textY <= 127) {
 				textAnimationTimer.stop();
+				addDivsToContainer();
+				//fade in divs with the apartments and the scroll option
 			}
 		}else if (e.getSource() == botonLogOut) {
 			if (!InicioS || Inicio2) {
@@ -318,7 +375,7 @@ public class Inicio extends JFrame implements ActionListener {
 			this.dispose();
 		}
 	}
-
+	
 	protected void InicioSesion() {
 		if (InicioS) { // Si se ha iniciado sesion
 			correo = IniciarSesion.EmailT.getText();
