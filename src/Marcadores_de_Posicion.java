@@ -225,8 +225,6 @@ public class Marcadores_de_Posicion {
 	    return false;
 	}
 
-
-	
 	public static void Obtener () {
 		String devolver = devolverUsuarioInfo();
 		String[] valores = devolver.split(",");
