@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -7,13 +8,14 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.border.Border;
+
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class Inicio extends JFrame implements ActionListener {
 	private Timer textAnimationTimer;
 	private ImageIcon logo;
-	private int opacity = 0;
-    private Timer fadeInTimer;
+	private boolean isDone = false;
 	private int textX, textY;
 	private int textYtf;
 	private int TextY2;
@@ -110,7 +112,7 @@ public class Inicio extends JFrame implements ActionListener {
 
 		lugar = new JTextField();
 		lugar.setForeground(Color.BLACK);
-		lugar.setBackground(new Color(240, 240, 240));
+		lugar.setBackground(new Color(255, 255, 255));
 		lugar.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100)));
 		lugar.setBounds(10, textYtf, 200, 35);
 		Marcadores_de_Posicion.Cambio1(lugar, "¿Dónde quieres ir?");
@@ -132,13 +134,14 @@ public class Inicio extends JFrame implements ActionListener {
 		lblFechaEntrada.setBounds(220, TextY2, 200, 30);
 		
 		divContainer = new JPanel(new GridLayout(0, 1));
-        divContainer.setOpaque(true); // Make it transparent
-        divContainer.setPreferredSize(new Dimension(getWidth(), 140)); // Initial size, adjust as needed
-
+        divContainer.setPreferredSize(new Dimension(getWidth(), 2250)); 
+        
        
         scrollPane = new JScrollPane(divContainer);
         scrollPane = new JScrollPane(divContainer, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBounds(10, 282, 960, 275);
+        scrollPane.setBounds(10, 282, getWidth()-25, 288);
+        scrollPane.setBorder(null);
+        
 		Dia = new JComboBox<>(Dias);
 		Dia.setBounds(320, textYtf, 50, 35);
 		Dia.setFont(fuente2);
@@ -166,18 +169,6 @@ public class Inicio extends JFrame implements ActionListener {
 		Adultos = new JComboBox<>(Personas);
 		Adultos.setBounds(700, 360, 70, 35);
 		Adultos.setFont(fuente2);
-		fadeInTimer = new Timer(10, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (opacity < 255) {
-                    opacity += 5; // Adjust this value for the fade speed
-                    divContainer.repaint();
-                } else {
-                    // Stop the timer when opacity reaches 255
-                    fadeInTimer.stop();
-                }
-            }
-        });
 		lblAdultos = new JLabel("Adultos:");
 		lblAdultos.setFont(fuente2);
 		lblAdultos.setForeground(Color.white);
@@ -233,33 +224,33 @@ public class Inicio extends JFrame implements ActionListener {
 		this.setResizable(false);
 	}
 	private JPanel createDiv(String text) {
+		JLabel Lab = new JLabel(text);
+		Lab.setForeground(Color.white);
+		Lab.setFont(fuente2);
 	    JPanel div = new JPanel() {
 	        @Override
 	        protected void paintComponent(Graphics g) {
 	            super.paintComponent(g);
-	            g.setColor(new Color(0, 255, 0, opacity));
-	            g.fillRect(0, 0, getWidth(), getHeight());
+	            g.drawImage(fondo, 0, 0, getWidth(), height, this);
+	        
 	        }
 	    };
-	    div.add(new JLabel(text)); // Add content as needed
-	    div.setPreferredSize(new Dimension(getWidth(), 60)); // Increase the height as needed
+	    div.add(Lab); 	    
 	    return div;
 	}
-
 
 	private void addDivsToContainer() {
 		scrollPane.setVisible(true);
 		 divContainer.setLayout(new GridLayout(0, 1)); 
-        for (int i = 0; i < 10; i++) { // Add 10 divs as an example
-            JPanel div = createDiv("Apartment " + i);
-            div.setPreferredSize(new Dimension(getWidth(),100));
-            divContainer.add(div);
-            if( i < 9) {
-            	 divContainer.add(Box.createVerticalStrut(30));
-            }
+        for (int i = 0; i < 10; i++) {
+            JPanel div = modifyApartments(i);
+            divContainer.add(div);     
         }
+        divContainer.setBorder(null);
         divContainer.revalidate(); // Refresh layout
+        
     }
+	
 	private void pintarVerde() {
 		setContentPane(new JPanel() {
 			@Override
@@ -272,7 +263,7 @@ public class Inicio extends JFrame implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == textAnimationTimer) {
+		if (e.getSource() == textAnimationTimer && !isDone) {
 			textY -= 1;
 			TextY2 -= 1;
 			textYtf -= 1;
@@ -293,12 +284,11 @@ public class Inicio extends JFrame implements ActionListener {
 			Niños.setLocation(785, textYtf);
 			Busqueda.setLocation(870, textYtf);
 			this.repaint();
-			height++;
-			
+			height++;			
 			if (textY <= 127) {
 				textAnimationTimer.stop();
-				addDivsToContainer();
-				//fade in divs with the apartments and the scroll option
+				isDone = true;
+				addDivsToContainer();				
 			}
 		}else if (e.getSource() == botonLogOut) {
 			if (!InicioS || Inicio2) {
@@ -375,7 +365,60 @@ public class Inicio extends JFrame implements ActionListener {
 			this.dispose();
 		}
 	}
-	
+	protected JPanel modifyApartments(int apartment) {
+		JPanel div = null;
+		switch(apartment) {
+		case 0: 
+			div = createDiv("Apartment " + 0);
+			ImageIcon i = new ImageIcon("D:/ec/Book4You/imgApart/ap1.jpg");
+			JLabel L1 = new JLabel(i);
+			ImageIcon i2 = new ImageIcon("D:\\ec\\Book4You\\imgApart\\ap1-2.jpg");
+			JLabel L2 = new JLabel(i2);
+			ImageIcon i3 = new ImageIcon("D:\\ec\\Book4You\\imgApart");
+			JLabel L3 = new JLabel(i3);
+			ImageIcon i4 = new ImageIcon("D:\\ec\\Book4You\\imgApart");
+			JLabel L4 = new JLabel(i4);
+			ImageIcon i5 = new ImageIcon("D:\\ec\\Book4You\\imgApart");
+			JLabel L5 = new JLabel(i5);
+			ImageIcon i6 = new ImageIcon("D:\\ec\\Book4You\\imgApart");
+			JLabel L6 = new JLabel(i6);
+			ImageIcon i7 = new ImageIcon("D:\\ec\\Book4You\\imgApart");
+			JLabel L7 = new JLabel(i7);
+			ImageIcon i8 = new ImageIcon("D:\\ec\\Book4You\\imgApart");
+			JLabel L8 = new JLabel(i8);		
+			L1.setBounds(10,15,100,62);
+			div.add(L1);
+			break;
+		case 1:
+			div = createDiv("Apartment " + 1);
+			break;
+		case 2:
+			div = createDiv("Apartment " + 2);
+			break;
+		case 3:
+			div = createDiv("Apartment " + 3);
+			break;
+		case 4:
+			div = createDiv("Apartment " + 4);
+			break;
+		case 5:
+			div = createDiv("Apartment " + 5);
+			break;
+		case 6:
+			div = createDiv("Apartment " + 6);
+			break;
+		case 7:
+			div = createDiv("Apartment " + 7);
+			break;
+		case 8:
+			div = createDiv("Apartment " + 8);
+			break;
+		case 9:
+			div = createDiv("Apartment " + 9);
+			break;
+		}
+		return div;
+	}
 	protected void InicioSesion() {
 		if (InicioS) { // Si se ha iniciado sesion
 			correo = IniciarSesion.EmailT.getText();
