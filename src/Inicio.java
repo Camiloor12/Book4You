@@ -13,6 +13,18 @@ import javax.swing.border.Border;
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class Inicio extends JFrame implements ActionListener {
+	private JLabel L1 = new JLabel();
+	ImageIcon i;
+	ImageIcon i2;
+	ImageIcon i3;
+	ImageIcon i4;
+	ImageIcon i5;
+	ImageIcon i6;
+	ImageIcon i7;
+	ImageIcon i8;
+	ImageIcon i9;
+	ImageIcon i10;
+	private int currentImg = 0;
 	private Timer textAnimationTimer;
 	private ImageIcon logo;
 	private boolean isDone = false;
@@ -39,12 +51,13 @@ public class Inicio extends JFrame implements ActionListener {
 	private Integer[] Dias = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
 			25, 26, 27, 28, 29, 30, 31 };
 	private JComboBox<Integer> Dia;
-	
+	private int imgLim = 0;
 	private JComboBox<Integer> Dia2;
 	private Integer[] Años = { 2023, 2024 };
 	private JComboBox<Integer> Año;
 	private JComboBox<Integer> Año2;
-	private Integer[] Personas = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+	private Integer[] Personas = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+	private Integer[] Personas2 = {0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }; // los criajos
 	private JComboBox<Integer> Adultos;
 	private JComboBox<Integer> Niños;
 	private int height = 360;
@@ -56,6 +69,10 @@ public class Inicio extends JFrame implements ActionListener {
 	public static JLabel nom = new JLabel();
 	private JButton Busqueda = new JButton("Buscar");
 	private JButton iniciarSesionButton = new JButton("Iniciar Sesion");
+	private ImageIcon alante = new ImageIcon("alante.png");
+	private ImageIcon atra = new ImageIcon("atras.png");
+	private JButton palante = new JButton(alante);
+	private JButton patras= new JButton(atra);
 	private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
 	private Font fuente = new Font("c", Font.PLAIN, 60);
 	public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
@@ -89,13 +106,23 @@ public class Inicio extends JFrame implements ActionListener {
 		int logoX = (frameWidth - logoWidth) / 2;
 		logo2.setBounds(logoX, -10, logoWidth, 200);
 		InicioSesion();
+		palante.setBorderPainted(false);
+		palante.setOpaque(false);
+		palante.setContentAreaFilled(false);
+		palante.setBounds(315,100,35,35);
+		patras.addActionListener(this);
+		patras.setBorderPainted(false);
+		patras.setOpaque(false);
+		patras.setContentAreaFilled(false);
+		patras.setBounds(4,100,35,35);
+		patras.addActionListener(this);
 		botonLogOut.setBorderPainted(false);
 		botonLogOut.setOpaque(false);
 		botonLogOut.setContentAreaFilled(false);
 		botonLogOut.setBounds(3, 25, 100, 100);
 		botonLogOut.addActionListener(this);
 
-		iniciarSesionButton.setBounds(820, 40, 150, 35);
+		iniciarSesionButton.setBounds(getWidth()-180, getHeight()-560, 150, 35);
 		iniciarSesionButton.addActionListener(this);
 		Marcadores_de_Posicion.estiloBoton(iniciarSesionButton);
 
@@ -133,15 +160,14 @@ public class Inicio extends JFrame implements ActionListener {
 		lblFechaEntrada.setForeground(Color.white);
 		lblFechaEntrada.setBounds(220, TextY2, 200, 30);
 		
-		divContainer = new JPanel(new GridLayout(0, 1));
+		divContainer = new JPanel(new GridLayout(0,1));
         divContainer.setPreferredSize(new Dimension(getWidth(), 2250)); 
         
        
         scrollPane = new JScrollPane(divContainer);
         scrollPane = new JScrollPane(divContainer, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBounds(10, 282, getWidth()-25, 288);
+        scrollPane.setBounds(0, 282, getWidth()-15, 288);
         scrollPane.setBorder(null);
-        
 		Dia = new JComboBox<>(Dias);
 		Dia.setBounds(320, textYtf, 50, 35);
 		Dia.setFont(fuente2);
@@ -165,7 +191,6 @@ public class Inicio extends JFrame implements ActionListener {
 		Año2 = new JComboBox<>(Años);
 		Año2.setBounds(615, textYtf, 70, 35);
 		Año2.setFont(fuente2);
-
 		Adultos = new JComboBox<>(Personas);
 		Adultos.setBounds(700, 360, 70, 35);
 		Adultos.setFont(fuente2);
@@ -174,10 +199,9 @@ public class Inicio extends JFrame implements ActionListener {
 		lblAdultos.setForeground(Color.white);
 		lblAdultos.setBounds(700, TextY2, 100, 30);
 
-		Niños = new JComboBox<>(Personas);
+		Niños = new JComboBox<>(Personas2);
 		Niños.setBounds(785, 360, 70, 35);
 		Niños.setFont(fuente2);
-
 		lblNiños = new JLabel("Niños:");
 		lblNiños.setFont(fuente2);
 		lblNiños.setForeground(Color.white);
@@ -187,6 +211,7 @@ public class Inicio extends JFrame implements ActionListener {
 		Marcadores_de_Posicion.estiloBoton(Busqueda);
 		Busqueda.setForeground(Color.BLACK);
 		Busqueda.setContentAreaFilled(true);
+		
 		Busqueda.addActionListener(this);
 		user2.addActionListener(this);
 		textAnimationTimer = new Timer(8, this); // Adjust the delay as needed
@@ -225,13 +250,14 @@ public class Inicio extends JFrame implements ActionListener {
 	}
 	private JPanel createDiv(String text) {
 		JLabel Lab = new JLabel(text);
-		Lab.setForeground(Color.white);
+		Lab.setBounds(0,0,100,20);
+		Lab.setForeground(Color.black); 
 		Lab.setFont(fuente2);
 	    JPanel div = new JPanel() {
 	        @Override
 	        protected void paintComponent(Graphics g) {
 	            super.paintComponent(g);
-	            g.drawImage(fondo, 0, 0, getWidth(), height, this);
+	            this.setBackground(Color.white);
 	        
 	        }
 	    };
@@ -241,9 +267,9 @@ public class Inicio extends JFrame implements ActionListener {
 
 	private void addDivsToContainer() {
 		scrollPane.setVisible(true);
-		 divContainer.setLayout(new GridLayout(0, 1)); 
         for (int i = 0; i < 10; i++) {
             JPanel div = modifyApartments(i);
+            div.setLayout(null);
             divContainer.add(div);     
         }
         divContainer.setBorder(null);
@@ -262,11 +288,13 @@ public class Inicio extends JFrame implements ActionListener {
 		});
 	}
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == textAnimationTimer && !isDone) {
-			textY -= 1;
-			TextY2 -= 1;
-			textYtf -= 1;
+	public void actionPerformed(ActionEvent e) {		
+		if (e.getSource() == textAnimationTimer && !isDone) {	
+			if(textY > 124) {
+				textY -= 1;
+				TextY2 -= 1;
+				textYtf -= 1;
+			}
 			x.setLocation(textX, textY);
 			lblFechaEntrada.setLocation(220, TextY2);
 			lblAdultos.setLocation(700, TextY2);
@@ -282,10 +310,10 @@ public class Inicio extends JFrame implements ActionListener {
 			Año2.setLocation(615, textYtf);
 			Adultos.setLocation(700, textYtf);
 			Niños.setLocation(785, textYtf);
-			Busqueda.setLocation(870, textYtf);
+			Busqueda.setLocation(870, textYtf);	
+			height--;
 			this.repaint();
-			height++;			
-			if (textY <= 127) {
+			if (height <= 140) {
 				textAnimationTimer.stop();
 				isDone = true;
 				addDivsToContainer();				
@@ -355,6 +383,7 @@ public class Inicio extends JFrame implements ActionListener {
 			}
 			if (!error) {
 				textAnimationTimer.start();
+				
 			}
 		}else if (e.getSource() == iniciarSesionButton) {
 			new IniciarSesion();
@@ -363,34 +392,36 @@ public class Inicio extends JFrame implements ActionListener {
 		}else if (e.getSource() == crearCuentaButton) {
 			new Registro();
 			this.dispose();
+		}else if(e.getSource() == palante) {
+			if(currentImg>imgLim) {
+				currentImg=0;
+			}else {
+				currentImg++;
+			}
+			changeImg();
+		}else if(e.getSource() == patras) {
+			if(!(currentImg<=0)) {
+				currentImg--;
+			}
+			changeImg();
 		}
 	}
 	protected JPanel modifyApartments(int apartment) {
 		JPanel div = null;
 		switch(apartment) {
-		case 0: 
-			div = createDiv("Apartment " + 0);
-			ImageIcon i = new ImageIcon("D:/ec/Book4You/imgApart/ap1.jpg");
-			JLabel L1 = new JLabel(i);
-			ImageIcon i2 = new ImageIcon("D:\\ec\\Book4You\\imgApart\\ap1-2.jpg");
-			JLabel L2 = new JLabel(i2);
-			ImageIcon i3 = new ImageIcon("D:\\ec\\Book4You\\imgApart");
-			JLabel L3 = new JLabel(i3);
-			ImageIcon i4 = new ImageIcon("D:\\ec\\Book4You\\imgApart");
-			JLabel L4 = new JLabel(i4);
-			ImageIcon i5 = new ImageIcon("D:\\ec\\Book4You\\imgApart");
-			JLabel L5 = new JLabel(i5);
-			ImageIcon i6 = new ImageIcon("D:\\ec\\Book4You\\imgApart");
-			JLabel L6 = new JLabel(i6);
-			ImageIcon i7 = new ImageIcon("D:\\ec\\Book4You\\imgApart");
-			JLabel L7 = new JLabel(i7);
-			ImageIcon i8 = new ImageIcon("D:\\ec\\Book4You\\imgApart");
-			JLabel L8 = new JLabel(i8);		
-			L1.setBounds(10,15,100,62);
+		case 0:
+			div = createDiv("Apartment 0");
+			changeImgText("Apartment 0");
+			L1 = new JLabel(i);
+			L1.setBounds(28,22,300,186);
+			div.add(palante);
+			div.add(patras);
 			div.add(L1);
+			imgLim = 9;
 			break;
 		case 1:
 			div = createDiv("Apartment " + 1);
+			changeImgText("Apartment 0");
 			break;
 		case 2:
 			div = createDiv("Apartment " + 2);
@@ -451,6 +482,69 @@ public class Inicio extends JFrame implements ActionListener {
 			creditos.setVisible(false);
 			nom.setVisible(false);
 
+		}
+	}
+	protected void changeImg() {		
+		switch(currentImg) {
+		case 0:
+			L1 = new JLabel(i);
+			break;
+		case 1:
+			L1 = new JLabel(i2);
+			break;
+		case 2:
+			L1.setIcon(i3);
+			break;
+		case 3:
+			L1.setIcon(i4);
+			break;
+		case 4:
+			L1.setIcon(i5);
+			break;
+		case 5:
+			L1.setIcon(i6);
+			break;
+		case 6:
+			L1.setIcon(i7);
+			break;
+		case 7:
+			L1.setIcon(i8);
+			break;
+		case 8:
+			L1.setIcon(i9);
+		case 9:
+			L1.setIcon(i10);
+			break;
+		default:
+			break;
+		}
+	}
+	protected void changeImgText(String text) {
+		switch(text) {
+		case "Apartment 0":
+			i = new ImageIcon("imgApart/ap1.jpg");
+			i2 = new ImageIcon("imgApart/ap1-2.jpg");
+			break;
+		case "Apartment 1":
+			i = new ImageIcon("imgApart/ap");
+			
+			break;
+		case "Apartment 2":
+			break;
+		case "Apartment 3":
+			break;
+		case "Apartment 4":
+			break;
+		case "Apartment 5":
+			break;
+		case "Apartment 6":
+			break;
+		case "Apartment 7":
+			break;
+		case "Apartment 8":
+			break;
+		case "Apartment 9":
+			break;
 		}
 	}
 }
