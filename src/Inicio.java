@@ -45,6 +45,8 @@ public class Inicio extends JFrame implements ActionListener {
 	private JButton ReservaH1;
 	private JLabel Ubi;
 	private ImageIcon Ubi1; 
+	private ImageIcon Estrellas1 = new ImageIcon("Estrellas.png"); 
+	private JLabel Estrellas = new JLabel(Estrellas1);
 	private int currentImg = 0;
 	private Timer textAnimationTimer;
 	private ImageIcon logo;
@@ -90,6 +92,8 @@ public class Inicio extends JFrame implements ActionListener {
 	public static JLabel nom = new JLabel();
 	private JButton Busqueda = new JButton("Buscar");
 	private JButton iniciarSesionButton = new JButton("Iniciar Sesion");
+	private ImageIcon alante = new ImageIcon("alante.png");
+	private ImageIcon atra = new ImageIcon("atras.png");
 	private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
 	private Font fuente = new Font("Oswald", Font.PLAIN, 60);
 	private Font fuente3 = new Font("Oswald", Font.PLAIN, 30);
@@ -101,9 +105,6 @@ public class Inicio extends JFrame implements ActionListener {
 	private botones b6 = new botones(4,100);
 	public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
 	protected static String correo = "";
-	
-
-
 	public Inicio() {
 		
 		user2.setBounds(890, 45, 60, 60);
@@ -188,7 +189,7 @@ public class Inicio extends JFrame implements ActionListener {
 		lblFechaEntrada.setBounds(220, TextY2, 200, 30);
 		
 		divContainer = new JPanel(new GridLayout(0,1));
-        divContainer.setPreferredSize(new Dimension(getWidth(), 2250)); 
+        divContainer.setPreferredSize(new Dimension(getWidth(), 1950)); 
         
        
         scrollPane = new JScrollPane(divContainer);
@@ -521,7 +522,8 @@ public class Inicio extends JFrame implements ActionListener {
 		switch(apartment) {
 		case 0:
 			div = createDiv("Resultado 1");
-			changeImgText("Resultado "+ (apartment+1));
+			changeImgText("Resultado 1");
+			L1.setBounds(28,22,300,186);
 			NombreH1= new JLabel(Marcadores_de_Posicion.p1.getNombre());
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
@@ -529,14 +531,53 @@ public class Inicio extends JFrame implements ActionListener {
 			UbicaionH1= new JLabel(Marcadores_de_Posicion.p1.getDireccion() + ", " + Marcadores_de_Posicion.p1.getCp() + ", " + lugar.getText() );
 			UbicaionH1.setBounds(400,40,300,50);
 			UbicaionH1.setFont(fuente2);
+			String descripcion = Marcadores_de_Posicion.p1.getDescripcion();
+			int anchoMaximo = 400;
+			StringBuilder sb = new StringBuilder("<html><body style='width: " + anchoMaximo + "px;'>");
+			String[] palabras = descripcion.split("\\s+");
+			int anchoActual = 0;
+			for (String palabra : palabras) {
+			    JLabel tempLabel = new JLabel(palabra + " ");
+			    tempLabel.setFont(fuente2);
+			    int anchoPalabra = tempLabel.getPreferredSize().width;
+			    if (anchoActual + anchoPalabra > anchoMaximo) {
+			        sb.append("<br>"); 
+			        anchoActual = 0;
+			    }
+
+			    sb.append(palabra).append(" ");
+			    anchoActual += anchoPalabra;
+			}
+			sb.append("</body></html>");
+			JLabel DescripcionH1 = new JLabel(sb.toString());
+			DescripcionH1.setBounds(380, -130, 440, 500);
+			DescripcionH1.setFont(fuente2);
 			changeImg(currentImg, L1);
+			Estrellas.setBounds(485,-85,300,300);
+			Estrellas.setVisible(true);
 			L1.setBounds(28,32,300,156);
+			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p1.getPrecio()) + " Q");
+			PNocheH1.setFont(fuente2);
+			PNocheH1.setBounds(820,60,120,70);
+			PrecioTH1= new JLabel("Precio Total: " + "1200 Q");
+			PrecioTH1.setFont(fuente2);
+			PrecioTH1.setBounds(820,85,120,70);
+			ReservaH1= new JButton("Reservar");
+			Marcadores_de_Posicion.estiloBoton(ReservaH1);
+			ReservaH1.setBackground(Color.gray);
+			ReservaH1.setBounds(820,145,110,25);
 			div.add(b1.getPalante());
 			div.add(b1.getPatras());
 			div.add(L1);
 			div.add(NombreH1);
 			div.add(Ubi);
 			div.add(UbicaionH1);
+			div.add(DescripcionH1);
+			div.add(DescripcionH1);
+			div.add(Estrellas);
+			div.add(PNocheH1);
+			div.add(PrecioTH1);
+			div.add(ReservaH1);
 			imgLim = 9;
 			break;
 		case 1:
