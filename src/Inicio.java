@@ -38,8 +38,13 @@ public class Inicio extends JFrame implements ActionListener {
 	private JButton ReservaH1;
 	private JLabel Ubi;
 	private ImageIcon Ubi1; 
+<<<<<<< HEAD
 	private JLabel Estrellas;
 	private ImageIcon Estrellas1; 
+=======
+	private ImageIcon Estrellas1 = new ImageIcon("Estrellas.png"); 
+	private JLabel Estrellas = new JLabel(Estrellas1);
+>>>>>>> alej2
 	private int currentImg = 0;
 	private Timer textAnimationTimer;
 	private ImageIcon logo;
@@ -87,16 +92,16 @@ public class Inicio extends JFrame implements ActionListener {
 	private JButton iniciarSesionButton = new JButton("Iniciar Sesion");
 	private ImageIcon alante = new ImageIcon("alante.png");
 	private ImageIcon atra = new ImageIcon("atras.png");
+<<<<<<< HEAD
 	private JButton palante = new JButton(alante);
 	private JButton patras= new JButton(atra);
+=======
+>>>>>>> alej2
 	private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
 	private Font fuente = new Font("Oswald", Font.PLAIN, 60);
 	private Font fuente3 = new Font("Oswald", Font.PLAIN, 30);
 	public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
 	protected static String correo = "";
-	
-
-
 	public Inicio() {
 		user2.setBounds(890, 45, 60, 60);
 		user2.setBorderPainted(false);
@@ -180,7 +185,7 @@ public class Inicio extends JFrame implements ActionListener {
 		lblFechaEntrada.setBounds(220, TextY2, 200, 30);
 		
 		divContainer = new JPanel(new GridLayout(0,1));
-        divContainer.setPreferredSize(new Dimension(getWidth(), 2250)); 
+        divContainer.setPreferredSize(new Dimension(getWidth(), 1950)); 
         
        
         scrollPane = new JScrollPane(divContainer);
@@ -434,7 +439,80 @@ public class Inicio extends JFrame implements ActionListener {
 				changeImg();
 			}else if(currentImg==0) {
 				currentImg=imgLim-1;
+<<<<<<< HEAD
 				changeImg();
+=======
+				changeImg(currentImg, L1);
+			}
+		}else if(e.getSource() == b2.getPalante()) { //b2 apt2
+			changeImgText("Resultado "+ 2);
+			if(b2.getCon()<imgLim-1) {
+				b2.setCon(b2.getCon()+1);
+				changeImg(b2.getCon(), L2);
+			}else {
+				b2.setCon(0); 
+				changeImg(b2.getCon(), L2);
+			}
+		}else if(e.getSource() == b2.getPatras()) {
+			changeImgText("Resultado "+ 2);
+			if(!(b2.getCon()<=0)) {
+				b2.setCon(b2.getCon()-1);
+				changeImgText("Resultado "+ 2);
+				changeImg(b2.getCon(), L2);
+			}
+			if(b2.getCon()>0) {
+				changeImgText("Resultado "+ 2);
+				changeImg(b2.getCon(), L2);		
+			}else if(b2.getCon()==0) {	
+				b2.setCon(imgLim-1);
+				changeImg(b2.getCon(), L2);
+			}
+		}else if(e.getSource() == b3.getPalante()) { //b3 apt3
+			changeImgText("Resultado "+ 2);
+			if(b3.getCon()<imgLim-1) {
+				b3.setCon(b3.getCon()+1);
+				changeImg(b3.getCon(), L3);
+			}else {
+				b3.setCon(0); 
+				changeImg(b3.getCon(), L3);
+			}
+		}else if(e.getSource() == b3.getPatras()) {
+			changeImgText("Resultado "+ 2);
+			if(!(b3.getCon()<=0)) {
+				b3.setCon(b3.getCon()-1);
+				changeImgText("Resultado "+ 2);
+				changeImg(b3.getCon(), L3);
+			}
+			if(b3.getCon()>0) {
+				changeImgText("Resultado "+ 2);
+				changeImg(b3.getCon(), L3);		
+			}else if(b3.getCon()==0) {	
+				b3.setCon(imgLim-1);
+				changeImg(b3.getCon(), L3);
+			}
+		}else if(e.getSource() == b4.getPalante()) { //b4 apt4
+			changeImgText("Resultado "+ 2);
+			if(b4.getCon()<imgLim-1) {
+				b4.setCon(b4.getCon()+1);
+				changeImg(b4.getCon(), L4);
+			}else {
+				b4.setCon(0); 
+				changeImg(b4.getCon(), L4);
+			}
+		}else if(e.getSource() == b4.getPatras()) {
+			changeImgText("Resultado "+ 2);
+			if(!(b4.getCon()<=0)) {
+				b4.setCon(b4.getCon()-1);
+				changeImgText("Resultado "+ 2);
+				changeImg(b4.getCon(), L4);
+			}
+			if(b4.getCon()>0) {
+				changeImgText("Resultado "+ 2);
+				changeImg(b4.getCon(), L4);		
+			}else if(b4.getCon()==0) {	
+				b4.setCon(imgLim-1);
+				changeImg(b4.getCon(), L4);
+>>>>>>> alej2
 			}
 		}
 	}
@@ -442,9 +520,14 @@ public class Inicio extends JFrame implements ActionListener {
 		JPanel div = null;
 		switch(apartment) {
 		case 0:
+<<<<<<< HEAD
 			div = createDiv("Apartment 0");
 			changeImgText("Apartment 0");
 			L1 = new JLabel(i);
+=======
+			div = createDiv("Resultado 1");
+			changeImgText("Resultado 1");
+>>>>>>> alej2
 			L1.setBounds(28,22,300,186);
 			NombreH1= new JLabel(Marcadores_de_Posicion.p1.getNombre());
 			NombreH1.setFont(fuente3);
@@ -474,7 +557,11 @@ public class Inicio extends JFrame implements ActionListener {
 			JLabel DescripcionH1 = new JLabel(sb.toString());
 			DescripcionH1.setBounds(380, -130, 440, 500);
 			DescripcionH1.setFont(fuente2);
+<<<<<<< HEAD
 			changeImg();
+=======
+			changeImg(currentImg, L1);
+>>>>>>> alej2
 			Estrellas.setBounds(485,-85,300,300);
 			Estrellas.setVisible(true);
 			L1.setBounds(28,32,300,156);
@@ -488,8 +575,13 @@ public class Inicio extends JFrame implements ActionListener {
 			Marcadores_de_Posicion.estiloBoton(ReservaH1);
 			ReservaH1.setBackground(Color.gray);
 			ReservaH1.setBounds(820,145,110,25);
+<<<<<<< HEAD
 			div.add(palante);
 			div.add(patras);
+=======
+			div.add(b1.getPalante());
+			div.add(b1.getPatras());
+>>>>>>> alej2
 			div.add(L1);
 			div.add(NombreH1);
 			div.add(Ubi);
@@ -620,9 +712,31 @@ public class Inicio extends JFrame implements ActionListener {
 			
 			
 			break;
+<<<<<<< HEAD
 		case "Apartment 2":
 			break;
 		case "Apartment 3":
+=======
+		case "Resultado 3":
+			i = new ImageIcon("imgApart/ap3.jpg");
+			i2 = new ImageIcon("imgApart/ap3-2.jpg");
+			i3 = new ImageIcon("imgApart/ap3-3.jpg");
+			i4 = new ImageIcon("imgApart/ap3-4.jpg");
+			i5 = new ImageIcon("imgApart/ap3-5.jpg");
+			i6 = new ImageIcon("imgApart/ap3-6.jpg");
+			i7 = new ImageIcon("imgApart/ap3-7.jpg");
+			i7 = new ImageIcon("imgApart/ap3-8.jpg");	
+			i7 = new ImageIcon("imgApart/ap3-9.jpg");	
+			break;
+		case "Resultado 4":
+			i = new ImageIcon("imgApart/ap2.jpg");
+			i2 = new ImageIcon("imgApart/ap2-2.jpg");
+			i3 = new ImageIcon("imgApart/ap2-3.jpg");
+			i4 = new ImageIcon("imgApart/ap2-4.jpg");
+			i5 = new ImageIcon("imgApart/ap2-5.jpg");
+			i6 = new ImageIcon("imgApart/ap2-6.jpg");
+			i7 = new ImageIcon("imgApart/ap2-7.jpg");	
+>>>>>>> alej2
 			break;
 		case "Apartment 4":
 			break;
