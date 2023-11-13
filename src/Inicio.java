@@ -20,6 +20,12 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 public class Inicio extends JFrame implements ActionListener {
 	private JLabel L1 = new JLabel();
+	private JLabel L2 = new JLabel();
+	private JLabel L3 = new JLabel();
+	private JLabel L4 = new JLabel();
+	private JLabel L5 = new JLabel();
+	private JLabel L6 = new JLabel();
+	private JLabel L7 = new JLabel();
 	ImageIcon i;
 	ImageIcon i2;
 	ImageIcon i3;
@@ -83,19 +89,22 @@ public class Inicio extends JFrame implements ActionListener {
 	public static JLabel nom = new JLabel();
 	private JButton Busqueda = new JButton("Buscar");
 	private JButton iniciarSesionButton = new JButton("Iniciar Sesion");
-	private ImageIcon alante = new ImageIcon("alante.png");
-	private ImageIcon atra = new ImageIcon("atras.png");
-	private JButton palante = new JButton(alante);
-	private JButton patras= new JButton(atra);
 	private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
 	private Font fuente = new Font("Oswald", Font.PLAIN, 60);
 	private Font fuente3 = new Font("Oswald", Font.PLAIN, 30);
+	private botones b1 = new botones(4,100);
+	private botones b2 = new botones(4,100);
+	private botones b3 = new botones(4,100);
+	private botones b4 = new botones(4,100);
+	private botones b5 = new botones(4,100);
+	private botones b6 = new botones(4,100);
 	public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
 	protected static String correo = "";
 	
 
 
 	public Inicio() {
+		
 		user2.setBounds(890, 45, 60, 60);
 		user2.setBorderPainted(false);
 		user2.setOpaque(false);
@@ -123,16 +132,16 @@ public class Inicio extends JFrame implements ActionListener {
 		int logoX = (frameWidth - logoWidth) / 2;
 		logo2.setBounds(logoX, -10, logoWidth, 200);
 		InicioSesion();
-		palante.setBorderPainted(false);
-		palante.setOpaque(false);
-		palante.setContentAreaFilled(false);
-		palante.setBounds(315,100,35,35);
-		palante.addActionListener(this);
-		patras.setBorderPainted(false);
-		patras.setOpaque(false);
-		patras.setContentAreaFilled(false);
-		patras.setBounds(4,100,35,35);
-		patras.addActionListener(this);
+		b1.getPalante().addActionListener(this);
+		b1.getPatras().addActionListener(this);
+		b2.getPalante().addActionListener(this);
+		b2.getPatras().addActionListener(this);
+		b3.getPalante().addActionListener(this);
+		b3.getPatras().addActionListener(this);
+		b4.getPalante().addActionListener(this);
+		b4.getPatras().addActionListener(this);
+		b5.getPalante().addActionListener(this);
+		b5.getPatras().addActionListener(this);
 		botonLogOut.setBorderPainted(false);
 		botonLogOut.setOpaque(false);
 		botonLogOut.setContentAreaFilled(false);
@@ -237,7 +246,8 @@ public class Inicio extends JFrame implements ActionListener {
 		Inicio.creditos.setFont(fuente2);
 		Inicio.nom.setBounds(875, 85, 140, 60);
 		Inicio.nom.setFont(fuente2);
-		
+		scrollPane.getVerticalScrollBar().setUnitIncrement(25);
+		scrollPane.getVerticalScrollBar().setBlockIncrement(20);
 		Ubi1 = new ImageIcon ("ubi.png");
 		Ubi= new JLabel(Ubi1);
 		this.add(logo2);
@@ -413,23 +423,95 @@ public class Inicio extends JFrame implements ActionListener {
 		}else if (e.getSource() == crearCuentaButton) {
 			new Registro();
 			this.dispose();
-		}else if(e.getSource() == palante) {
+		}else if(e.getSource() == b1.getPalante()) {
+			changeImgText("Resultado "+ 1);
 			if(currentImg<imgLim-1) {
 				currentImg++;
-				changeImg();
+				changeImg(currentImg, L1);
 			}else {
 				currentImg=0; 
-				changeImg();
+				changeImg(currentImg, L1);
 			}
-		}else if(e.getSource() == patras) {
+		}else if(e.getSource() == b1.getPatras()) {
+			changeImgText("Resultado "+ 1);
 			if(!(currentImg<=0)) {
 				currentImg--;
+				changeImg(currentImg, L1);
 			}
 			if(currentImg>0) {
-				changeImg();
+				changeImg(currentImg, L1);
 			}else if(currentImg==0) {
 				currentImg=imgLim-1;
-				changeImg();
+				changeImg(currentImg, L1);
+			}
+		}else if(e.getSource() == b2.getPalante()) { //b2 apt2
+			changeImgText("Resultado "+ 2);
+			if(b2.getCon()<imgLim-1) {
+				b2.setCon(b2.getCon()+1);
+				changeImg(b2.getCon(), L2);
+			}else {
+				b2.setCon(0); 
+				changeImg(b2.getCon(), L2);
+			}
+		}else if(e.getSource() == b2.getPatras()) {
+			changeImgText("Resultado "+ 2);
+			if(!(b2.getCon()<=0)) {
+				b2.setCon(b2.getCon()-1);
+				changeImgText("Resultado "+ 2);
+				changeImg(b2.getCon(), L2);
+			}
+			if(b2.getCon()>0) {
+				changeImgText("Resultado "+ 2);
+				changeImg(b2.getCon(), L2);		
+			}else if(b2.getCon()==0) {	
+				b2.setCon(imgLim-1);
+				changeImg(b2.getCon(), L2);
+			}
+		}else if(e.getSource() == b3.getPalante()) { //b3 apt3
+			changeImgText("Resultado "+ 2);
+			if(b3.getCon()<imgLim-1) {
+				b3.setCon(b3.getCon()+1);
+				changeImg(b3.getCon(), L3);
+			}else {
+				b3.setCon(0); 
+				changeImg(b3.getCon(), L3);
+			}
+		}else if(e.getSource() == b3.getPatras()) {
+			changeImgText("Resultado "+ 2);
+			if(!(b3.getCon()<=0)) {
+				b3.setCon(b3.getCon()-1);
+				changeImgText("Resultado "+ 2);
+				changeImg(b3.getCon(), L3);
+			}
+			if(b3.getCon()>0) {
+				changeImgText("Resultado "+ 2);
+				changeImg(b3.getCon(), L3);		
+			}else if(b3.getCon()==0) {	
+				b3.setCon(imgLim-1);
+				changeImg(b3.getCon(), L3);
+			}
+		}else if(e.getSource() == b4.getPalante()) { //b4 apt4
+			changeImgText("Resultado "+ 2);
+			if(b4.getCon()<imgLim-1) {
+				b4.setCon(b4.getCon()+1);
+				changeImg(b4.getCon(), L3);
+			}else {
+				b4.setCon(0); 
+				changeImg(b4.getCon(), L3);
+			}
+		}else if(e.getSource() == b4.getPatras()) {
+			changeImgText("Resultado "+ 2);
+			if(!(b4.getCon()<=0)) {
+				b4.setCon(b4.getCon()-1);
+				changeImgText("Resultado "+ 2);
+				changeImg(b4.getCon(), L3);
+			}
+			if(b4.getCon()>0) {
+				changeImgText("Resultado "+ 2);
+				changeImg(b4.getCon(), L3);		
+			}else if(b4.getCon()==0) {	
+				b4.setCon(imgLim-1);
+				changeImg(b4.getCon(), L3);
 			}
 		}
 	}
@@ -437,11 +519,8 @@ public class Inicio extends JFrame implements ActionListener {
 		JPanel div = null;
 		switch(apartment) {
 		case 0:
-			div = createDiv("Apartment 0");
-			changeImgText("Apartment 0");
-
-			L1 = new JLabel(i);
-			L1.setBounds(28,22,300,186);
+			div = createDiv("Resultado 1");
+			changeImgText("Resultado "+ (apartment+1));
 			NombreH1= new JLabel(Marcadores_de_Posicion.p1.getNombre());
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
@@ -449,11 +528,10 @@ public class Inicio extends JFrame implements ActionListener {
 			UbicaionH1= new JLabel(Marcadores_de_Posicion.p1.getDireccion() + ", " + Marcadores_de_Posicion.p1.getCp() + ", " + lugar.getText() );
 			UbicaionH1.setBounds(400,40,300,50);
 			UbicaionH1.setFont(fuente2);
-
-			changeImg();
+			changeImg(currentImg, L1);
 			L1.setBounds(28,32,300,156);
-			div.add(palante);
-			div.add(patras);
+			div.add(b1.getPalante());
+			div.add(b1.getPatras());
 			div.add(L1);
 			div.add(NombreH1);
 			div.add(Ubi);
@@ -461,32 +539,52 @@ public class Inicio extends JFrame implements ActionListener {
 			imgLim = 9;
 			break;
 		case 1:
-			div = createDiv("Apartment " + 1);
-			changeImgText("Apartment "+ apartment);
+			div = createDiv("Resultado 2");
+			changeImgText("Resultado "+ (apartment+1));
+			changeImg(b2.getCon(), L2);
+			L2.setBounds(28,32,300,156);
+			div.add(b2.getPalante());
+			div.add(b2.getPatras());
+			div.add(L2);
+			imgLim=7;
 			break;
 		case 2:
-			div = createDiv("Apartment " + 2);
+			div = createDiv("Resultado 3");
+			changeImgText("Resultado "+ (apartment+1));
+			changeImg(b3.getCon(), L3);
+			L3.setBounds(28,32,300,156);
+			div.add(b3.getPalante());
+			div.add(b3.getPatras());
+			div.add(L3);
+			imgLim=10;
 			break;
 		case 3:
-			div = createDiv("Apartment " + 3);
+			div = createDiv("Resultado 4");
+			changeImgText("Resultado "+ (apartment+1));
+			changeImg(b4.getCon(), L4);
+			L4.setBounds(28,32,300,156);
+			div.add(b4.getPalante());
+			div.add(b4.getPatras());
+			div.add(L4);
+			imgLim=8;
 			break;
 		case 4:
-			div = createDiv("Apartment " + 4);
+			div = createDiv("Resultado " + 5);
 			break;
 		case 5:
-			div = createDiv("Apartment " + 5);
+			div = createDiv("Resultado " + 6);
 			break;
 		case 6:
-			div = createDiv("Apartment " + 6);
+			div = createDiv("Resultado " + 7);
 			break;
 		case 7:
-			div = createDiv("Apartment " + 7);
+			div = createDiv("Resultado " + 8);
 			break;
 		case 8:
-			div = createDiv("Apartment " + 8);
+			div = createDiv("Resultado " + 9);
 			break;
 		case 9:
-			div = createDiv("Apartment " + 9);
+			div = createDiv("Resultado " + 10);
 			break;
 		}
 		return div;
@@ -525,37 +623,37 @@ public class Inicio extends JFrame implements ActionListener {
 
 		}
 	}
-	protected void changeImg() {		
-		switch(currentImg) {
+	protected void changeImg(int cont,JLabel L) {		
+		switch(cont) {
 		case 0:
-			L1.setIcon(i);
+			L.setIcon(i);
 			break;
 		case 1:
-			L1.setIcon(i2);
+			L.setIcon(i2);
 			break;
 		case 2:
-			L1.setIcon(i3);
+			L.setIcon(i3);
 			break;
 		case 3:
-			L1.setIcon(i4);
+			L.setIcon(i4);
 			break;
 		case 4:
-			L1.setIcon(i5);
+			L.setIcon(i5);
 			break;
 		case 5:
-			L1.setIcon(i6);
+			L.setIcon(i6);
 			break;
 		case 6:
-			L1.setIcon(i7);
+			L.setIcon(i7);
 			break;
 		case 7:
-			L1.setIcon(i8);
+			L.setIcon(i8);
 			break;
 		case 8:
-			L1.setIcon(i9);
+			L.setIcon(i9);
 			break;
 		case 9:
-			L1.setIcon(i10);
+			L.setIcon(i10);
 			break;
 		default:
 			break;
@@ -563,7 +661,7 @@ public class Inicio extends JFrame implements ActionListener {
 	}
 	protected void changeImgText(String text) {
 		switch(text) {
-		case "Apartment 0":
+		case "Resultado 1":
 			i = new ImageIcon("imgApart/ap1.jpg");
 			i2 = new ImageIcon("imgApart/ap1-2.jpg");
 			i3 = new ImageIcon("imgApart/ap1-3.jpg");
@@ -574,25 +672,30 @@ public class Inicio extends JFrame implements ActionListener {
 			i8 = new ImageIcon("imgApart/ap1-8.jpg");
 			i9 = new ImageIcon("imgApart/ap1-9.jpg");
 			break;
-		case "Apartment 1":
-			
-			
+		case "Resultado 2":
+			i = new ImageIcon("imgApart/ap2.jpg");
+			i2 = new ImageIcon("imgApart/ap2-2.jpg");
+			i3 = new ImageIcon("imgApart/ap2-3.jpg");
+			i4 = new ImageIcon("imgApart/ap2-4.jpg");
+			i5 = new ImageIcon("imgApart/ap2-5.jpg");
+			i6 = new ImageIcon("imgApart/ap2-6.jpg");
+			i7 = new ImageIcon("imgApart/ap2-7.jpg");			
 			break;
-		case "Apartment 2":
+		case "Resultado 3":
 			break;
-		case "Apartment 3":
+		case "Resultado 4":
 			break;
-		case "Apartment 4":
+		case "Resultado 5":
 			break;
-		case "Apartment 5":
+		case "Resultado 6":
 			break;
-		case "Apartment 6":
+		case "Resultado 7":
 			break;
-		case "Apartment 7":
+		case "Resultado 8":
 			break;
-		case "Apartment 8":
+		case "Resultado 9":
 			break;
-		case "Apartment 9":
+		case "Resultado 10":
 			break;
 		}
 	}
