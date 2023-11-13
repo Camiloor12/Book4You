@@ -494,24 +494,24 @@ public class Inicio extends JFrame implements ActionListener {
 			changeImgText("Resultado "+ 2);
 			if(b4.getCon()<imgLim-1) {
 				b4.setCon(b4.getCon()+1);
-				changeImg(b4.getCon(), L3);
+				changeImg(b4.getCon(), L4);
 			}else {
 				b4.setCon(0); 
-				changeImg(b4.getCon(), L3);
+				changeImg(b4.getCon(), L4);
 			}
 		}else if(e.getSource() == b4.getPatras()) {
 			changeImgText("Resultado "+ 2);
 			if(!(b4.getCon()<=0)) {
 				b4.setCon(b4.getCon()-1);
 				changeImgText("Resultado "+ 2);
-				changeImg(b4.getCon(), L3);
+				changeImg(b4.getCon(), L4);
 			}
 			if(b4.getCon()>0) {
 				changeImgText("Resultado "+ 2);
-				changeImg(b4.getCon(), L3);		
+				changeImg(b4.getCon(), L4);		
 			}else if(b4.getCon()==0) {	
 				b4.setCon(imgLim-1);
-				changeImg(b4.getCon(), L3);
+				changeImg(b4.getCon(), L4);
 			}
 		}
 	}
@@ -682,8 +682,22 @@ public class Inicio extends JFrame implements ActionListener {
 			i7 = new ImageIcon("imgApart/ap2-7.jpg");			
 			break;
 		case "Resultado 3":
+			i = new ImageIcon("imgApart/ap2.jpg");
+			i2 = new ImageIcon("imgApart/ap2-2.jpg");
+			i3 = new ImageIcon("imgApart/ap2-3.jpg");
+			i4 = new ImageIcon("imgApart/ap2-4.jpg");
+			i5 = new ImageIcon("imgApart/ap2-5.jpg");
+			i6 = new ImageIcon("imgApart/ap2-6.jpg");
+			i7 = new ImageIcon("imgApart/ap2-7.jpg");	
 			break;
 		case "Resultado 4":
+			i = new ImageIcon("imgApart/ap2.jpg");
+			i2 = new ImageIcon("imgApart/ap2-2.jpg");
+			i3 = new ImageIcon("imgApart/ap2-3.jpg");
+			i4 = new ImageIcon("imgApart/ap2-4.jpg");
+			i5 = new ImageIcon("imgApart/ap2-5.jpg");
+			i6 = new ImageIcon("imgApart/ap2-6.jpg");
+			i7 = new ImageIcon("imgApart/ap2-7.jpg");	
 			break;
 		case "Resultado 5":
 			break;
