@@ -16,6 +16,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Marcadores_de_Posicion {
+	public  static Productos p1;
+	public  static Productos p2;
+	public static Productos p3;
+	public static Productos p4;
+	public static Productos p5;
+	public static Productos p6;
+	public static Productos p7;
+	public static Productos p8;
+	public static Productos p9;
+	public static Productos p10;
 
 	public static void Cambio1(JTextField caja, String palabra) {
 		caja.setText(palabra);
@@ -231,5 +241,69 @@ public class Marcadores_de_Posicion {
 		Inicio.creditos.setText("Saldo Actual: " + (String.valueOf(valores[2]) + " Q"));
 		Inicio.nom.setText ( "Usuario: " + (String.valueOf(valores[0])));
 	}
+	
+	public  static void crearHotel() {
+		int id =0;
+		String direccion = "";
+		int cp =0;
+		String Nombre="";
+		String Descripcion="";
+		int Precio= 0;
+		String sql = "SELECT * FROM LUGAR_HOTEL";
+		try {
+			Statement st = Main.con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					id = rs.getInt("ID_HOTEL");
+					direccion = rs.getString("DIRECCION");
+					cp = rs.getInt("CP");
+					Nombre= rs.getString("NOMBRE");
+					Descripcion= rs.getString("DESCRIPCION");
+					Precio= rs.getInt("PRECIO");
+					switch (id) {
+					case 1:
+						p1 = new Productos(id, direccion, cp, Nombre, Descripcion, Precio);
+						break;
+					case 2:
+						p2 = new Productos(id, direccion, cp, Nombre, Descripcion, Precio);
+						break;
+					case 3:
+						p3 = new Productos(id, direccion, cp, Nombre, Descripcion, Precio);
+						break;
+					case 4:
+						p4 = new Productos(id, direccion, cp, Nombre, Descripcion, Precio);
+						break;
+					case 5:
+						p5 = new Productos(id, direccion, cp, Nombre, Descripcion, Precio);
+						break;
+					case 6:
+						p6 = new Productos(id, direccion, cp, Nombre, Descripcion, Precio);
+						break;
+					case 7:
+						p7= new Productos(id, direccion, cp, Nombre, Descripcion, Precio);
+						break;
+					case 8:
+						p8= new Productos(id, direccion, cp, Nombre, Descripcion, Precio);
+						break;
+					case 9:
+						p9= new Productos(id, direccion, cp, Nombre, Descripcion, Precio);
+						break;
+					case 10:
+						p10= new Productos(id, direccion, cp, Nombre, Descripcion, Precio);
+						System.out.println("fet");
+						System.out.println(p1.getNombre());
+						break;
+					
+					}				
+					
+				}
+			}
+			else {
+				System.out.println("No se encontró nada.");
+			}
+		} catch (SQLException e) {
+			System.out.println("Error" + e);
+		
 
-}
+}}}

@@ -118,7 +118,7 @@ public class IniciarSesion implements ActionListener {
 						Inicio.InicioS = true;
 						return true;
 					} else {
-						JOptionPane.showMessageDialog(null, "Incorret Password o Email", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Incorret Password or Email", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 
 				}

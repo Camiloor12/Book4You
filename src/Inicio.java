@@ -7,10 +7,16 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 
 import com.formdev.flatlaf.FlatLightLaf;
+
 
 public class Inicio extends JFrame implements ActionListener {
 	private JLabel L1 = new JLabel();
@@ -24,6 +30,14 @@ public class Inicio extends JFrame implements ActionListener {
 	ImageIcon i8;
 	ImageIcon i9;
 	ImageIcon i10;
+	private JLabel NombreH1;
+	private JLabel UbicaionH1;
+	private JLabel DescripcionH1;
+	private JLabel PNocheH1;
+	private JLabel PrecioTH1;
+	private JButton ReservaH1;
+	private JLabel Ubi;
+	private ImageIcon Ubi1; 
 	private int currentImg = 0;
 	private Timer textAnimationTimer;
 	private ImageIcon logo;
@@ -74,9 +88,12 @@ public class Inicio extends JFrame implements ActionListener {
 	private JButton palante = new JButton(alante);
 	private JButton patras= new JButton(atra);
 	private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
-	private Font fuente = new Font("c", Font.PLAIN, 60);
+	private Font fuente = new Font("Oswald", Font.PLAIN, 60);
+	private Font fuente3 = new Font("Oswald", Font.PLAIN, 30);
 	public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
 	protected static String correo = "";
+	
+
 
 	public Inicio() {
 		user2.setBounds(890, 45, 60, 60);
@@ -220,6 +237,9 @@ public class Inicio extends JFrame implements ActionListener {
 		Inicio.creditos.setFont(fuente2);
 		Inicio.nom.setBounds(875, 85, 140, 60);
 		Inicio.nom.setFont(fuente2);
+		
+		Ubi1 = new ImageIcon ("ubi.png");
+		Ubi= new JLabel(Ubi1);
 		this.add(logo2);
 		this.add(botonLogOut);
 		this.add(user2);
@@ -332,6 +352,7 @@ public class Inicio extends JFrame implements ActionListener {
 			this.dispose();
 			new User();// Frame user
 		} else if (e.getSource() == Busqueda) {
+			Marcadores_de_Posicion.crearHotel();
 			boolean error = false;
 			if (!error) {
 				String Entrada = (String) mes.getSelectedItem();
@@ -414,9 +435,19 @@ public class Inicio extends JFrame implements ActionListener {
 			changeImgText("Apartment 0");
 			L1 = new JLabel(i);
 			L1.setBounds(28,22,300,186);
+			NombreH1= new JLabel(Marcadores_de_Posicion.p1.getNombre());
+			NombreH1.setFont(fuente3);
+			NombreH1.setBounds(380,-10,300,100);
+			Ubi.setBounds(380,60,15,15);
+			UbicaionH1= new JLabel(Marcadores_de_Posicion.p1.getDireccion() + ", " + Marcadores_de_Posicion.p1.getCp() + ", " + lugar.getText() );
+			UbicaionH1.setBounds(400,40,300,50);
+			UbicaionH1.setFont(fuente2);
 			div.add(palante);
 			div.add(patras);
 			div.add(L1);
+			div.add(NombreH1);
+			div.add(Ubi);
+			div.add(UbicaionH1);
 			imgLim = 9;
 			break;
 		case 1:
@@ -547,4 +578,6 @@ public class Inicio extends JFrame implements ActionListener {
 			break;
 		}
 	}
+	
 }
+	
