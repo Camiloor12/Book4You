@@ -684,12 +684,14 @@ public class Inicio extends JFrame implements ActionListener {
 			break;
 		case "Resultado 3":
 			i = new ImageIcon("imgApart/ap3.jpg");
-			i2 = new ImageIcon("imgApart/ap2-2.jpg");
-			i3 = new ImageIcon("imgApart/ap2-3.jpg");
-			i4 = new ImageIcon("imgApart/ap2-4.jpg");
-			i5 = new ImageIcon("imgApart/ap2-5.jpg");
-			i6 = new ImageIcon("imgApart/ap2-6.jpg");
-			i7 = new ImageIcon("imgApart/ap2-7.jpg");	
+			i2 = new ImageIcon("imgApart/ap3-2.jpg");
+			i3 = new ImageIcon("imgApart/ap3-3.jpg");
+			i4 = new ImageIcon("imgApart/ap3-4.jpg");
+			i5 = new ImageIcon("imgApart/ap3-5.jpg");
+			i6 = new ImageIcon("imgApart/ap3-6.jpg");
+			i7 = new ImageIcon("imgApart/ap3-7.jpg");
+			i7 = new ImageIcon("imgApart/ap3-8.jpg");	
+			i7 = new ImageIcon("imgApart/ap3-9.jpg");	
 			break;
 		case "Resultado 4":
 			i = new ImageIcon("imgApart/ap2.jpg");
