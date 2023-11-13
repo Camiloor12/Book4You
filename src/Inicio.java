@@ -127,7 +127,7 @@ public class Inicio extends JFrame implements ActionListener {
 		palante.setOpaque(false);
 		palante.setContentAreaFilled(false);
 		palante.setBounds(315,100,35,35);
-		patras.addActionListener(this);
+		palante.addActionListener(this);
 		patras.setBorderPainted(false);
 		patras.setOpaque(false);
 		patras.setContentAreaFilled(false);
@@ -270,7 +270,7 @@ public class Inicio extends JFrame implements ActionListener {
 	}
 	private JPanel createDiv(String text) {
 		JLabel Lab = new JLabel(text);
-		Lab.setBounds(0,0,100,20);
+		Lab.setBounds(8,0,100,20);
 		Lab.setForeground(Color.black); 
 		Lab.setFont(fuente2);
 	    JPanel div = new JPanel() {
@@ -414,17 +414,23 @@ public class Inicio extends JFrame implements ActionListener {
 			new Registro();
 			this.dispose();
 		}else if(e.getSource() == palante) {
-			if(currentImg>imgLim) {
-				currentImg=0;
-			}else {
+			if(currentImg<imgLim-1) {
 				currentImg++;
+				changeImg();
+			}else {
+				currentImg=0; 
+				changeImg();
 			}
-			changeImg();
 		}else if(e.getSource() == patras) {
 			if(!(currentImg<=0)) {
 				currentImg--;
 			}
-			changeImg();
+			if(currentImg>0) {
+				changeImg();
+			}else if(currentImg==0) {
+				currentImg=imgLim-1;
+				changeImg();
+			}
 		}
 	}
 	protected JPanel modifyApartments(int apartment) {
@@ -433,6 +439,7 @@ public class Inicio extends JFrame implements ActionListener {
 		case 0:
 			div = createDiv("Apartment 0");
 			changeImgText("Apartment 0");
+
 			L1 = new JLabel(i);
 			L1.setBounds(28,22,300,186);
 			NombreH1= new JLabel(Marcadores_de_Posicion.p1.getNombre());
@@ -442,6 +449,9 @@ public class Inicio extends JFrame implements ActionListener {
 			UbicaionH1= new JLabel(Marcadores_de_Posicion.p1.getDireccion() + ", " + Marcadores_de_Posicion.p1.getCp() + ", " + lugar.getText() );
 			UbicaionH1.setBounds(400,40,300,50);
 			UbicaionH1.setFont(fuente2);
+
+			changeImg();
+			L1.setBounds(28,32,300,156);
 			div.add(palante);
 			div.add(patras);
 			div.add(L1);
@@ -452,7 +462,7 @@ public class Inicio extends JFrame implements ActionListener {
 			break;
 		case 1:
 			div = createDiv("Apartment " + 1);
-			changeImgText("Apartment 0");
+			changeImgText("Apartment "+ apartment);
 			break;
 		case 2:
 			div = createDiv("Apartment " + 2);
@@ -518,10 +528,10 @@ public class Inicio extends JFrame implements ActionListener {
 	protected void changeImg() {		
 		switch(currentImg) {
 		case 0:
-			L1 = new JLabel(i);
+			L1.setIcon(i);
 			break;
 		case 1:
-			L1 = new JLabel(i2);
+			L1.setIcon(i2);
 			break;
 		case 2:
 			L1.setIcon(i3);
@@ -543,6 +553,7 @@ public class Inicio extends JFrame implements ActionListener {
 			break;
 		case 8:
 			L1.setIcon(i9);
+			break;
 		case 9:
 			L1.setIcon(i10);
 			break;
@@ -555,9 +566,16 @@ public class Inicio extends JFrame implements ActionListener {
 		case "Apartment 0":
 			i = new ImageIcon("imgApart/ap1.jpg");
 			i2 = new ImageIcon("imgApart/ap1-2.jpg");
+			i3 = new ImageIcon("imgApart/ap1-3.jpg");
+			i4 = new ImageIcon("imgApart/ap1-4.jpg");
+			i5 = new ImageIcon("imgApart/ap1-5.jpg");
+			i6 = new ImageIcon("imgApart/ap1-6.jpg");
+			i7 = new ImageIcon("imgApart/ap1-7.jpg");
+			i8 = new ImageIcon("imgApart/ap1-8.jpg");
+			i9 = new ImageIcon("imgApart/ap1-9.jpg");
 			break;
 		case "Apartment 1":
-			i = new ImageIcon("imgApart/ap");
+			
 			
 			break;
 		case "Apartment 2":
