@@ -17,8 +17,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Marcadores_de_Posicion {
-	public  static Productos p1;
-	public  static Productos p2;
+	public static Productos p1;
+	public static Productos p2;
 	public static Productos p3;
 	public static Productos p4;
 	public static Productos p5;
