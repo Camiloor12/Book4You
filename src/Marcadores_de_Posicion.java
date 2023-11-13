@@ -1,4 +1,3 @@
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -292,6 +291,8 @@ public class Marcadores_de_Posicion {
 						break;
 					case 10:
 						p10= new Productos(id, direccion, cp, Nombre, Descripcion, Precio);
+						System.out.println("fet");
+						System.out.println(p1.getNombre());
 						break;
 					
 					}				
