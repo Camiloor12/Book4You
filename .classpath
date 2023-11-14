@@ -6,11 +6,19 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/faris/OneDrive/Documentos/Book4You/ojdbc11 (2).jar">
+=======
+	<classpathentry kind="lib" path="D:/b4u/Book4You/ojdbc11 (2).jar">
+>>>>>>> d436adcf625c057cd282aa3c9bfc673fa0e84af1
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/faris/OneDrive/Documentos/Book4You/flatlaf-3.2.5.jar"/>
+=======
+	<classpathentry kind="lib" path="D:/b4u/Book4You/flatlaf-3.2.5.jar"/>
+>>>>>>> d436adcf625c057cd282aa3c9bfc673fa0e84af1
 	<classpathentry kind="output" path="bin"/>
 </classpath>

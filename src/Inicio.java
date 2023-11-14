@@ -115,6 +115,7 @@ public class Inicio extends JFrame implements ActionListener {
 	private botones b8 = new botones(4,100);
 	private botones b9 = new botones(4,100);
 	private botones b10 = new botones(4,100);
+	private int frameHeight = 600;
 	public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
 	protected static String correo = "";
 	public Inicio() {
@@ -136,11 +137,10 @@ public class Inicio extends JFrame implements ActionListener {
 		FlatLightLaf.setup();
 		ImageIcon image = new ImageIcon("logot.jpg");
 		String imagenFondo = "fondoo.jpg";
-		fondo = new ImageIcon(imagenFondo).getImage();
-		
+		fondo = new ImageIcon(imagenFondo).getImage();	
 		pintarVerde();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(1000, 600);
+		this.setSize(1000, frameHeight);
 		this.setLocationRelativeTo(null);
 		this.setLayout(null);
 		this.setTitle("BOOK4YOU");
@@ -206,7 +206,7 @@ public class Inicio extends JFrame implements ActionListener {
        
         scrollPane = new JScrollPane(divContainer);
         scrollPane = new JScrollPane(divContainer, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBounds(0, 282, getWidth()-15, 275);
+        scrollPane.setBounds(0, 282, getWidth()-15, 495);
         scrollPane.setBorder(null);
 		Dia = new JComboBox<>(Dias);
 		Dia.setBounds(320, textYtf, 50, 35);
@@ -749,8 +749,10 @@ public class Inicio extends JFrame implements ActionListener {
 		Niños.setLocation(785, textYtf);
 		Busqueda.setLocation(870, textYtf);	
 		height--;
+		frameHeight++;
+		this.setSize(1000,frameHeight);
 		this.repaint();
-		if (height <= 140) {
+		if (height <= 140 && frameHeight <=1750) {
 			textAnimationTimer.stop();
 			isDone = true;
 			addDivsToContainer();				
@@ -807,22 +809,25 @@ public class Inicio extends JFrame implements ActionListener {
 	}
 	private JPanel addHotelInfo(int apartment) {
 		JPanel div = null;
+		JLabel valoracion = new JLabel("Valoraciones:");
+		valoracion.setBounds(820,40,100,20);
+		valoracion.setFont(fuente2);
 		switch(apartment) {
 		case 0:
 			ImageIcon Estrellas1 = new ImageIcon("Estrellas.png"); 
-			
 			JLabel Estrellas = new JLabel(Estrellas1);
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
 			div = createDiv("Resultado 1");
+			int xAxis = 400;
 			changeImgText("Resultado 1");
 			L1.setBounds(28,22,300,186);
 			NombreH1= new JLabel(Marcadores_de_Posicion.p1.getNombre());
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
 			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p1.getDireccion() + ", " + Marcadores_de_Posicion.p1.getCp() + ", " + lugar.getText().toUpperCase() );
-			UbicaionH1.setBounds(400,40,300,50);
+			UbicaionH1= new JLabel(Marcadores_de_Posicion.p1.getDireccion() + ", " + Marcadores_de_Posicion.p1.getCp() + ", " + lugar.getText());
+			UbicaionH1.setBounds(xAxis,40,250,50);
 			UbicaionH1.setFont(fuente2);
 			String descripcion1 = Marcadores_de_Posicion.p1.getDescripcion();
 			int anchoMaximo = 400;
@@ -846,7 +851,7 @@ public class Inicio extends JFrame implements ActionListener {
 			DescripcionH1.setBounds(380, -130, 440, 500);
 			DescripcionH1.setFont(fuente2);
 			changeImg(currentImg, L1);
-			Estrellas.setBounds(518,-85,300,300);
+			Estrellas.setBounds(710,-85,300,300);
 			Estrellas.setVisible(true);
 			L1.setBounds(28,32,300,156);
 			
@@ -912,7 +917,7 @@ public class Inicio extends JFrame implements ActionListener {
 			 DescripcionH1 = new JLabel(sb.toString());
 			DescripcionH1.setBounds(380, -130, 440, 500);
 			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(518,-85,300,300);
+			Estrellas.setBounds(710,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p2.getPrecio()) + " Q");
 			PNocheH1.setFont(fuente2);
@@ -974,7 +979,7 @@ public class Inicio extends JFrame implements ActionListener {
 			 DescripcionH1 = new JLabel(sb.toString());
 			DescripcionH1.setBounds(380, -130, 440, 500);
 			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(575,-85,300,300);
+			Estrellas.setBounds(695,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p3.getPrecio()) + " Q");
 			PNocheH1.setFont(fuente2);
@@ -1039,7 +1044,7 @@ public class Inicio extends JFrame implements ActionListener {
 			 DescripcionH1 = new JLabel(sb.toString());
 			DescripcionH1.setBounds(380, -130, 440, 500);
 			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(560,-85,300,300);
+			Estrellas.setBounds(700,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p4.getPrecio()) + " Q");
 			PNocheH1.setFont(fuente2);
@@ -1104,7 +1109,7 @@ public class Inicio extends JFrame implements ActionListener {
 			 DescripcionH1 = new JLabel(sb.toString());
 			DescripcionH1.setBounds(380, -130, 440, 500);
 			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(560,-85,300,300);
+			Estrellas.setBounds(710,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p5.getPrecio()) + " Q");
 			PNocheH1.setFont(fuente2);
@@ -1168,7 +1173,7 @@ public class Inicio extends JFrame implements ActionListener {
 			 DescripcionH1 = new JLabel(sb.toString());
 			DescripcionH1.setBounds(380, -130, 440, 500);
 			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(560,-85,300,300);
+			Estrellas.setBounds(695,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p6.getPrecio()) + " Q");
 			PNocheH1.setFont(fuente2);
@@ -1232,7 +1237,7 @@ public class Inicio extends JFrame implements ActionListener {
 			 DescripcionH1 = new JLabel(sb.toString());
 			DescripcionH1.setBounds(380, -130, 440, 500);
 			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(560,-85,300,300);
+			Estrellas.setBounds(700,-85,300,300);
 			
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p7.getPrecio()) + " Q");
@@ -1296,7 +1301,7 @@ public class Inicio extends JFrame implements ActionListener {
 			 DescripcionH1 = new JLabel(sb.toString());
 			DescripcionH1.setBounds(380, -130, 440, 500);
 			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(560,-85,300,300);
+			Estrellas.setBounds(710,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p8.getPrecio()) + " Q");
 			PNocheH1.setFont(fuente2);
@@ -1359,7 +1364,7 @@ public class Inicio extends JFrame implements ActionListener {
 			 DescripcionH1 = new JLabel(sb.toString());
 			DescripcionH1.setBounds(380, -130, 440, 500);
 			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(560,-85,300,300);
+			Estrellas.setBounds(695,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p9.getPrecio()) + " Q");
 			PNocheH1.setFont(fuente2);
@@ -1422,7 +1427,7 @@ public class Inicio extends JFrame implements ActionListener {
 			 DescripcionH1 = new JLabel(sb.toString());
 			DescripcionH1.setBounds(380, -130, 440, 500);
 			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(560,-85,300,300);
+			Estrellas.setBounds(710,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p10.getPrecio()) + " Q");
 			PNocheH1.setFont(fuente2);
@@ -1449,6 +1454,7 @@ public class Inicio extends JFrame implements ActionListener {
 			div.add(con10);
 			break;
 		}
+		div.add(valoracion);
 		return div;
 	}
 }
