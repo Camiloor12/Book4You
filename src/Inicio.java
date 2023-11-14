@@ -744,12 +744,14 @@ public class Inicio extends JFrame implements ActionListener {
 		Niños.setLocation(785, textYtf);
 		Busqueda.setLocation(870, textYtf);	
 		height--;
+		this.setLocationRelativeTo(null);
 		frameHeight++;
 		this.setSize(1000,frameHeight);
 		this.repaint();
 		if (height <= 140 && frameHeight <=1750) {
 			textAnimationTimer.stop();
 			isDone = true;
+
 			addDivsToContainer();				
 		}
 	}
