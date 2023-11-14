@@ -115,9 +115,9 @@ public class Inicio extends JFrame implements ActionListener {
 	private botones b8 = new botones(4,100);
 	private botones b9 = new botones(4,100);
 	private botones b10 = new botones(4,100);
-	private int frameHeight = 600;
 	public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
 	protected static String correo = "";
+	private int frameHeight = 600;
 	public Inicio() {
 		con1 = new JLabel("- " +String.valueOf(b1.getCon())+ " -");
 		con2 = new JLabel("- " +String.valueOf(b2.getCon())+ " -");
@@ -137,7 +137,7 @@ public class Inicio extends JFrame implements ActionListener {
 		FlatLightLaf.setup();
 		ImageIcon image = new ImageIcon("logot.jpg");
 		String imagenFondo = "fondoo.jpg";
-		fondo = new ImageIcon(imagenFondo).getImage();	
+		fondo = new ImageIcon(imagenFondo).getImage();
 		pintarVerde();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(1000, frameHeight);
@@ -815,6 +815,7 @@ public class Inicio extends JFrame implements ActionListener {
 		switch(apartment) {
 		case 0:
 			ImageIcon Estrellas1 = new ImageIcon("Estrellas.png"); 
+			
 			JLabel Estrellas = new JLabel(Estrellas1);
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
