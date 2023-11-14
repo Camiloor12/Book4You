@@ -6,11 +6,11 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/b4u/Book4You/ojdbc11 (2).jar">
+	<classpathentry kind="lib" path="D:/Eclipse/Book4You/Book4You/ojdbc11 (2).jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/b4u/Book4You/flatlaf-3.2.5.jar"/>
+	<classpathentry kind="lib" path="D:/Eclipse/Book4You/Book4You/flatlaf-3.2.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
