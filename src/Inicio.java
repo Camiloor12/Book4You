@@ -1,13 +1,21 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 import javax.swing.*;
+import javax.swing.border.Border;
+
 import com.formdev.flatlaf.FlatLightLaf;
 
 
@@ -31,6 +39,7 @@ public class Inicio extends JFrame implements ActionListener {
 	ImageIcon i10;
 	private JLabel NombreH1;
 	private JLabel UbicaionH1;
+	private JLabel DescripcionH1;
 	private JLabel PNocheH1;
 	private JLabel PrecioTH1;
 	private JButton ReservaH1;
@@ -38,6 +47,7 @@ public class Inicio extends JFrame implements ActionListener {
 	private ImageIcon Ubi1; 
 	private ImageIcon Estrellas1 = new ImageIcon("Estrellas.png"); 
 	private JLabel Estrellas = new JLabel(Estrellas1);
+	private int currentImg = 0;
 	private Timer textAnimationTimer;
 	private ImageIcon logo;
 	private boolean isDone = false;
@@ -91,10 +101,6 @@ public class Inicio extends JFrame implements ActionListener {
 	private botones b4 = new botones(4,100);
 	private botones b5 = new botones(4,100);
 	private botones b6 = new botones(4,100);
-	private botones b7 = new botones(4,100);
-	private botones b8 = new botones(4,100);
-	private botones b9 = new botones(4,100);
-	private botones b10 = new botones(4,100);
 	public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
 	protected static String correo = "";
 	public Inicio() {
@@ -126,7 +132,16 @@ public class Inicio extends JFrame implements ActionListener {
 		int logoX = (frameWidth - logoWidth) / 2;
 		logo2.setBounds(logoX, -10, logoWidth, 200);
 		InicioSesion();
-		addListenerButtons();
+		b1.getPalante().addActionListener(this);
+		b1.getPatras().addActionListener(this);
+		b2.getPalante().addActionListener(this);
+		b2.getPatras().addActionListener(this);
+		b3.getPalante().addActionListener(this);
+		b3.getPatras().addActionListener(this);
+		b4.getPalante().addActionListener(this);
+		b4.getPatras().addActionListener(this);
+		b5.getPalante().addActionListener(this);
+		b5.getPatras().addActionListener(this);
 		botonLogOut.setBorderPainted(false);
 		botonLogOut.setOpaque(false);
 		botonLogOut.setContentAreaFilled(false);
@@ -408,20 +423,146 @@ public class Inicio extends JFrame implements ActionListener {
 		}else if (e.getSource() == crearCuentaButton) {
 			new Registro();
 			this.dispose();
+		}else if(e.getSource() == b1.getPalante()) {
+			changeImgText("Resultado "+ 1);
+			if(currentImg<imgLim-1) {
+				currentImg++;
+				changeImg(currentImg, L1);
+			}else {
+				currentImg=0; 
+				changeImg(currentImg, L1);
+			}
+		}else if(e.getSource() == b1.getPatras()) {
+			changeImgText("Resultado "+ 1);
+			if(!(currentImg<=0)) {
+				currentImg--;
+				changeImg(currentImg, L1);
+			}
+			if(currentImg>0) {
+				changeImg(currentImg, L1);
+			}else if(currentImg==0) {
+				currentImg=imgLim-1;
+				changeImg(currentImg, L1);
+			}
+		}else if(e.getSource() == b2.getPalante()) { //b2 apt2
+			changeImgText("Resultado "+ 2);
+			imgLim = 7;
+			if(b2.getCon()<imgLim-1) {
+				b2.setCon(b2.getCon()+1);
+				changeImg(b2.getCon(), L2);
+			}else {
+				b2.setCon(0); 
+				changeImg(b2.getCon(), L2);
+			}
+		}else if(e.getSource() == b2.getPatras()) {
+			changeImgText("Resultado "+ 2);
+			imgLim = 7;
+			if(!(b2.getCon()<=0)) {
+				b2.setCon(b2.getCon()-1);
+				changeImgText("Resultado "+ 2);
+				changeImg(b2.getCon(), L2);
+			}
+			if(b2.getCon()>0) {
+				changeImgText("Resultado "+ 2);
+				changeImg(b2.getCon(), L2);		
+			}else if(b2.getCon()==0) {	
+				b2.setCon(imgLim-1);
+				changeImg(b2.getCon(), L2);
+			}
+		}else if(e.getSource() == b3.getPalante()) { //b3 apt3
+			changeImgText("Resultado "+ 3);
+			imgLim = 9;
+			if(b3.getCon()<imgLim-1) {
+				b3.setCon(b3.getCon()+1);
+				changeImg(b3.getCon(), L3);
+			}else {
+				b3.setCon(0); 
+				changeImg(b3.getCon(), L3);
+			}
+		}else if(e.getSource() == b3.getPatras()) {
+			changeImgText("Resultado "+ 3);
+			imgLim = 9;
+			if(!(b3.getCon()<=0)) {
+				b3.setCon(b3.getCon()-1);			
+				changeImg(b3.getCon(), L3);
+			}
+			if(b3.getCon()>0) {
+				changeImg(b3.getCon(), L3);		
+			}else if(b3.getCon()==0) {	
+				b3.setCon(imgLim-1);
+				changeImg(b3.getCon(), L3);
+			}
+		}else if(e.getSource() == b4.getPalante()) { //b4 apt4
+			changeImgText("Resultado "+ 4);
+			imgLim = 10;
+			if(b4.getCon()<imgLim-1) {
+				b4.setCon(b4.getCon()+1);
+				changeImg(b4.getCon(), L4);
+			}else {
+				b4.setCon(0); 
+				changeImg(b4.getCon(), L4);
+			}
+		}else if(e.getSource() == b4.getPatras()) {
+			changeImgText("Resultado "+ 4);
+			imgLim = 10;
+			if(!(b4.getCon()<=0)) {
+				b4.setCon(b4.getCon()-1);
+				changeImg(b4.getCon(), L4);
+			}
+			if(b4.getCon()>0) {
+				changeImg(b4.getCon(), L4);		
+			}else if(b4.getCon()==0) {	
+				b4.setCon(imgLim-1);
+				changeImg(b4.getCon(), L4);
+			}
+		}else if(e.getSource() == b5.getPalante()) { //b5 y apt5
+			changeImgText("Resultado "+ 5);
+			imgLim = 8;
+			if(b5.getCon()<imgLim-1) {
+				b5.setCon(b5.getCon()+1);
+				changeImg(b5.getCon(), L5);
+			}else {
+				b5.setCon(0); 
+				changeImg(b5.getCon(), L5);
+			}
+		}else if(e.getSource() == b5.getPatras()) { 
+			changeImgText("Resultado "+ 5);
+			imgLim = 8;
+			if(!(b5.getCon()<=0)) {
+				b5.setCon(b5.getCon()-1);
+				changeImg(b5.getCon(), L5);
+			}
+			if(b5.getCon()>0) {
+				changeImg(b5.getCon(), L5);		
+			}else if(b5.getCon()==0) {	
+				b5.setCon(imgLim-1);
+				changeImg(b5.getCon(), L5);
+			}
 		}
-		if (e.getSource() == b1.getPalante() || e.getSource() == b1.getPatras()) { // Logica botones imagenes
-	        handleButton(b1, L1, 1,e);
-	    } else if (e.getSource() == b2.getPalante() || e.getSource() == b2.getPatras()) {
-	        handleButton(b2, L2, 2,e);
-	    } else if (e.getSource() == b3.getPalante() || e.getSource() == b3.getPatras()) {
-	        handleButton(b3, L3, 3,e);
-	    } else if (e.getSource() == b4.getPalante() || e.getSource() == b4.getPatras()) {
-	        handleButton(b4, L4, 4,e);
-	    } else if (e.getSource() == b5.getPalante() || e.getSource() == b5.getPatras()) {
-	        handleButton(b5, L5, 5,e);
-	    } else if (e.getSource() == b6.getPalante() || e.getSource() == b6.getPatras()) {
-	        handleButton(b6, L6, 6,e);
-	    }
+		else if(e.getSource() == b6.getPalante()) { //b6 y apt6
+			changeImgText("Resultado "+ 5);
+			imgLim = 8;
+			if(b6.getCon()<imgLim-1) {
+				b6.setCon(b6.getCon()+1);
+				changeImg(b6.getCon(), L5);
+			}else {
+				b6.setCon(0); 
+				changeImg(b6.getCon(), L5);
+			}
+		}else if(e.getSource() == b6.getPatras()) { 
+			changeImgText("Resultado "+ 5);
+			imgLim = 8;
+			if(!(b6.getCon()<=0)) {
+				b6.setCon(b6.getCon()-1);
+				changeImg(b6.getCon(), L5);
+			}
+			if(b6.getCon()>0) {
+				changeImg(b6.getCon(), L5);		
+			}else if(b6.getCon()==0) {	
+				b6.setCon(imgLim-1);
+				changeImg(b6.getCon(), L5);
+			}
+		}
 	}
 	protected JPanel modifyApartments(int apartment) {
 		JPanel div = null;
@@ -462,7 +603,7 @@ public class Inicio extends JFrame implements ActionListener {
 			JLabel DescripcionH1 = new JLabel(sb.toString());
 			DescripcionH1.setBounds(380, -130, 440, 500);
 			DescripcionH1.setFont(fuente2);
-			changeImg(b1.getCon(), L1);
+			changeImg(currentImg, L1);
 			Estrellas.setBounds(518,-85,300,300);
 			Estrellas.setVisible(true);
 			L1.setBounds(28,32,300,156);
@@ -1185,92 +1326,5 @@ public class Inicio extends JFrame implements ActionListener {
 			break;
 		}
 	}
-	private void handleButton(botones button, JLabel label, int index,ActionEvent e) {
-	    changeImgText("Resultado " + index);
-	    int currentImg = button.getCon();
-	   switch(index) {
-	   case 1:
-		   imgLim = 9;
-		   break;
-	   case 2:
-		   imgLim = 7;
-		   break;
-	   case 3:
-		   imgLim = 9;
-		   break;
-	   case 4:
-		   imgLim = 10;
-		   break;
-	   case 5:
-		   imgLim = 8;
-		   break;
-	   case 6:
-		   imgLim = 7;
-		   break;
-	   case 7:
-		   imgLim = 9;
-		   break;
-	   case 8:
-		   break;
-	   case 9:
-		   break;
-	   case 10:
-		   break;
-	   }
-	    
-
-	    if (e.getSource() == button.getPalante()) {
-	    	if(currentImg<imgLim-1) {
-				currentImg++;
-				changeImg(currentImg, label);
-				button.setCon(currentImg);
-			}else {
-				currentImg=0; 
-				changeImg(currentImg, label);
-				button.setCon(currentImg);
-			}
-	    } else if (e.getSource() == button.getPatras()) {
-	    	if(!(currentImg<=0)) {
-				currentImg--;
-				changeImg(currentImg, label);
-				button.setCon(currentImg);
-			}
-			if(currentImg>0) {
-				changeImg(currentImg, label);
-				button.setCon(currentImg);
-			}else if(currentImg==0) {
-				currentImg=imgLim-1;
-				changeImg(currentImg, label);
-				button.setCon(currentImg);
-			}
-	    }
-	}
 	
-
-
-
-
-
-	private void addListenerButtons() {
-		b1.getPalante().addActionListener(this);
-		b1.getPatras().addActionListener(this);
-		b2.getPalante().addActionListener(this);
-		b2.getPatras().addActionListener(this);
-		b3.getPalante().addActionListener(this);
-		b3.getPatras().addActionListener(this);
-		b4.getPalante().addActionListener(this);
-		b4.getPatras().addActionListener(this);
-		b5.getPalante().addActionListener(this);
-		b5.getPatras().addActionListener(this);
-		b6.getPalante().addActionListener(this);
-		b6.getPatras().addActionListener(this);
-		b7.getPalante().addActionListener(this);
-		b7.getPatras().addActionListener(this);
-		b8.getPalante().addActionListener(this);
-		b8.getPatras().addActionListener(this);
-		b9.getPalante().addActionListener(this);
-		b9.getPatras().addActionListener(this);
-		b10.getPalante().addActionListener(this);
-		b10.getPatras().addActionListener(this);
-	}
 }
