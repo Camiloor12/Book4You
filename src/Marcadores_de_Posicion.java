@@ -2,6 +2,7 @@
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
@@ -305,4 +306,29 @@ public class Marcadores_de_Posicion {
 			System.out.println("Error" + e);
 		
 
-}}}
+}}
+	public static boolean Ciudad (String Ciudad) {
+
+		String sql = "SELECT * FROM CIUDADES WHERE CIUDADES = '" + Ciudad + "'";
+
+		try {
+			Statement st = Main.con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					String Ciudades = rs.getString("CIUDADES");
+					if (Ciudades.equals(Ciudad)) { 
+						return true;
+					} 
+
+				}
+
+			} 
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}	
+}

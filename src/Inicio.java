@@ -97,7 +97,7 @@ public class Inicio extends JFrame implements ActionListener {
 	private Image fondo;
 	private JPanel divContainer; // Panel to hold divs
     private JScrollPane scrollPane; 
-	private JTextField lugar;
+	public static  JTextField lugar;
 	public static JLabel creditos = new JLabel();
 	public static JLabel nom = new JLabel();
 	private JButton Busqueda = new JButton("Buscar");
@@ -347,16 +347,20 @@ public class Inicio extends JFrame implements ActionListener {
 			}
 		} else if (e.getSource() == user2) {
 			this.dispose();
-			new User();// Frame user
+			new User();
 		} else if (e.getSource() == Busqueda) {
 			Marcadores_de_Posicion.crearHotel();
 			boolean error = false;
+			boolean error2= Marcadores_de_Posicion.Ciudad(lugar.getText().toUpperCase());
+			if (error2) {
 			if (!error) {
 				error = controlErroresBusq(error);
 			}
 			if (!error) {
 				textAnimationTimer.start();
-				
+			}}
+			else {
+				JOptionPane.showMessageDialog(null, "Por ahora no llegamos hasta allí... Pero llegaremos Pronto ", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}else if (e.getSource() == iniciarSesionButton) {
 			new IniciarSesion();
@@ -817,7 +821,7 @@ public class Inicio extends JFrame implements ActionListener {
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
 			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p1.getDireccion() + ", " + Marcadores_de_Posicion.p1.getCp() + ", " + lugar.getText() );
+			UbicaionH1= new JLabel(Marcadores_de_Posicion.p1.getDireccion() + ", " + Marcadores_de_Posicion.p1.getCp() + ", " + lugar.getText().toUpperCase() );
 			UbicaionH1.setBounds(400,40,300,50);
 			UbicaionH1.setFont(fuente2);
 			String descripcion1 = Marcadores_de_Posicion.p1.getDescripcion();
@@ -884,7 +888,7 @@ public class Inicio extends JFrame implements ActionListener {
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
 			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p2.getDireccion() + ", " + Marcadores_de_Posicion.p2.getCp() + ", " + lugar.getText() );
+			UbicaionH1= new JLabel(Marcadores_de_Posicion.p2.getDireccion() + ", " + Marcadores_de_Posicion.p2.getCp() + ", " + lugar.getText().toUpperCase());
 			UbicaionH1.setBounds(400,40,300,50);
 			UbicaionH1.setFont(fuente2);
 			String descripcion2 = Marcadores_de_Posicion.p2.getDescripcion();
@@ -946,7 +950,7 @@ public class Inicio extends JFrame implements ActionListener {
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
 			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p3.getDireccion() + ", " + Marcadores_de_Posicion.p3.getCp() + ", " + lugar.getText() );
+			UbicaionH1= new JLabel(Marcadores_de_Posicion.p3.getDireccion() + ", " + Marcadores_de_Posicion.p3.getCp() + ", " + lugar.getText().toUpperCase());
 			UbicaionH1.setBounds(400,40,300,50);
 			UbicaionH1.setFont(fuente2);
 			 descripcion2 = Marcadores_de_Posicion.p3.getDescripcion();
@@ -1011,7 +1015,7 @@ public class Inicio extends JFrame implements ActionListener {
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
 			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p4.getDireccion() + ", " + Marcadores_de_Posicion.p4.getCp() + ", " + lugar.getText() );
+			UbicaionH1= new JLabel(Marcadores_de_Posicion.p4.getDireccion() + ", " + Marcadores_de_Posicion.p4.getCp() + ", " + lugar.getText().toUpperCase());
 			UbicaionH1.setBounds(400,40,300,50);
 			UbicaionH1.setFont(fuente2);
 			 descripcion2 = Marcadores_de_Posicion.p4.getDescripcion();
@@ -1076,7 +1080,7 @@ public class Inicio extends JFrame implements ActionListener {
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
 			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p5.getDireccion() + ", " + Marcadores_de_Posicion.p5.getCp() + ", " + lugar.getText() );
+			UbicaionH1= new JLabel(Marcadores_de_Posicion.p5.getDireccion() + ", " + Marcadores_de_Posicion.p5.getCp() + ", " + lugar.getText().toUpperCase());
 			UbicaionH1.setBounds(400,40,300,50);
 			UbicaionH1.setFont(fuente2);
 			 descripcion2 = Marcadores_de_Posicion.p5.getDescripcion();
@@ -1140,7 +1144,7 @@ public class Inicio extends JFrame implements ActionListener {
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
 			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p6.getDireccion() + ", " + Marcadores_de_Posicion.p6.getCp() + ", " + lugar.getText() );
+			UbicaionH1= new JLabel(Marcadores_de_Posicion.p6.getDireccion() + ", " + Marcadores_de_Posicion.p6.getCp() + ", " + lugar.getText().toUpperCase());
 			UbicaionH1.setBounds(400,40,300,50);
 			UbicaionH1.setFont(fuente2);
 			 descripcion2 = Marcadores_de_Posicion.p6.getDescripcion();
@@ -1204,7 +1208,7 @@ public class Inicio extends JFrame implements ActionListener {
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
 			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p7.getDireccion() + ", " + Marcadores_de_Posicion.p7.getCp() + ", " + lugar.getText() );
+			UbicaionH1= new JLabel(Marcadores_de_Posicion.p7.getDireccion() + ", " + Marcadores_de_Posicion.p7.getCp() + ", " + lugar.getText().toUpperCase());
 			UbicaionH1.setBounds(400,40,300,50);
 			UbicaionH1.setFont(fuente2);
 			 descripcion2 = Marcadores_de_Posicion.p7.getDescripcion();
@@ -1268,7 +1272,7 @@ public class Inicio extends JFrame implements ActionListener {
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
 			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p8.getDireccion() + ", " + Marcadores_de_Posicion.p8.getCp() + ", " + lugar.getText() );
+			UbicaionH1= new JLabel(Marcadores_de_Posicion.p8.getDireccion() + ", " + Marcadores_de_Posicion.p8.getCp() + ", " + lugar.getText().toUpperCase());
 			UbicaionH1.setBounds(400,40,300,50);
 			UbicaionH1.setFont(fuente2);
 			 descripcion2 = Marcadores_de_Posicion.p8.getDescripcion();
@@ -1331,7 +1335,7 @@ public class Inicio extends JFrame implements ActionListener {
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
 			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p9.getDireccion() + ", " + Marcadores_de_Posicion.p9.getCp() + ", " + lugar.getText() );
+			UbicaionH1= new JLabel(Marcadores_de_Posicion.p9.getDireccion() + ", " + Marcadores_de_Posicion.p9.getCp() + ", " + lugar.getText().toUpperCase());
 			UbicaionH1.setBounds(400,40,300,50);
 			UbicaionH1.setFont(fuente2);
 			 descripcion2 = Marcadores_de_Posicion.p9.getDescripcion();
@@ -1394,7 +1398,7 @@ public class Inicio extends JFrame implements ActionListener {
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
 			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p10.getDireccion() + ", " + Marcadores_de_Posicion.p10.getCp() + ", " + lugar.getText() );
+			UbicaionH1= new JLabel(Marcadores_de_Posicion.p10.getDireccion() + ", " + Marcadores_de_Posicion.p10.getCp() + ", " + lugar.getText().toUpperCase());
 			UbicaionH1.setBounds(400,40,300,50);
 			UbicaionH1.setFont(fuente2);
 			 descripcion2 = Marcadores_de_Posicion.p10.getDescripcion();
