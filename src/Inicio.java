@@ -826,8 +826,8 @@ public class Inicio extends JFrame implements ActionListener {
 			NombreH1.setFont(fuente3);
 			NombreH1.setBounds(380,-10,300,100);
 			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p1.getDireccion() + ", " + Marcadores_de_Posicion.p1.getCp() + ", " + lugar.getText());
-			UbicaionH1.setBounds(xAxis,40,250,50);
+			UbicaionH1= new JLabel(Marcadores_de_Posicion.p1.getDireccion() + ", " + Marcadores_de_Posicion.p1.getCp() + ", " + lugar.getText().toUpperCase());
+			UbicaionH1.setBounds(xAxis,40,350,50);
 			UbicaionH1.setFont(fuente2);
 			String descripcion1 = Marcadores_de_Posicion.p1.getDescripcion();
 			int anchoMaximo = 400;
