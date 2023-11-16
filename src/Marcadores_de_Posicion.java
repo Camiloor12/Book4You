@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -63,12 +65,25 @@ public class Marcadores_de_Posicion {
 	public static boolean Fecha(String meses, int dia, int Año) {
 		SimpleDateFormat Formato = new SimpleDateFormat("MM/dd/yyyy");
 		java.util.Date FechaActual = new java.util.Date();
+		 Calendar calendar = Calendar.getInstance();
+		calendar.setTime(FechaActual);       
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+ 
+        Date fechaConHorasCero = calendar.getTime();
 		try {
 			String Fecha = Mes(meses) + "/" + dia + "/" + Año;
-			java.util.Date Actual = Formato.parse(Fecha);
-			if (Actual.before(FechaActual)) {
+			java.util.Date FechaReserva = Formato.parse(Fecha);
+			if (FechaReserva.equals(fechaConHorasCero)) {
+				return true;
+			}
+			else if (FechaReserva.before(fechaConHorasCero) ) {
 				return false;
-			} else {
+			}
+			else {
 				return true;
 			}
 		} catch (ParseException e) {
@@ -151,7 +166,12 @@ public class Marcadores_de_Posicion {
 			java.util.Date Segunda = Formato.parse(Fecha2);
 			if (Segunda.before(Primera)) {
 				return false;
-			} else {
+			}if (Segunda.equals(Primera)) {
+				return false;
+			}
+			
+			
+			else {
 				return true;
 			}
 		} catch (ParseException e) {
@@ -331,4 +351,61 @@ public class Marcadores_de_Posicion {
 		return false;
 
 	}	
+	
+	
+	public static String[] obtenerFechaActual() {
+        // Obtener la fecha actual
+        Date fecha = new Date();
+
+        // Crear un objeto SimpleDateFormat para formatear la fecha
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+        // Formatear la fecha
+        String fechaFormateada = formato.format(fecha);
+
+        // Dividir la fecha formateada en día, mes y año
+        String[] partesFecha = fechaFormateada.split("/");
+
+        
+        return partesFecha;
+    }
+	public static long calcularDiferenciaEnDias(String meses_entrada, int dia_entrada, int año_entrada, String meses_salida,
+            int dia_salida, int año_salida) {
+        SimpleDateFormat formato = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            String fechaEntrada = Mes(meses_entrada) + "/" + dia_entrada + "/" + año_entrada;
+            java.util.Date fechaInicial = formato.parse(fechaEntrada);
+
+            String fechaSalida = Mes(meses_salida) + "/" + dia_salida + "/" + año_salida;
+            java.util.Date fechaFinal = formato.parse(fechaSalida);
+
+           
+            long diferenciaEnMillis = fechaFinal.getTime() - fechaInicial.getTime();
+
+         
+            return diferenciaEnMillis / (24 * 60 * 60 * 1000);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+	public static int calcularPrecioTotal(int noches, int cantidadNinos, int cantidadAdultos, int precioBasePorNoche) {
+		if (noches != 1 ) {
+			noches--;
+		}
+
+		int precioAdulto= precioBasePorNoche;
+		int Precionniño= precioBasePorNoche /2;
+		int Niño= (cantidadNinos * Precionniño) * noches;
+		int Adulto= (cantidadAdultos * precioAdulto) * noches;
+		
+		if (cantidadNinos == 0) {
+			return Adulto;	
+		}
+      
+		else {
+			return Niño + Adulto;
+		}
+    }
 }
+

@@ -8,7 +8,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+import javax.management.StringValueExp;
 import javax.swing.*;
 
 import com.formdev.flatlaf.FlatLightLaf;
@@ -49,6 +49,7 @@ public class Inicio extends JFrame implements ActionListener {
 	private JLabel UbicaionH1;
 	private JLabel PNocheH1;
 	private JLabel PrecioTH1;
+	private JLabel NochesTH1;
 	private JButton ReservaH1;
 	private JLabel Ubi;
 	private ImageIcon Ubi1; 
@@ -110,10 +111,15 @@ public class Inicio extends JFrame implements ActionListener {
 	private botones b8 = new botones(4,100);
 	private botones b9 = new botones(4,100);
 	private botones b10 = new botones(4,100);
+	public static int  a = 0;
+	public static int CAdultos = 0;
+	public static int CNiños;
+	public static int valorInt ;
 	public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
 	protected static String correo = "";
 	private int frameHeight = 600;
 	public Inicio() {
+		
 		con1 = new JLabel("- " +String.valueOf(b1.getCon())+ " -");
 		con2 = new JLabel("- " +String.valueOf(b2.getCon())+ " -");
 		con3 = new JLabel("- " +String.valueOf(b3.getCon())+ " -");
@@ -185,10 +191,12 @@ public class Inicio extends JFrame implements ActionListener {
 		lblLugar.setForeground(Color.white);
 		TextY2 = 330;
 		lblLugar.setBounds(10, TextY2, 100, 30);
-
+		String[] fechaActual = Marcadores_de_Posicion.obtenerFechaActual();
+		String Mes1= Marcadores_de_Posicion.Mes2(Integer.parseInt(fechaActual[1]));
 		mes = new JComboBox<>(meses);
 		mes.setBounds(220, textYtf, 100, 35);
 		mes.setFont(fuente2);
+		mes.setSelectedItem(Mes1);
 
 		lblFechaEntrada = new JLabel("Fecha de Entrada:");
 		lblFechaEntrada.setFont(fuente2);
@@ -206,14 +214,17 @@ public class Inicio extends JFrame implements ActionListener {
 		Dia = new JComboBox<>(Dias);
 		Dia.setBounds(320, textYtf, 50, 35);
 		Dia.setFont(fuente2);
+		Dia.setSelectedItem(Integer.parseInt(fechaActual[0]));
 
 		Año = new JComboBox<>(Años);
 		Año.setBounds(370, textYtf, 70, 35);
 		Año.setFont(fuente2);
+		Año.setSelectedItem(Integer.parseInt(fechaActual[2]));
 
 		mes2 = new JComboBox<>(meses);
 		mes2.setBounds(465, textYtf, 100, 35);
 		mes2.setFont(fuente2);
+		mes2.setSelectedItem(Mes1);
 
 		lblFechaSalida = new JLabel("Fecha de Salida:");
 		lblFechaSalida.setFont(fuente2);
@@ -222,10 +233,13 @@ public class Inicio extends JFrame implements ActionListener {
 
 		Dia2 = new JComboBox<>(Dias);
 		Dia2.setBounds(565, textYtf, 50, 35);
-
+		Dia2.setFont(fuente2);
+		Dia2.setSelectedItem(Integer.parseInt(fechaActual[0]));
+		
 		Año2 = new JComboBox<>(Años);
 		Año2.setBounds(615, textYtf, 70, 35);
 		Año2.setFont(fuente2);
+		Año2.setSelectedItem(Integer.parseInt(fechaActual[2]));
 		Adultos = new JComboBox<>(Personas);
 		Adultos.setBounds(700, 360, 70, 35);
 		Adultos.setFont(fuente2);
@@ -241,7 +255,7 @@ public class Inicio extends JFrame implements ActionListener {
 		lblNiños.setFont(fuente2);
 		lblNiños.setForeground(Color.white);
 		lblNiños.setBounds(785, TextY2, 100, 30);
-
+		
 		Busqueda.setBounds(870, 360, 100, 30);
 		Marcadores_de_Posicion.estiloBoton(Busqueda);
 		Busqueda.setForeground(Color.BLACK);
@@ -259,6 +273,7 @@ public class Inicio extends JFrame implements ActionListener {
 		scrollPane.getVerticalScrollBar().setBlockIncrement(20);
 		Ubi1 = new ImageIcon ("ubi.png");
 		Ubi= new JLabel(Ubi1);
+	
 		this.add(logo2);
 		this.add(botonLogOut);
 		this.add(user2);
@@ -327,7 +342,7 @@ public class Inicio extends JFrame implements ActionListener {
 		});
 	}
 	@Override
-	public void actionPerformed(ActionEvent e) {		
+	public void actionPerformed(ActionEvent e) { 		
 		if (e.getSource() == textAnimationTimer && !isDone) {	
 			animation();
 		}else if (e.getSource() == botonLogOut) {
@@ -759,9 +774,13 @@ public class Inicio extends JFrame implements ActionListener {
 		String Entrada = (String) mes.getSelectedItem();
 		int Dia_Entrada = (int) Dia.getSelectedItem();
 		String Salida = (String) mes2.getSelectedItem();
-		int Dia_Salida = (int) Dia2.getSelectedItem();
+		int Dia_Salida = (int) Dia2.getSelectedItem();  
 		int Año_Entrada = (int) Año.getSelectedItem();
 		int Año_Salida = (int) Año2.getSelectedItem();
+		long a= Marcadores_de_Posicion.calcularDiferenciaEnDias(Entrada, Dia_Entrada, Año_Entrada, Salida, Dia_Salida,
+				Año_Salida );
+		  valorInt = (int) a ;
+		  System.out.println(valorInt);
 
 		if (Entrada.equals("Febrero") && Dia_Entrada > 28) {
 			JOptionPane.showMessageDialog(this, " Fecha de entrada: Febrero solo tiene 28 días.");
@@ -784,10 +803,10 @@ public class Inicio extends JFrame implements ActionListener {
 			esFechaValidaSalida = true;
 		}
 		if (!esFechaValidaEntrada) {
-			JOptionPane.showMessageDialog(this, "Fecha Entrada: Fecha Invalida, La fecha ya ha pasado");
+			JOptionPane.showMessageDialog(this, "Fecha Entrada: Errores en la fecha de entrada" );
 			error = true;
 		} else if (!esFechaValidaSalida) {
-			JOptionPane.showMessageDialog(this, "Fecha Salida: Fecha Invalida, La fecha ya ha pasado");
+			JOptionPane.showMessageDialog(this, "Fecha Salida:  Errores en la fecha de salida");
 			error = true;
 		}
 		boolean Valida = Marcadores_de_Posicion.Fecha2(Entrada, Dia_Entrada, Año_Entrada, Salida, Dia_Salida,
@@ -854,15 +873,28 @@ public class Inicio extends JFrame implements ActionListener {
 			L1.setBounds(28,32,300,156);
 			
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p1.getPrecio()) + " Q");
+			CAdultos= (int) Adultos.getSelectedItem();
+			CNiños= (int) Niños.getSelectedItem();
+			a= Marcadores_de_Posicion.calcularPrecioTotal(valorInt , CNiños, CAdultos, Marcadores_de_Posicion.p1.getPrecio());
 			PNocheH1.setFont(fuente2);
-			PNocheH1.setBounds(820,60,120,70);
-			PrecioTH1= new JLabel("Precio Total: " + "1200 Q");
+			PNocheH1.setBounds(820,55,120,70);
+			PrecioTH1= new JLabel("Precio Total: " + a +" Q");
+			System.out.println(a);
 			PrecioTH1.setFont(fuente2);
-			PrecioTH1.setBounds(820,85,120,70);
+			PrecioTH1.setBounds(820,80,120,70);
 			ReservaH1= new JButton("Reservar");
 			Marcadores_de_Posicion.estiloBoton(ReservaH1);
+			if (valorInt == 1) {
+				NochesTH1 = new JLabel("Noches: " + String.valueOf(valorInt));	
+			}
+			else if (valorInt != 1) {
+				NochesTH1 = new JLabel("Noches: " + String.valueOf(valorInt-1));
+			}
+			
+			NochesTH1.setFont(fuente2);
+			NochesTH1.setBounds(820,105,120,70);
 			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,145,110,25);
+			ReservaH1.setBounds(820,155,110,25);
 			div.add(con1);
 			div.add(b1.getPalante());
 			div.add(b1.getPatras());
@@ -876,6 +908,7 @@ public class Inicio extends JFrame implements ActionListener {
 			div.add(PNocheH1);
 			div.add(PrecioTH1);
 			div.add(ReservaH1);
+			div.add(NochesTH1);
 			imgLim = 9;
 			break;
 		case 1:
