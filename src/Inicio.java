@@ -49,7 +49,7 @@ public class Inicio extends JFrame implements ActionListener {
 	private JLabel UbicaionH1;
 	private JLabel PNocheH1;
 	private JLabel PrecioTH1;
-	private JLabel NochesTH1;
+	private JLabel NochesTH1 = new JLabel();
 	private JButton ReservaH1;
 	private JLabel Ubi;
 	private ImageIcon Ubi1; 
@@ -824,14 +824,21 @@ public class Inicio extends JFrame implements ActionListener {
 		return error;
 	}
 	private JPanel addHotelInfo(int apartment) {
+		if (valorInt == 1) {
+			NochesTH1 = new JLabel("Noches: " + String.valueOf(valorInt));	
+		}
+		else if (valorInt != 1) {
+			NochesTH1 = new JLabel("Noches: " + String.valueOf(valorInt-1));
+		}	
 		JPanel div = null;
 		JLabel valoracion = new JLabel("Valoraciones:");
 		valoracion.setBounds(820,40,100,20);
+		NochesTH1.setBounds(820,105,120,70);
+		NochesTH1.setFont(fuente2);
 		valoracion.setFont(fuente2);
 		switch(apartment) {
 		case 0:
 			ImageIcon Estrellas1 = new ImageIcon("Estrellas.png"); 
-			
 			JLabel Estrellas = new JLabel(Estrellas1);
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
@@ -870,29 +877,11 @@ public class Inicio extends JFrame implements ActionListener {
 			changeImg(currentImg, L1);
 			Estrellas.setBounds(710,-85,300,300);
 			Estrellas.setVisible(true);
+			
 			L1.setBounds(28,32,300,156);
 			
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p1.getPrecio()) + " Q");
-			CAdultos= (int) Adultos.getSelectedItem();
-			CNiños= (int) Niños.getSelectedItem();
-			a= Marcadores_de_Posicion.calcularPrecioTotal(valorInt , CNiños, CAdultos, Marcadores_de_Posicion.p1.getPrecio());
-			PNocheH1.setFont(fuente2);
-			PNocheH1.setBounds(820,55,120,70);
-			PrecioTH1= new JLabel("Precio Total: " + a +" Q");
-			System.out.println(a);
-			PrecioTH1.setFont(fuente2);
-			PrecioTH1.setBounds(820,80,120,70);
-			ReservaH1= new JButton("Reservar");
-			Marcadores_de_Posicion.estiloBoton(ReservaH1);
-			if (valorInt == 1) {
-				NochesTH1 = new JLabel("Noches: " + String.valueOf(valorInt));	
-			}
-			else if (valorInt != 1) {
-				NochesTH1 = new JLabel("Noches: " + String.valueOf(valorInt-1));
-			}
-			
-			NochesTH1.setFont(fuente2);
-			NochesTH1.setBounds(820,105,120,70);
+			addExtraInfoHotel(Marcadores_de_Posicion.p1);
 			ReservaH1.setBackground(Color.gray);
 			ReservaH1.setBounds(820,155,110,25);
 			div.add(con1);
@@ -908,7 +897,6 @@ public class Inicio extends JFrame implements ActionListener {
 			div.add(PNocheH1);
 			div.add(PrecioTH1);
 			div.add(ReservaH1);
-			div.add(NochesTH1);
 			imgLim = 9;
 			break;
 		case 1:
@@ -950,16 +938,12 @@ public class Inicio extends JFrame implements ActionListener {
 			DescripcionH1.setFont(fuente2);
 			Estrellas.setBounds(710,-85,300,300);
 			Estrellas.setVisible(true);
-			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p2.getPrecio()) + " Q");
-			PNocheH1.setFont(fuente2);
-			PNocheH1.setBounds(820,60,120,70);
-			PrecioTH1= new JLabel("Precio Total: " + "1200 Q");
-			PrecioTH1.setFont(fuente2);
-			PrecioTH1.setBounds(820,85,120,70);
-			ReservaH1= new JButton("Reservar");
+			
 			Marcadores_de_Posicion.estiloBoton(ReservaH1);
+			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p2.getPrecio()) + " Q");
+			addExtraInfoHotel(Marcadores_de_Posicion.p2);
 			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,145,110,25);
+			ReservaH1.setBounds(820,155,110,25);			
 			div.add(con2);
 			div.add(NombreH1);
 			div.add(Ubi);
@@ -1013,15 +997,9 @@ public class Inicio extends JFrame implements ActionListener {
 			Estrellas.setBounds(695,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p3.getPrecio()) + " Q");
-			PNocheH1.setFont(fuente2);
-			PNocheH1.setBounds(820,60,120,70);
-			PrecioTH1= new JLabel("Precio Total: " + "1200 Q");
-			PrecioTH1.setFont(fuente2);
-			PrecioTH1.setBounds(820,85,120,70);
-			ReservaH1= new JButton("Reservar");
-			Marcadores_de_Posicion.estiloBoton(ReservaH1);
+			addExtraInfoHotel(Marcadores_de_Posicion.p3);
 			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,145,110,25);
+			ReservaH1.setBounds(820,155,110,25);
 			div.add(NombreH1);
 			div.add(Ubi);
 			div.add(UbicaionH1);
@@ -1078,15 +1056,9 @@ public class Inicio extends JFrame implements ActionListener {
 			Estrellas.setBounds(700,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p4.getPrecio()) + " Q");
-			PNocheH1.setFont(fuente2);
-			PNocheH1.setBounds(820,60,120,70);
-			PrecioTH1= new JLabel("Precio Total: " + "1200 Q");
-			PrecioTH1.setFont(fuente2);
-			PrecioTH1.setBounds(820,85,120,70);
-			ReservaH1= new JButton("Reservar");
-			Marcadores_de_Posicion.estiloBoton(ReservaH1);
+			addExtraInfoHotel(Marcadores_de_Posicion.p4);
 			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,145,110,25);
+			ReservaH1.setBounds(820,155,110,25);
 			div.add(NombreH1);
 			div.add(Ubi);
 			div.add(UbicaionH1);
@@ -1143,15 +1115,9 @@ public class Inicio extends JFrame implements ActionListener {
 			Estrellas.setBounds(710,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p5.getPrecio()) + " Q");
-			PNocheH1.setFont(fuente2);
-			PNocheH1.setBounds(820,60,120,70);
-			PrecioTH1= new JLabel("Precio Total: " + "1200 Q");
-			PrecioTH1.setFont(fuente2);
-			PrecioTH1.setBounds(820,85,120,70);
-			ReservaH1= new JButton("Reservar");
-			Marcadores_de_Posicion.estiloBoton(ReservaH1);
+			addExtraInfoHotel(Marcadores_de_Posicion.p5);
 			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,145,110,25);
+			ReservaH1.setBounds(820,155,110,25);
 			div.add(NombreH1);
 			div.add(Ubi);
 			div.add(UbicaionH1);
@@ -1207,15 +1173,9 @@ public class Inicio extends JFrame implements ActionListener {
 			Estrellas.setBounds(695,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p6.getPrecio()) + " Q");
-			PNocheH1.setFont(fuente2);
-			PNocheH1.setBounds(820,60,120,70);
-			PrecioTH1= new JLabel("Precio Total: " + "1200 Q");
-			PrecioTH1.setFont(fuente2);
-			PrecioTH1.setBounds(820,85,120,70);
-			ReservaH1= new JButton("Reservar");
-			Marcadores_de_Posicion.estiloBoton(ReservaH1);
+			addExtraInfoHotel(Marcadores_de_Posicion.p6);
 			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,145,110,25);
+			ReservaH1.setBounds(820,155,110,25);
 			div.add(NombreH1);
 			div.add(Ubi);
 			div.add(UbicaionH1);
@@ -1272,15 +1232,9 @@ public class Inicio extends JFrame implements ActionListener {
 			
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p7.getPrecio()) + " Q");
-			PNocheH1.setFont(fuente2);
-			PNocheH1.setBounds(820,60,120,70);
-			PrecioTH1= new JLabel("Precio Total: " + "1200 Q");
-			PrecioTH1.setFont(fuente2);
-			PrecioTH1.setBounds(820,85,120,70);
-			ReservaH1= new JButton("Reservar");
-			Marcadores_de_Posicion.estiloBoton(ReservaH1);
+			addExtraInfoHotel(Marcadores_de_Posicion.p7);
 			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,145,110,25);
+			ReservaH1.setBounds(820,155,110,25);
 			div.add(con7);
 			div.add(L7);
 			div.add(b7.getPalante());
@@ -1335,15 +1289,9 @@ public class Inicio extends JFrame implements ActionListener {
 			Estrellas.setBounds(710,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p8.getPrecio()) + " Q");
-			PNocheH1.setFont(fuente2);
-			PNocheH1.setBounds(820,60,120,70);
-			PrecioTH1= new JLabel("Precio Total: " + "1200 Q");
-			PrecioTH1.setFont(fuente2);
-			PrecioTH1.setBounds(820,85,120,70);
-			ReservaH1= new JButton("Reservar");
-			Marcadores_de_Posicion.estiloBoton(ReservaH1);
+			addExtraInfoHotel(Marcadores_de_Posicion.p8);
 			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,145,110,25);
+			ReservaH1.setBounds(820,155,110,25);
 			div.add(b8.getPalante());
 			div.add(con8);
 			div.add(b8.getPatras());
@@ -1398,15 +1346,9 @@ public class Inicio extends JFrame implements ActionListener {
 			Estrellas.setBounds(695,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p9.getPrecio()) + " Q");
-			PNocheH1.setFont(fuente2);
-			PNocheH1.setBounds(820,60,120,70);
-			PrecioTH1= new JLabel("Precio Total: " + "1200 Q");
-			PrecioTH1.setFont(fuente2);
-			PrecioTH1.setBounds(820,85,120,70);
-			ReservaH1= new JButton("Reservar");
-			Marcadores_de_Posicion.estiloBoton(ReservaH1);
+			addExtraInfoHotel(Marcadores_de_Posicion.p9);
 			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,145,110,25);
+			ReservaH1.setBounds(820,155,110,25);
 			div.add(L9);
 			div.add(b9.getPalante());
 			div.add(b9.getPatras());
@@ -1461,15 +1403,9 @@ public class Inicio extends JFrame implements ActionListener {
 			Estrellas.setBounds(710,-85,300,300);
 			Estrellas.setVisible(true);
 			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p10.getPrecio()) + " Q");
-			PNocheH1.setFont(fuente2);
-			PNocheH1.setBounds(820,60,120,70);
-			PrecioTH1= new JLabel("Precio Total: " + "1200 Q");
-			PrecioTH1.setFont(fuente2);
-			PrecioTH1.setBounds(820,85,120,70);
-			ReservaH1= new JButton("Reservar");
-			Marcadores_de_Posicion.estiloBoton(ReservaH1);
+			addExtraInfoHotel(Marcadores_de_Posicion.p10);
 			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,145,110,25);
+			ReservaH1.setBounds(820,155,110,25);
 			div.add(L10);
 			div.add(b10.getPalante());
 			div.add(b10.getPatras());
@@ -1486,6 +1422,19 @@ public class Inicio extends JFrame implements ActionListener {
 			break;
 		}
 		div.add(valoracion);
+		div.add(NochesTH1);
 		return div;
+	}
+	private void addExtraInfoHotel(Productos p) {
+		CAdultos= (int) Adultos.getSelectedItem();
+		CNiños= (int) Niños.getSelectedItem();
+		a= Marcadores_de_Posicion.calcularPrecioTotal(valorInt , CNiños, CAdultos, p.getPrecio());
+		PNocheH1.setFont(fuente2);
+		PNocheH1.setBounds(820,55,120,70);
+		PrecioTH1= new JLabel("Precio Total: " + a +" Q");
+		PrecioTH1.setFont(fuente2);
+		PrecioTH1.setBounds(820,80,120,70);
+		ReservaH1= new JButton("Reservar");
+		Marcadores_de_Posicion.estiloBoton(ReservaH1);
 	}
 }
