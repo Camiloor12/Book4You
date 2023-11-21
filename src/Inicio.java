@@ -52,6 +52,15 @@ public class Inicio extends JFrame implements ActionListener {
 	private JLabel NochesTH1 = new JLabel();
 	private JButton ReservaH1;
 	private JLabel Ubi;
+	private JLabel DescripcionH1;
+	private String descripcion1; 
+	private ImageIcon Estrellas1;
+	private JLabel Estrellas;
+	private int anchoMaximo = 0;
+	private StringBuilder sb ;
+	private String[] palabras ;
+	private int anchoActual = 0;
+	private  int anchoPalabra = 0;
 	private ImageIcon Ubi1; 
 	private int currentImg = 0;
 	private Timer textAnimationTimer;
@@ -838,52 +847,16 @@ public class Inicio extends JFrame implements ActionListener {
 		valoracion.setFont(fuente2);
 		switch(apartment) {
 		case 0:
-			ImageIcon Estrellas1 = new ImageIcon("Estrellas.png"); 
-			JLabel Estrellas = new JLabel(Estrellas1);
+			Estrellas1 = new ImageIcon("Estrellas.png"); 
+			Estrellas = new JLabel(Estrellas1);
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
 			div = createDiv("Resultado 1");
-			int xAxis = 400;
 			changeImgText("Resultado 1");
 			L1.setBounds(28,22,300,186);
-			NombreH1= new JLabel(Marcadores_de_Posicion.p1.getNombre());
-			NombreH1.setFont(fuente3);
-			NombreH1.setBounds(380,-10,300,100);
-			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p1.getDireccion() + ", " + Marcadores_de_Posicion.p1.getCp() + ", " + lugar.getText().toUpperCase());
-			UbicaionH1.setBounds(xAxis,40,350,50);
-			UbicaionH1.setFont(fuente2);
-			String descripcion1 = Marcadores_de_Posicion.p1.getDescripcion();
-			int anchoMaximo = 400;
-			StringBuilder sb = new StringBuilder("<html><body style='width: " + anchoMaximo + "px;'>");
-			String[] palabras = descripcion1.split("\\s+");
-			int anchoActual = 0;
-			for (String palabra : palabras) {
-			    JLabel tempLabel = new JLabel(palabra + " ");
-			    tempLabel.setFont(fuente2);
-			    int anchoPalabra = tempLabel.getPreferredSize().width;
-			    if (anchoActual + anchoPalabra > anchoMaximo) {
-			        sb.append("<br>"); 
-			        anchoActual = 0;
-			    }
-
-			    sb.append(palabra).append(" ");
-			    anchoActual += anchoPalabra;
-			}
-			sb.append("</body></html>");
-			JLabel DescripcionH1 = new JLabel(sb.toString());
-			DescripcionH1.setBounds(380, -130, 440, 500);
-			DescripcionH1.setFont(fuente2);
 			changeImg(currentImg, L1);
-			Estrellas.setBounds(710,-85,300,300);
-			Estrellas.setVisible(true);
-			
 			L1.setBounds(28,32,300,156);
-			
-			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p1.getPrecio()) + " Q");
 			addExtraInfoHotel(Marcadores_de_Posicion.p1);
-			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,155,110,25);
 			div.add(con1);
 			div.add(b1.getPalante());
 			div.add(b1.getPatras());
@@ -908,42 +881,7 @@ public class Inicio extends JFrame implements ActionListener {
 			changeImgText("Resultado "+ (apartment+1));
 			changeImg(b2.getCon(), L2);
 			L2.setBounds(28,32,300,156);
-			NombreH1= new JLabel(Marcadores_de_Posicion.p2.getNombre());
-			NombreH1.setFont(fuente3);
-			NombreH1.setBounds(380,-10,300,100);
-			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p2.getDireccion() + ", " + Marcadores_de_Posicion.p2.getCp() + ", " + lugar.getText().toUpperCase());
-			UbicaionH1.setBounds(400,40,300,50);
-			UbicaionH1.setFont(fuente2);
-			String descripcion2 = Marcadores_de_Posicion.p2.getDescripcion();
-			 anchoMaximo = 400;
-			 sb = new StringBuilder("<html><body style='width: " + anchoMaximo + "px;'>");
-			palabras = descripcion2.split("\\s+");
-			 anchoActual = 0;
-			for (String palabra : palabras) {
-			    JLabel tempLabel = new JLabel(palabra + " ");
-			    tempLabel.setFont(fuente2);
-			    int anchoPalabra = tempLabel.getPreferredSize().width;
-			    if (anchoActual + anchoPalabra > anchoMaximo) {
-			        sb.append("<br>"); 
-			        anchoActual = 0;
-			    }
-
-			    sb.append(palabra).append(" ");
-			    anchoActual += anchoPalabra;
-			}
-			sb.append("</body></html>");
-			 DescripcionH1 = new JLabel(sb.toString());
-			DescripcionH1.setBounds(380, -130, 440, 500);
-			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(710,-85,300,300);
-			Estrellas.setVisible(true);
-			
-			Marcadores_de_Posicion.estiloBoton(ReservaH1);
-			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p2.getPrecio()) + " Q");
-			addExtraInfoHotel(Marcadores_de_Posicion.p2);
-			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,155,110,25);			
+			addExtraInfoHotel(Marcadores_de_Posicion.p2);		
 			div.add(con2);
 			div.add(NombreH1);
 			div.add(Ubi);
@@ -966,40 +904,7 @@ public class Inicio extends JFrame implements ActionListener {
 			Estrellas = new JLabel(Estrellas1);
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
-			NombreH1= new JLabel(Marcadores_de_Posicion.p3.getNombre());
-			NombreH1.setFont(fuente3);
-			NombreH1.setBounds(380,-10,300,100);
-			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p3.getDireccion() + ", " + Marcadores_de_Posicion.p3.getCp() + ", " + lugar.getText().toUpperCase());
-			UbicaionH1.setBounds(400,40,300,50);
-			UbicaionH1.setFont(fuente2);
-			 descripcion2 = Marcadores_de_Posicion.p3.getDescripcion();
-			 anchoMaximo = 400;
-			 sb = new StringBuilder("<html><body style='width: " + anchoMaximo + "px;'>");
-			palabras = descripcion2.split("\\s+");
-			 anchoActual = 0;
-			for (String palabra : palabras) {
-			    JLabel tempLabel = new JLabel(palabra + " ");
-			    tempLabel.setFont(fuente2);
-			    int anchoPalabra = tempLabel.getPreferredSize().width;
-			    if (anchoActual + anchoPalabra > anchoMaximo) {
-			        sb.append("<br>"); 
-			        anchoActual = 0;
-			    }
-
-			    sb.append(palabra).append(" ");
-			    anchoActual += anchoPalabra;
-			}
-			sb.append("</body></html>");
-			 DescripcionH1 = new JLabel(sb.toString());
-			DescripcionH1.setBounds(380, -130, 440, 500);
-			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(695,-85,300,300);
-			Estrellas.setVisible(true);
-			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p3.getPrecio()) + " Q");
 			addExtraInfoHotel(Marcadores_de_Posicion.p3);
-			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,155,110,25);
 			div.add(NombreH1);
 			div.add(Ubi);
 			div.add(UbicaionH1);
@@ -1025,40 +930,7 @@ public class Inicio extends JFrame implements ActionListener {
 			Estrellas = new JLabel(Estrellas1);
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
-			NombreH1= new JLabel(Marcadores_de_Posicion.p4.getNombre());
-			NombreH1.setFont(fuente3);
-			NombreH1.setBounds(380,-10,300,100);
-			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p4.getDireccion() + ", " + Marcadores_de_Posicion.p4.getCp() + ", " + lugar.getText().toUpperCase());
-			UbicaionH1.setBounds(400,40,300,50);
-			UbicaionH1.setFont(fuente2);
-			 descripcion2 = Marcadores_de_Posicion.p4.getDescripcion();
-			 anchoMaximo = 400;
-			 sb = new StringBuilder("<html><body style='width: " + anchoMaximo + "px;'>");
-			palabras = descripcion2.split("\\s+");
-			 anchoActual = 0;
-			for (String palabra : palabras) {
-			    JLabel tempLabel = new JLabel(palabra + " ");
-			    tempLabel.setFont(fuente2);
-			    int anchoPalabra = tempLabel.getPreferredSize().width;
-			    if (anchoActual + anchoPalabra > anchoMaximo) {
-			        sb.append("<br>"); 
-			        anchoActual = 0;
-			    }
-
-			    sb.append(palabra).append(" ");
-			    anchoActual += anchoPalabra;
-			}
-			sb.append("</body></html>");
-			 DescripcionH1 = new JLabel(sb.toString());
-			DescripcionH1.setBounds(380, -130, 440, 500);
-			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(700,-85,300,300);
-			Estrellas.setVisible(true);
-			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p4.getPrecio()) + " Q");
 			addExtraInfoHotel(Marcadores_de_Posicion.p4);
-			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,155,110,25);
 			div.add(NombreH1);
 			div.add(Ubi);
 			div.add(UbicaionH1);
@@ -1084,40 +956,7 @@ public class Inicio extends JFrame implements ActionListener {
 			Estrellas = new JLabel(Estrellas1);
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
-			NombreH1= new JLabel(Marcadores_de_Posicion.p5.getNombre());
-			NombreH1.setFont(fuente3);
-			NombreH1.setBounds(380,-10,300,100);
-			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p5.getDireccion() + ", " + Marcadores_de_Posicion.p5.getCp() + ", " + lugar.getText().toUpperCase());
-			UbicaionH1.setBounds(400,40,300,50);
-			UbicaionH1.setFont(fuente2);
-			 descripcion2 = Marcadores_de_Posicion.p5.getDescripcion();
-			 anchoMaximo = 400;
-			 sb = new StringBuilder("<html><body style='width: " + anchoMaximo + "px;'>");
-			palabras = descripcion2.split("\\s+");
-			 anchoActual = 0;
-			for (String palabra : palabras) {
-			    JLabel tempLabel = new JLabel(palabra + " ");
-			    tempLabel.setFont(fuente2);
-			    int anchoPalabra = tempLabel.getPreferredSize().width;
-			    if (anchoActual + anchoPalabra > anchoMaximo) {
-			        sb.append("<br>"); 
-			        anchoActual = 0;
-			    }
-
-			    sb.append(palabra).append(" ");
-			    anchoActual += anchoPalabra;
-			}
-			sb.append("</body></html>");
-			 DescripcionH1 = new JLabel(sb.toString());
-			DescripcionH1.setBounds(380, -130, 440, 500);
-			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(710,-85,300,300);
-			Estrellas.setVisible(true);
-			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p5.getPrecio()) + " Q");
 			addExtraInfoHotel(Marcadores_de_Posicion.p5);
-			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,155,110,25);
 			div.add(NombreH1);
 			div.add(Ubi);
 			div.add(UbicaionH1);
@@ -1142,40 +981,7 @@ public class Inicio extends JFrame implements ActionListener {
 			Estrellas = new JLabel(Estrellas1);
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
-			NombreH1= new JLabel(Marcadores_de_Posicion.p6.getNombre());
-			NombreH1.setFont(fuente3);
-			NombreH1.setBounds(380,-10,300,100);
-			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p6.getDireccion() + ", " + Marcadores_de_Posicion.p6.getCp() + ", " + lugar.getText().toUpperCase());
-			UbicaionH1.setBounds(400,40,300,50);
-			UbicaionH1.setFont(fuente2);
-			 descripcion2 = Marcadores_de_Posicion.p6.getDescripcion();
-			 anchoMaximo = 400;
-			 sb = new StringBuilder("<html><body style='width: " + anchoMaximo + "px;'>");
-			palabras = descripcion2.split("\\s+");
-			 anchoActual = 0;
-			for (String palabra : palabras) {
-			    JLabel tempLabel = new JLabel(palabra + " ");
-			    tempLabel.setFont(fuente2);
-			    int anchoPalabra = tempLabel.getPreferredSize().width;
-			    if (anchoActual + anchoPalabra > anchoMaximo) {
-			        sb.append("<br>"); 
-			        anchoActual = 0;
-			    }
-
-			    sb.append(palabra).append(" ");
-			    anchoActual += anchoPalabra;
-			}
-			sb.append("</body></html>");
-			 DescripcionH1 = new JLabel(sb.toString());
-			DescripcionH1.setBounds(380, -130, 440, 500);
-			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(695,-85,300,300);
-			Estrellas.setVisible(true);
-			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p6.getPrecio()) + " Q");
 			addExtraInfoHotel(Marcadores_de_Posicion.p6);
-			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,155,110,25);
 			div.add(NombreH1);
 			div.add(Ubi);
 			div.add(UbicaionH1);
@@ -1200,41 +1006,7 @@ public class Inicio extends JFrame implements ActionListener {
 			L7.setBounds(28,32,300,156);
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
-			NombreH1= new JLabel(Marcadores_de_Posicion.p7.getNombre());
-			NombreH1.setFont(fuente3);
-			NombreH1.setBounds(380,-10,300,100);
-			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p7.getDireccion() + ", " + Marcadores_de_Posicion.p7.getCp() + ", " + lugar.getText().toUpperCase());
-			UbicaionH1.setBounds(400,40,300,50);
-			UbicaionH1.setFont(fuente2);
-			 descripcion2 = Marcadores_de_Posicion.p7.getDescripcion();
-			 anchoMaximo = 400;
-			 sb = new StringBuilder("<html><body style='width: " + anchoMaximo + "px;'>");
-			palabras = descripcion2.split("\\s+");
-			 anchoActual = 0;
-			for (String palabra : palabras) {
-			    JLabel tempLabel = new JLabel(palabra + " ");
-			    tempLabel.setFont(fuente2);
-			    int anchoPalabra = tempLabel.getPreferredSize().width;
-			    if (anchoActual + anchoPalabra > anchoMaximo) {
-			        sb.append("<br>"); 
-			        anchoActual = 0;
-			    }
-
-			    sb.append(palabra).append(" ");
-			    anchoActual += anchoPalabra;
-			}
-			sb.append("</body></html>");
-			 DescripcionH1 = new JLabel(sb.toString());
-			DescripcionH1.setBounds(380, -130, 440, 500);
-			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(700,-85,300,300);
-			
-			Estrellas.setVisible(true);
-			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p7.getPrecio()) + " Q");
 			addExtraInfoHotel(Marcadores_de_Posicion.p7);
-			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,155,110,25);
 			div.add(con7);
 			div.add(L7);
 			div.add(b7.getPalante());
@@ -1258,40 +1030,7 @@ public class Inicio extends JFrame implements ActionListener {
 			Estrellas = new JLabel(Estrellas1);
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
-			NombreH1= new JLabel(Marcadores_de_Posicion.p8.getNombre());
-			NombreH1.setFont(fuente3);
-			NombreH1.setBounds(380,-10,300,100);
-			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p8.getDireccion() + ", " + Marcadores_de_Posicion.p8.getCp() + ", " + lugar.getText().toUpperCase());
-			UbicaionH1.setBounds(400,40,300,50);
-			UbicaionH1.setFont(fuente2);
-			 descripcion2 = Marcadores_de_Posicion.p8.getDescripcion();
-			 anchoMaximo = 400;
-			 sb = new StringBuilder("<html><body style='width: " + anchoMaximo + "px;'>");
-			palabras = descripcion2.split("\\s+");
-			 anchoActual = 0;
-			for (String palabra : palabras) {
-			    JLabel tempLabel = new JLabel(palabra + " ");
-			    tempLabel.setFont(fuente2);
-			    int anchoPalabra = tempLabel.getPreferredSize().width;
-			    if (anchoActual + anchoPalabra > anchoMaximo) {
-			        sb.append("<br>"); 
-			        anchoActual = 0;
-			    }
-
-			    sb.append(palabra).append(" ");
-			    anchoActual += anchoPalabra;
-			}
-			sb.append("</body></html>");
-			 DescripcionH1 = new JLabel(sb.toString());
-			DescripcionH1.setBounds(380, -130, 440, 500);
-			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(710,-85,300,300);
-			Estrellas.setVisible(true);
-			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p8.getPrecio()) + " Q");
-			addExtraInfoHotel(Marcadores_de_Posicion.p8);
-			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,155,110,25);
+			addExtraInfoHotel(Marcadores_de_Posicion.p8);			
 			div.add(b8.getPalante());
 			div.add(con8);
 			div.add(b8.getPatras());
@@ -1315,40 +1054,8 @@ public class Inicio extends JFrame implements ActionListener {
 			L9.setBounds(28,32,300,156);
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
-			NombreH1= new JLabel(Marcadores_de_Posicion.p9.getNombre());
-			NombreH1.setFont(fuente3);
-			NombreH1.setBounds(380,-10,300,100);
-			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p9.getDireccion() + ", " + Marcadores_de_Posicion.p9.getCp() + ", " + lugar.getText().toUpperCase());
-			UbicaionH1.setBounds(400,40,300,50);
-			UbicaionH1.setFont(fuente2);
-			 descripcion2 = Marcadores_de_Posicion.p9.getDescripcion();
-			 anchoMaximo = 400;
-			 sb = new StringBuilder("<html><body style='width: " + anchoMaximo + "px;'>");
-			palabras = descripcion2.split("\\s+");
-			 anchoActual = 0;
-			for (String palabra : palabras) {
-			    JLabel tempLabel = new JLabel(palabra + " ");
-			    tempLabel.setFont(fuente2);
-			    int anchoPalabra = tempLabel.getPreferredSize().width;
-			    if (anchoActual + anchoPalabra > anchoMaximo) {
-			        sb.append("<br>"); 
-			        anchoActual = 0;
-			    }
-
-			    sb.append(palabra).append(" ");
-			    anchoActual += anchoPalabra;
-			}
-			sb.append("</body></html>");
-			 DescripcionH1 = new JLabel(sb.toString());
-			DescripcionH1.setBounds(380, -130, 440, 500);
-			DescripcionH1.setFont(fuente2);
 			Estrellas.setBounds(695,-85,300,300);
-			Estrellas.setVisible(true);
-			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p9.getPrecio()) + " Q");
 			addExtraInfoHotel(Marcadores_de_Posicion.p9);
-			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,155,110,25);
 			div.add(L9);
 			div.add(b9.getPalante());
 			div.add(b9.getPatras());
@@ -1372,40 +1079,7 @@ public class Inicio extends JFrame implements ActionListener {
 			changeImg(b10.getCon(), L10);
 			L10.setBounds(28,32,300,156);
 			Ubi= new JLabel(Ubi1);
-			NombreH1= new JLabel(Marcadores_de_Posicion.p10.getNombre());
-			NombreH1.setFont(fuente3);
-			NombreH1.setBounds(380,-10,300,100);
-			Ubi.setBounds(380,60,15,15);
-			UbicaionH1= new JLabel(Marcadores_de_Posicion.p10.getDireccion() + ", " + Marcadores_de_Posicion.p10.getCp() + ", " + lugar.getText().toUpperCase());
-			UbicaionH1.setBounds(400,40,300,50);
-			UbicaionH1.setFont(fuente2);
-			 descripcion2 = Marcadores_de_Posicion.p10.getDescripcion();
-			 anchoMaximo = 400;
-			 sb = new StringBuilder("<html><body style='width: " + anchoMaximo + "px;'>");
-			palabras = descripcion2.split("\\s+");
-			 anchoActual = 0;
-			for (String palabra : palabras) {
-			    JLabel tempLabel = new JLabel(palabra + " ");
-			    tempLabel.setFont(fuente2);
-			    int anchoPalabra = tempLabel.getPreferredSize().width;
-			    if (anchoActual + anchoPalabra > anchoMaximo) {
-			        sb.append("<br>"); 
-			        anchoActual = 0;
-			    }
-
-			    sb.append(palabra).append(" ");
-			    anchoActual += anchoPalabra;
-			}
-			sb.append("</body></html>");
-			 DescripcionH1 = new JLabel(sb.toString());
-			DescripcionH1.setBounds(380, -130, 440, 500);
-			DescripcionH1.setFont(fuente2);
-			Estrellas.setBounds(710,-85,300,300);
-			Estrellas.setVisible(true);
-			PNocheH1= new JLabel("Precio Noche: " + String.valueOf(Marcadores_de_Posicion.p10.getPrecio()) + " Q");
 			addExtraInfoHotel(Marcadores_de_Posicion.p10);
-			ReservaH1.setBackground(Color.gray);
-			ReservaH1.setBounds(820,155,110,25);
 			div.add(L10);
 			div.add(b10.getPalante());
 			div.add(b10.getPatras());
@@ -1426,15 +1100,47 @@ public class Inicio extends JFrame implements ActionListener {
 		return div;
 	}
 	private void addExtraInfoHotel(Productos p) {
+		NombreH1= new JLabel(p.getNombre());
+		NombreH1.setFont(fuente3);
+		NombreH1.setBounds(380,-10,300,100);
+		Ubi.setBounds(380,60,15,15);
+		UbicaionH1= new JLabel(p.getDireccion() + ", " + p.getCp() + ", " + lugar.getText().toUpperCase());
+		UbicaionH1.setBounds(400,40,350,50);
+		UbicaionH1.setFont(fuente2);
+		 descripcion1 = p.getDescripcion();
+		 anchoMaximo = 400;
+		 sb = new StringBuilder("<html><body style='width: " + anchoMaximo + "px;'>");
+		 palabras  = descripcion1.split("\\s+");
+		 anchoActual = 0;
+		for (String palabra : palabras) {
+		    JLabel tempLabel = new JLabel(palabra + " ");
+		    tempLabel.setFont(fuente2);
+		     anchoPalabra = tempLabel.getPreferredSize().width;
+		    if (anchoActual + anchoPalabra > anchoMaximo) {
+		        sb.append("<br>"); 
+		        anchoActual = 0;
+		    }
+
+		    sb.append(palabra).append(" ");
+		    anchoActual += anchoPalabra;
+		}
+		sb.append("</body></html>");
+		 DescripcionH1 = new JLabel(sb.toString());
+		DescripcionH1.setBounds(380, -130, 440, 500);
+		DescripcionH1.setFont(fuente2);
 		CAdultos= (int) Adultos.getSelectedItem();
 		CNiños= (int) Niños.getSelectedItem();
 		a= Marcadores_de_Posicion.calcularPrecioTotal(valorInt , CNiños, CAdultos, p.getPrecio());
+		PNocheH1= new JLabel( "Precio Noche: " +  String.valueOf(p.getPrecio()));
 		PNocheH1.setFont(fuente2);
 		PNocheH1.setBounds(820,55,120,70);
 		PrecioTH1= new JLabel("Precio Total: " + a +" Q");
 		PrecioTH1.setFont(fuente2);
 		PrecioTH1.setBounds(820,80,120,70);
 		ReservaH1= new JButton("Reservar");
+		ReservaH1.setBackground(Color.gray);
+		ReservaH1.setBounds(820,155,110,25);
+		Estrellas.setBounds(710,-85,300,300);
 		Marcadores_de_Posicion.estiloBoton(ReservaH1);
 	}
 }
