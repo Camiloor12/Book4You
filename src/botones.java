@@ -4,7 +4,7 @@ import javax.swing.JButton;
 public class botones {
 	private ImageIcon alante = new ImageIcon("alante.png");
 	private ImageIcon atra = new ImageIcon("atras.png");
-	private int con = 0;
+	private int con = 1;
 	public int getCon() {
 		return con;
 	}

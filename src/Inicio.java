@@ -62,7 +62,7 @@ public class Inicio extends JFrame implements ActionListener {
 	private int anchoActual = 0;
 	private  int anchoPalabra = 0;
 	private ImageIcon Ubi1; 
-	private int currentImg = 0;
+	private int currentImg = 1;
 	private Timer textAnimationTimer;
 	private ImageIcon logo;
 	private boolean isDone = false;
@@ -129,16 +129,16 @@ public class Inicio extends JFrame implements ActionListener {
 	private int frameHeight = 600;
 	public Inicio() {
 		
-		con1 = new JLabel("- " +String.valueOf(b1.getCon())+ " -");
-		con2 = new JLabel("- " +String.valueOf(b2.getCon())+ " -");
-		con3 = new JLabel("- " +String.valueOf(b3.getCon())+ " -");
-		con4 = new JLabel("- " +String.valueOf(b4.getCon())+ " -");
-		con5 = new JLabel("- " +String.valueOf(b5.getCon())+ " -");
-		con6 = new JLabel("- " +String.valueOf(b6.getCon())+ " -");
-		con7 = new JLabel("- " +String.valueOf(b7.getCon())+ " -");
-		con8 = new JLabel("- " +String.valueOf(b8.getCon())+ " -");
-		con9 = new JLabel("- " +String.valueOf(b9.getCon())+ " -");
-		con10 = new JLabel("- " +String.valueOf(b10.getCon())+ " -");
+		con1 = new JLabel("1/9");
+		con2 = new JLabel("1/7");
+		con3 = new JLabel("1/9");
+		con4 = new JLabel("1/10");
+		con5 = new JLabel("1/8");
+		con6 = new JLabel("1/7");
+		con7 = new JLabel("1/9");
+		con8 = new JLabel("1/8");
+		con9 = new JLabel("1/10");
+		con10 = new JLabel("1/10");
 		user2.setBounds(890, 45, 60, 60);
 		user2.setBorderPainted(false);
 		user2.setOpaque(false);
@@ -483,34 +483,34 @@ public class Inicio extends JFrame implements ActionListener {
 	}
 	protected void changeImg(int cont,JLabel L) {		
 		switch(cont) {
-		case 0:
+		case 1:
 			L.setIcon(i);
 			break;
-		case 1:
+		case 2:
 			L.setIcon(i2);
 			break;
-		case 2:
+		case 3:
 			L.setIcon(i3);
 			break;
-		case 3:
+		case 4:
 			L.setIcon(i4);
 			break;
-		case 4:
+		case 5:
 			L.setIcon(i5);
 			break;
-		case 5:
+		case 6:
 			L.setIcon(i6);
 			break;
-		case 6:
+		case 7:
 			L.setIcon(i7);
 			break;
-		case 7:
+		case 8:
 			L.setIcon(i8);
 			break;
-		case 8:
+		case 9:
 			L.setIcon(i9);
 			break;
-		case 9:
+		case 10:
 			L.setIcon(i10);
 			break;
 		default:
@@ -666,7 +666,7 @@ public class Inicio extends JFrame implements ActionListener {
 		   con = con8;
 		   break;
 	   case 9:
-		   imgLim = 9;
+		   imgLim = 10;
 		   con = con9;
 		   break;
 	   case 10:
@@ -677,30 +677,30 @@ public class Inicio extends JFrame implements ActionListener {
 	    
 
 	    if (e.getSource() == button.getPalante()) {
-	    	if(currentImg<imgLim-1) {
+	    	if(currentImg<imgLim) {
 				currentImg++;
 				changeImg(currentImg, label);
 				button.setCon(currentImg);
 			}else {
-				currentImg=0; 
+				currentImg=1; 
 				changeImg(currentImg, label);
 				button.setCon(currentImg);
 			}
-	    	con.setText("- " +String.valueOf(button.getCon())+ " -");	
+	    	con.setText(String.valueOf(button.getCon())+ "/"+imgLim);
 	    } else if (e.getSource() == button.getPatras()) {
-	    	if(!(currentImg<=0)) {
+	    	if(!(currentImg<=1)) {
 				currentImg--;
 				changeImg(currentImg, label);
 				button.setCon(currentImg);
-			}else if(currentImg>0) {
+			}else if(currentImg>1) {
 				changeImg(currentImg, label);
 				button.setCon(currentImg);
-			}else if(currentImg==0) {
-				currentImg=imgLim-1;
+			}else if(currentImg==1) {
+				currentImg=imgLim;
 				changeImg(currentImg, label);
 				button.setCon(currentImg);
 			}
-	    	con.setText("- " +String.valueOf(button.getCon())+ " -");	
+	    	con.setText(String.valueOf(button.getCon())+ "/"+imgLim);	
 	    }
 	}
 	private void addListenerAndBounds() {
