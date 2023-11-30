@@ -29,9 +29,10 @@ public class IniciarSesion implements ActionListener {
 	private ImageIcon Show = new ImageIcon("show.png");
 	private JButton ShowHideButton = new JButton(Show);
 	private JPasswordField passwordT = new JPasswordField("Alex");
-	
+	private int Valor= 0;
 
-	public IniciarSesion() {
+	public IniciarSesion(int valor) {
+		Valor= valor;
 		password.setFont(fuente);
 		passwordT.setFont(fuente);
 		botonVolver.setBorderPainted(false);
@@ -85,11 +86,23 @@ public class IniciarSesion implements ActionListener {
 			b.dispose();
 		} else if (IniciarS == e.getSource()) {
 			if(selectLogin(EmailT.getText())) {//Si se ha iniciado sesion
+			if (Valor==1) {
+				Reserva.Inicio3= true;
+				Reserva.user2.setVisible(true);
+				Reserva.crearCuentaButton.setVisible(false);
+				Reserva.iniciarSesionButton.setVisible(false);
+				Inicio.correo= EmailT.getText();
+				Marcadores_de_Posicion.devolverUsuarioInfo();
+				b.dispose();
+			}
+			else {
 				new Inicio();
 				b.dispose();
 			}
+				
+			}
 		} else if (CrearC == e.getSource()) {
-			new Registro();
+			new Registro(0);
 			b.dispose();
 		}else if (passwordT.getEchoChar() == 0) {//Ocultar password
             passwordT.setEchoChar('*');
@@ -115,6 +128,8 @@ public class IniciarSesion implements ActionListener {
 						String email = EmailT.getText();
 						JOptionPane.showMessageDialog(null, "Welcome Back!!"+ email+ "!", "Actualización", JOptionPane.INFORMATION_MESSAGE);
 						Inicio.InicioS = true;
+						Reserva.Inicio3=true;
+						
 						return true;
 					} else {
 						JOptionPane.showMessageDialog(null, "Incorret Password or Email", "Error", JOptionPane.ERROR_MESSAGE);

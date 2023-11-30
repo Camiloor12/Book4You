@@ -40,8 +40,9 @@ public class Registro implements ActionListener{
 	  private JPasswordField passwordT = new JPasswordField("");
 	  private JLabel password2 = new JLabel("Repetir Contraseña:");
 	  private JPasswordField passwordT2 = new JPasswordField("");
-
-	  public Registro() {
+	  private int Valor ;
+	  public Registro(int valor) {
+		  Valor = valor;
 		  	mes.setFont(fuente);
 		  	password.setFont(fuente);
 		  	passwordT.setFont(fuente);
@@ -134,13 +135,32 @@ public class Registro implements ActionListener{
 			
 			else {
 				Inicio.Inicio2 = DarAlta();
+				Reserva.Inicio4 = DarAlta();
+				if (Valor ==1) {
+					Reserva.Inicio4=true;
+					Reserva.user2.setVisible(true);
+					Reserva.crearCuentaButton.setVisible(false);
+					Reserva.iniciarSesionButton.setVisible(false);
+					Inicio.correo= EmailT.getText();
+					b.dispose();
+					
+				}
+				else {
 				new Inicio();
 				b.dispose();
+				}
+				
 			}
 
 		}else if(botonVolver == e.getSource()) {
+			if (Valor ==1) {
+				b.dispose();	
+			}
+			else {
 			new Inicio();
 			b.dispose();
+			}
+			
 		}
 		
 		

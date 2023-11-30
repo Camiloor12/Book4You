@@ -51,6 +51,15 @@ public class Inicio extends JFrame implements ActionListener {
 	private JLabel PrecioTH1;
 	private JLabel NochesTH1 = new JLabel();
 	private JButton ReservaH1;
+	private JButton ReservaH2;
+	private JButton ReservaH3;
+	private JButton ReservaH4;
+	private JButton ReservaH5;
+	private JButton ReservaH6;
+	private JButton ReservaH7;
+	private JButton ReservaH8;
+	private JButton ReservaH9;
+	private JButton ReservaH10;
 	private JLabel Ubi;
 	private JLabel DescripcionH1;
 	private String descripcion1; 
@@ -108,7 +117,7 @@ public class Inicio extends JFrame implements ActionListener {
 	private JButton Busqueda = new JButton("Buscar");
 	private JButton iniciarSesionButton = new JButton("Iniciar Sesion");
 	private JButton crearCuentaButton = new JButton("Crear cuenta nueva");
-	private Font fuente = new Font("Oswald", Font.PLAIN, 60);
+	public static Font fuente = new Font("Oswald", Font.PLAIN, 60);
 	private Font fuente3 = new Font("Oswald", Font.PLAIN, 30);
 	private botones b1 = new botones(4,100);
 	private botones b2 = new botones(4,100);
@@ -123,10 +132,15 @@ public class Inicio extends JFrame implements ActionListener {
 	public static int  a = 0;
 	public static int CAdultos = 0;
 	public static int CNiños;
-	public static int valorInt ;
+	public static int valorInt  ;
 	public static Font fuente2 = (new Font("Oswald", Font.PLAIN, 13));
 	protected static String correo = "";
 	private int frameHeight = 600;
+	private String Entrada1;
+	private String Salida1;
+	private String Entrada2;
+	private String Salida2;
+	
 	public Inicio() {
 		
 		con1 = new JLabel("1/9");
@@ -366,7 +380,7 @@ public class Inicio extends JFrame implements ActionListener {
 			}
 		} else if (e.getSource() == user2) {
 			this.dispose();
-			new User();
+			new User(0);
 		} else if (e.getSource() == Busqueda) {
 			Marcadores_de_Posicion.crearHotel();
 			boolean error = false;
@@ -382,14 +396,14 @@ public class Inicio extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Por ahora no llegamos hasta allí... Pero llegaremos Pronto ", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}else if (e.getSource() == iniciarSesionButton) {
-			new IniciarSesion();
+			new IniciarSesion(0);
 			this.dispose();
 
 		}else if (e.getSource() == crearCuentaButton) {
-			new Registro();
+			new Registro(0);
 			this.dispose();
 		}
-		if (e.getSource() == b1.getPalante() || e.getSource() == b1.getPatras()) { // Logica botones imagenes
+		else if (e.getSource() == b1.getPalante() || e.getSource() == b1.getPatras()) { // Logica botones imagenes
 	        handleButton(b1, L1, 1,e);
 	    } else if (e.getSource() == b2.getPalante() || e.getSource() == b2.getPatras()) {
 	        handleButton(b2, L2, 2,e);
@@ -410,6 +424,58 @@ public class Inicio extends JFrame implements ActionListener {
 	    }else if (e.getSource() == b10.getPalante() || e.getSource() == b10.getPatras()) {
 	        handleButton(b10, L10, 10,e);
 	    }
+	     if (e.getSource() == ReservaH1) {
+	    	new Reserva (Marcadores_de_Posicion.p1.getPrecio(),Marcadores_de_Posicion.p1.getNombre(),Entrada2,Salida2,CNiños,CAdultos,L1,valorInt,
+	    			Marcadores_de_Posicion.p1.getId());
+			this.dispose();
+		}
+	    else if (e.getSource() == ReservaH2) {
+	    	new Reserva (Marcadores_de_Posicion.p2.getPrecio(),Marcadores_de_Posicion.p2.getNombre(),Entrada2,Salida2,CNiños,CAdultos,L2,valorInt,
+	    			Marcadores_de_Posicion.p2.getId());
+	    	this.dispose();
+			
+		}
+		else if (e.getSource() == ReservaH3) {
+			new Reserva (Marcadores_de_Posicion.p3.getPrecio(),Marcadores_de_Posicion.p3.getNombre(),Entrada2,Salida2,CNiños,CAdultos,L3,valorInt,
+					Marcadores_de_Posicion.p3.getId());
+			this.dispose();
+				}
+		else if (e.getSource() == ReservaH4) {
+			new Reserva (Marcadores_de_Posicion.p4.getPrecio(),Marcadores_de_Posicion.p4.getNombre(),Entrada2,Salida2,CNiños,CAdultos,L4,valorInt,
+					Marcadores_de_Posicion.p4.getId());
+			this.dispose();
+		}
+		else if (e.getSource() == ReservaH5) {
+			new Reserva (Marcadores_de_Posicion.p5.getPrecio(),Marcadores_de_Posicion.p5.getNombre(),Entrada2,Salida2,CNiños,CAdultos,L5,valorInt, 
+					Marcadores_de_Posicion.p5.getId());
+			this.dispose();
+			
+		}
+		else if (e.getSource() == ReservaH6) {
+			new Reserva (Marcadores_de_Posicion.p6.getPrecio(),Marcadores_de_Posicion.p6.getNombre(),Entrada2,Salida2,CNiños,CAdultos,L6,valorInt,
+					Marcadores_de_Posicion.p6.getId());
+			this.dispose();
+		}
+		else if (e.getSource() == ReservaH7) {
+			new Reserva (Marcadores_de_Posicion.p7.getPrecio(),Marcadores_de_Posicion.p7.getNombre(),Entrada2,Salida2,CNiños,CAdultos,L7,valorInt, 
+					Marcadores_de_Posicion.p7.getId());
+			this.dispose();
+		}
+		else if (e.getSource() == ReservaH8) {
+			new Reserva (Marcadores_de_Posicion.p8.getPrecio(),Marcadores_de_Posicion.p8.getNombre(),Entrada2,Salida2,CNiños,CAdultos,L8,valorInt,
+					Marcadores_de_Posicion.p8.getId());
+			this.dispose();
+		}
+		else if (e.getSource() == ReservaH9) {
+			new Reserva (Marcadores_de_Posicion.p9.getPrecio(),Marcadores_de_Posicion.p9.getNombre(),Entrada2,Salida2,CNiños,CAdultos,L9,valorInt, 
+					Marcadores_de_Posicion.p9.getId());
+			this.dispose();
+		}
+		else if (e.getSource() == ReservaH10) {
+			new Reserva (Marcadores_de_Posicion.p10.getPrecio(),Marcadores_de_Posicion.p10.getNombre(),Entrada2,Salida2,CNiños,CAdultos,L10,valorInt, 
+					Marcadores_de_Posicion.p10.getId());
+			this.dispose();
+		}
 	}
 	protected JPanel modifyApartments(int apartment) {
 		JPanel div = null;
@@ -786,6 +852,10 @@ public class Inicio extends JFrame implements ActionListener {
 		int Dia_Salida = (int) Dia2.getSelectedItem();  
 		int Año_Entrada = (int) Año.getSelectedItem();
 		int Año_Salida = (int) Año2.getSelectedItem();
+		Entrada1= Integer.toString(Dia_Entrada) + " /" + Entrada + " /" + Integer.toString(Año_Entrada);
+		Salida1= Integer.toString(Dia_Salida) + " /" + Salida + " /" + Integer.toString(Año_Salida);
+		Entrada2= Integer.toString(Dia_Entrada) + " /" + Marcadores_de_Posicion.Mes(Entrada) + " /" + Integer.toString(Año_Entrada);
+		Salida2= Integer.toString(Dia_Salida) + " /" + Marcadores_de_Posicion.Mes(Salida) + " /" + Integer.toString(Año_Salida);
 		long a= Marcadores_de_Posicion.calcularDiferenciaEnDias(Entrada, Dia_Entrada, Año_Entrada, Salida, Dia_Salida,
 				Año_Salida );
 		  valorInt = (int) a ;
@@ -857,6 +927,11 @@ public class Inicio extends JFrame implements ActionListener {
 			changeImg(currentImg, L1);
 			L1.setBounds(28,32,300,156);
 			addExtraInfoHotel(Marcadores_de_Posicion.p1);
+			ReservaH1= new JButton("Reservar");
+			ReservaH1.setBackground(Color.gray);
+			ReservaH1.setBounds(820,155,110,25);
+			ReservaH1.addActionListener(this);
+			Marcadores_de_Posicion.estiloBoton(ReservaH1);
 			div.add(con1);
 			div.add(b1.getPalante());
 			div.add(b1.getPatras());
@@ -881,7 +956,12 @@ public class Inicio extends JFrame implements ActionListener {
 			changeImgText("Resultado "+ (apartment+1));
 			changeImg(b2.getCon(), L2);
 			L2.setBounds(28,32,300,156);
-			addExtraInfoHotel(Marcadores_de_Posicion.p2);		
+			addExtraInfoHotel(Marcadores_de_Posicion.p2);
+			ReservaH2= new JButton("Reservar");
+			ReservaH2.setBackground(Color.gray);
+			ReservaH2.setBounds(820,155,110,25);
+			ReservaH2.addActionListener(this);
+			Marcadores_de_Posicion.estiloBoton(ReservaH2);
 			div.add(con2);
 			div.add(NombreH1);
 			div.add(Ubi);
@@ -891,7 +971,7 @@ public class Inicio extends JFrame implements ActionListener {
 			div.add(Estrellas);
 			div.add(PNocheH1);
 			div.add(PrecioTH1);
-			div.add(ReservaH1);
+			div.add(ReservaH2);
 			div.add(b2.getPalante());
 			div.add(b2.getPatras());
 			div.add(L2);
@@ -905,6 +985,11 @@ public class Inicio extends JFrame implements ActionListener {
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
 			addExtraInfoHotel(Marcadores_de_Posicion.p3);
+			ReservaH3= new JButton("Reservar");
+			ReservaH3.setBackground(Color.gray);
+			ReservaH3.setBounds(820,155,110,25);
+			ReservaH3.addActionListener(this);
+			Marcadores_de_Posicion.estiloBoton(ReservaH3);
 			div.add(NombreH1);
 			div.add(Ubi);
 			div.add(UbicaionH1);
@@ -913,7 +998,7 @@ public class Inicio extends JFrame implements ActionListener {
 			div.add(Estrellas);
 			div.add(PNocheH1);
 			div.add(PrecioTH1);
-			div.add(ReservaH1);
+			div.add(ReservaH3);
 			changeImg(b3.getCon(), L3);
 			L3.setBounds(28,32,300,156);
 			div.add(b3.getPalante());
@@ -931,6 +1016,11 @@ public class Inicio extends JFrame implements ActionListener {
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
 			addExtraInfoHotel(Marcadores_de_Posicion.p4);
+			ReservaH4= new JButton("Reservar");
+			ReservaH4.setBackground(Color.gray);
+			ReservaH4.setBounds(820,155,110,25);
+			ReservaH4.addActionListener(this);
+			Marcadores_de_Posicion.estiloBoton(ReservaH4);
 			div.add(NombreH1);
 			div.add(Ubi);
 			div.add(UbicaionH1);
@@ -939,7 +1029,7 @@ public class Inicio extends JFrame implements ActionListener {
 			div.add(Estrellas);
 			div.add(PNocheH1);
 			div.add(PrecioTH1);
-			div.add(ReservaH1);
+			div.add(ReservaH4);
 			L4.setBounds(28,32,300,156);
 			div.add(b4.getPalante());
 			div.add(b4.getPatras());
@@ -957,6 +1047,11 @@ public class Inicio extends JFrame implements ActionListener {
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
 			addExtraInfoHotel(Marcadores_de_Posicion.p5);
+			ReservaH5= new JButton("Reservar");
+			ReservaH5.setBackground(Color.gray);
+			ReservaH5.setBounds(820,155,110,25);
+			ReservaH5.addActionListener(this);
+			Marcadores_de_Posicion.estiloBoton(ReservaH5);
 			div.add(NombreH1);
 			div.add(Ubi);
 			div.add(UbicaionH1);
@@ -965,7 +1060,7 @@ public class Inicio extends JFrame implements ActionListener {
 			div.add(Estrellas);
 			div.add(PNocheH1);
 			div.add(PrecioTH1);
-			div.add(ReservaH1);
+			div.add(ReservaH5);
 			div.add(b5.getPalante());
 			div.add(b5.getPatras());
 			div.add(L5);
@@ -982,6 +1077,11 @@ public class Inicio extends JFrame implements ActionListener {
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
 			addExtraInfoHotel(Marcadores_de_Posicion.p6);
+			ReservaH6= new JButton("Reservar");
+			ReservaH6.setBackground(Color.gray);
+			ReservaH6.setBounds(820,155,110,25);
+			ReservaH6.addActionListener(this);
+			Marcadores_de_Posicion.estiloBoton(ReservaH6);
 			div.add(NombreH1);
 			div.add(Ubi);
 			div.add(UbicaionH1);
@@ -990,7 +1090,7 @@ public class Inicio extends JFrame implements ActionListener {
 			div.add(Estrellas);
 			div.add(PNocheH1);
 			div.add(PrecioTH1);
-			div.add(ReservaH1);
+			div.add(ReservaH6);
 			div.add(b6.getPalante());
 			div.add(b6.getPatras());
 			div.add(L6);
@@ -1007,6 +1107,11 @@ public class Inicio extends JFrame implements ActionListener {
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
 			addExtraInfoHotel(Marcadores_de_Posicion.p7);
+			ReservaH7= new JButton("Reservar");
+			ReservaH7.setBackground(Color.gray);
+			ReservaH7.setBounds(820,155,110,25);
+			ReservaH7.addActionListener(this);
+			Marcadores_de_Posicion.estiloBoton(ReservaH7);
 			div.add(con7);
 			div.add(L7);
 			div.add(b7.getPalante());
@@ -1019,7 +1124,7 @@ public class Inicio extends JFrame implements ActionListener {
 			div.add(Estrellas);
 			div.add(PNocheH1);
 			div.add(PrecioTH1);
-			div.add(ReservaH1);
+			div.add(ReservaH7);
 			break;
 		case 7:
 			div = createDiv("Resultado " + 8);
@@ -1030,7 +1135,12 @@ public class Inicio extends JFrame implements ActionListener {
 			Estrellas = new JLabel(Estrellas1);
 			Ubi1 = new ImageIcon ("ubi.png");
 			Ubi= new JLabel(Ubi1);
-			addExtraInfoHotel(Marcadores_de_Posicion.p8);			
+			addExtraInfoHotel(Marcadores_de_Posicion.p8);	
+			ReservaH8= new JButton("Reservar");
+			ReservaH8.setBackground(Color.gray);
+			ReservaH8.setBounds(820,155,110,25);
+			ReservaH8.addActionListener(this);
+			Marcadores_de_Posicion.estiloBoton(ReservaH8);
 			div.add(b8.getPalante());
 			div.add(con8);
 			div.add(b8.getPatras());
@@ -1043,7 +1153,7 @@ public class Inicio extends JFrame implements ActionListener {
 			div.add(Estrellas);
 			div.add(PNocheH1);
 			div.add(PrecioTH1);
-			div.add(ReservaH1);
+			div.add(ReservaH8);
 			break;
 		case 8:
 			div = createDiv("Resultado " + 9);
@@ -1056,6 +1166,11 @@ public class Inicio extends JFrame implements ActionListener {
 			Ubi= new JLabel(Ubi1);
 			Estrellas.setBounds(695,-85,300,300);
 			addExtraInfoHotel(Marcadores_de_Posicion.p9);
+			ReservaH9= new JButton("Reservar");
+			ReservaH9.setBackground(Color.gray);
+			ReservaH9.setBounds(820,155,110,25);
+			ReservaH9.addActionListener(this);
+			Marcadores_de_Posicion.estiloBoton(ReservaH9);
 			div.add(L9);
 			div.add(b9.getPalante());
 			div.add(b9.getPatras());
@@ -1067,7 +1182,7 @@ public class Inicio extends JFrame implements ActionListener {
 			div.add(Estrellas);
 			div.add(PNocheH1);
 			div.add(PrecioTH1);
-			div.add(ReservaH1);
+			div.add(ReservaH9);
 			div.add(con9);
 			break;
 		case 9:
@@ -1080,6 +1195,11 @@ public class Inicio extends JFrame implements ActionListener {
 			L10.setBounds(28,32,300,156);
 			Ubi= new JLabel(Ubi1);
 			addExtraInfoHotel(Marcadores_de_Posicion.p10);
+			ReservaH10= new JButton("Reservar");
+			ReservaH10.setBackground(Color.gray);
+			ReservaH10.setBounds(820,155,110,25);
+			ReservaH10.addActionListener(this);
+			Marcadores_de_Posicion.estiloBoton(ReservaH10);
 			div.add(L10);
 			div.add(b10.getPalante());
 			div.add(b10.getPatras());
@@ -1091,7 +1211,7 @@ public class Inicio extends JFrame implements ActionListener {
 			div.add(Estrellas);
 			div.add(PNocheH1);
 			div.add(PrecioTH1);
-			div.add(ReservaH1);
+			div.add(ReservaH10);
 			div.add(con10);
 			break;
 		}
@@ -1137,10 +1257,7 @@ public class Inicio extends JFrame implements ActionListener {
 		PrecioTH1= new JLabel("Precio Total: " + a +" Q");
 		PrecioTH1.setFont(fuente2);
 		PrecioTH1.setBounds(820,80,120,70);
-		ReservaH1= new JButton("Reservar");
-		ReservaH1.setBackground(Color.gray);
-		ReservaH1.setBounds(820,155,110,25);
 		Estrellas.setBounds(710,-85,300,300);
-		Marcadores_de_Posicion.estiloBoton(ReservaH1);
+		
 	}
 }

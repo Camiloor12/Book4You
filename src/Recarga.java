@@ -23,8 +23,9 @@ public class Recarga extends JFrame implements ActionListener {
 	 private JButton Cancelar;
 	 private ImageIcon logo;
 	 private JLabel logo2;
-	  public Recarga() {
-		  
+	 private int Valor;
+	  public Recarga(int valor) {
+		  Valor=valor;
 		  try {
 	            UIManager.setLookAndFeel(new NimbusLookAndFeel());
 	        } catch (UnsupportedLookAndFeelException e) {
@@ -143,8 +144,8 @@ public class Recarga extends JFrame implements ActionListener {
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Compra exitosa.", "Information", JOptionPane.INFORMATION_MESSAGE);
-			Marcadores_de_Posicion.actualizarQuevedos();
-			new User();
+			Marcadores_de_Posicion.actualizarQuevedos(1);
+			new User(0);
 			this.dispose();
 		}
     	  
@@ -153,12 +154,12 @@ public class Recarga extends JFrame implements ActionListener {
       
       else  if (Cancelar == e.getSource()) {
     	JOptionPane.showMessageDialog(null, "Operacion cancelada.", "Information", JOptionPane.INFORMATION_MESSAGE);
-		new User();
+		new User(Valor);
 		this.dispose();
 	}
       
       else   if (botonVolver == e.getSource()) {
-    	 new User();
+    	 new User(Valor);
   		this.dispose();
 	}
           

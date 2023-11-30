@@ -30,6 +30,8 @@ public class Marcadores_de_Posicion {
 	public static Productos p8;
 	public static Productos p9;
 	public static Productos p10;
+	public static int quevedos;
+	public static int nuevaCantidadQuevedos;
 
 	public static void Cambio1(JTextField caja, String palabra) {
 		caja.setText(palabra);
@@ -192,7 +194,7 @@ public class Marcadores_de_Posicion {
 	public static String devolverUsuarioInfo() {
 		String nombreCompleto = "";
 		int telefono = 0;
-		int quevedos = 0;
+		 int quevedos = 0;
 		Date Fechadenacimiento = null;
 		String sql = "SELECT NOMBRE_APELLIDO, TELEFONO, QUEVEDOS,FECHA_DE_NACIMIENTO FROM USUARIO WHERE E_MAIL = '"
 				+ Inicio.correo + "'";
@@ -216,8 +218,15 @@ public class Marcadores_de_Posicion {
 		return nombreCompleto + "," + telefono + "," + quevedos + "," + Fechadenacimiento;
 	}
 
-	public static boolean actualizarQuevedos() {
-		int nuevaCantidadQuevedos = User.Quevedosn + User.Quevedos;
+	public static void actualizarQuevedos(int Valor) {
+		if (Valor==1) {
+			 nuevaCantidadQuevedos = User.Quevedosn + User.Quevedos;
+		}
+		else if (Valor==0) {
+			 nuevaCantidadQuevedos =  Reserva.A - User.Quevedos ;
+		}
+		else if (nuevaCantidadQuevedos > 0) {
+		
 		Inicio.creditos.setText("Saldo Actual: " + (String.valueOf(nuevaCantidadQuevedos) + " Q"));
 		String sql = "UPDATE USUARIO SET QUEVEDOS = " + nuevaCantidadQuevedos + " WHERE E_MAIL = '" + Inicio.correo
 				+ "'";
@@ -225,12 +234,16 @@ public class Marcadores_de_Posicion {
 			Statement st = Main.con.createStatement();
 			st.executeUpdate(sql);
 			System.out.println("Cantidad de Quevedos actualizada exitosamente.");
-			return true;
+			
 		} catch (SQLException e) {
 			System.out.println("Error al actualizar Quevedos: " + e);
-			return false;
+			
+		}}
+		else {
+			System.out.println("error");
 		}
-	}
+	
+		}
 
 	public static boolean Cambio_Datos(String Correo_id, String nombre, String Correo, String Contra, int Telefono) {
 	    String sql = "BEGIN actualizar_informacion(" +
@@ -407,5 +420,39 @@ public class Marcadores_de_Posicion {
 			return Niño + Adulto;
 		}
     }
-}
+	
+	
+
+	
+	    public static boolean Reserva(int ID_RESERVA, String FECHA_R_E, String FECHA_R_S, int ADULTOS, int NIÑOS,
+	                                  int  PRECIO_TOTAL, int NOCHES, int ID_HOTEL, String E_MAIL) {
+	     
+	        String sql = "INSERT INTO RESERVA (ID_RESERVA, FECHA_R_E, FECHA_R_S, ADULTOS, NIÑOS, PRECIO_TOTAL, NOCHES, ID_HOTEL, E_MAIL) " +
+	                     "VALUES (?, TO_DATE(?, 'DD/MM/YYYY'), TO_DATE(?, 'DD/MM/YYYY'), ?, ?, ?, ?, ?, ?)";
+
+	        try {
+	            PreparedStatement ps = Main.con.prepareStatement(sql);
+	            ps.setInt(1, ID_RESERVA);
+	            ps.setString(2, FECHA_R_E);
+	            ps.setString(3, FECHA_R_S);
+	            ps.setInt(4, ADULTOS);
+	            ps.setInt(5, NIÑOS);
+	            ps.setInt(6, PRECIO_TOTAL);
+	            ps.setInt(7, NOCHES);
+	            ps.setInt(8, ID_HOTEL);
+	            ps.setString(9, E_MAIL);
+
+	            ps.executeUpdate();
+	            
+	            return true;
+	        } catch (SQLException e) {
+	            System.out.println("Ha habido un error en el Insert " + e);
+	        }
+	        return false;
+	    }
+
+	   
+	}
+
+	
 

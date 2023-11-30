@@ -64,7 +64,7 @@ public class User extends JFrame implements ActionListener{
 	  private JTextField Fondos2= new JTextField();
 	  private JLabel Fondos22= new JLabel("Añadir Fondos");
 	  protected static int Quevedosn=0;
-	  protected static int Quevedos=0;
+	  public static int Quevedos=0;
 	  protected static String nom= "";
 	  protected static String Tele= "";
 	  protected static String password="";
@@ -72,10 +72,12 @@ public class User extends JFrame implements ActionListener{
 	  protected static JLabel Email2;
 	  protected static JLabel Telefono2;
 	  protected static JLabel Fecha3;
+      protected static int Valor=0;
 	  protected static JPasswordField Contra = new JPasswordField (2) ;
 	  protected JLabel Contra2= new JLabel("Pon tu Nueva Contraseña: ");
 
-	  public User() {
+	  public User(int valor) {
+		  Valor= valor;
 		String devolver = Marcadores_de_Posicion.devolverUsuarioInfo();
 		String[] valores = devolver.split(",");
 		JLabel FondosT = new JLabel(String.valueOf(valores[2]));
@@ -244,14 +246,19 @@ public class User extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(botonVolver == e.getSource()) {
-			new Inicio();
-			this.dispose();
+			if (Valor==1) {
+				this.dispose();
+			}
+			else  {
+				 new Inicio();
+				 this.dispose();
+			}
 		}else if(addFondos == e.getSource()) {
 			Quevedosn= Integer.parseInt(Fondos2.getText());
 			double x = Double.parseDouble(Fondos2.getText()) * 10;
 			 int opcion = JOptionPane.showConfirmDialog(null, "¿Desea Recargar? " + Quevedosn + " Q Equivalentes a: "+ x + "€"  , "Confirmación", JOptionPane.YES_NO_OPTION);
 			 if (opcion == JOptionPane.YES_OPTION) {
-			new Recarga();
+			new Recarga(Valor);
 			this.dispose();}
 			}else if(actualizarDatos == e.getSource()) {
 			Nombre2.setVisible(false);	
