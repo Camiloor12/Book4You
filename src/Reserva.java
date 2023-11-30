@@ -212,10 +212,10 @@ public class Reserva extends JFrame implements ActionListener {
 					Marcadores_de_Posicion.actualizarQuevedos(0);
 					JOptionPane.showMessageDialog(null, "Reserva hecha con éxito", "Information", JOptionPane.ERROR_MESSAGE);
 					this.dispose();
+					new Inicio();
 				}else {
 					JOptionPane.showMessageDialog(null, "Reserva no realizada", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				 
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Debes iniciar Sesion O Registrarte", "Error", JOptionPane.ERROR_MESSAGE);

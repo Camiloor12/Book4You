@@ -295,7 +295,12 @@ public class User extends JFrame implements ActionListener{
 			Contra2.setVisible(false);
 		}
 			else if(historialReservas == e.getSource()) {
-			
+				/*Nombre2= new JLabel (valores[0]);
+			  	Email2= new JLabel(Inicio.correo);
+			  	Telefono2= new JLabel (valores[1]);
+			  	Fecha3= new JLabel (valores[3]);*/
+				new HistorialReservas(Nombre2.getText());
+				this.dispose();
 		}else if (passwordT.getEchoChar() == 0) {//Ocultar password
             passwordT.setEchoChar('*');
             ShowHideButton.setIcon(Show);
