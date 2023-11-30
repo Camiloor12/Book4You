@@ -115,9 +115,8 @@ public class IniciarSesion implements ActionListener {
 	}
 
 	public boolean selectLogin(String emailP) {
-
 		String sql = "SELECT * FROM USUARIO WHERE E_MAIL = '" + emailP + "'";
-
+		
 		try {
 			Statement st = Main.con.createStatement();
 			ResultSet rs = st.executeQuery(sql);

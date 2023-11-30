@@ -217,11 +217,14 @@ public class Marcadores_de_Posicion {
 	}
 
 	public static void actualizarQuevedos(int Valor) {
+		String devolver = Marcadores_de_Posicion.devolverUsuarioInfo();
+		String[] valores = devolver.split(",");
 		if (Valor == 1) {
-			nuevaCantidadQuevedos = User.Quevedosn + User.Quevedos;
+			nuevaCantidadQuevedos = User.Quevedosn +  Integer.parseInt(String.valueOf(valores[2]));
 		} else if (Valor == 0) {
-			nuevaCantidadQuevedos = Reserva.A - User.Quevedos;
-		} else if (nuevaCantidadQuevedos > 0) {
+			nuevaCantidadQuevedos = Reserva.A -  Integer.parseInt(String.valueOf(valores[2]));
+		}
+		if (nuevaCantidadQuevedos > 0) {
 
 			Inicio.creditos.setText("Saldo Actual: " + (String.valueOf(nuevaCantidadQuevedos) + " Q"));
 			String sql = "UPDATE USUARIO SET QUEVEDOS = " + nuevaCantidadQuevedos + " WHERE E_MAIL = '" + Inicio.correo
@@ -436,8 +439,8 @@ public class Marcadores_de_Posicion {
 		}
 		return false;
 	}
-	public static String devolverReserva() {
-		String idReserva = "";
+	public static String devolverReserva(int reserva) {
+		int idReserva = 0;
 		Date fecha_e = null;
 		Date fecha_s = null;
 		int adultos = 0;
@@ -446,14 +449,14 @@ public class Marcadores_de_Posicion {
 		int noches = 0;
 		int id_hotel = 0;
 		String correo = "";
-		String sql = "SELECT NOMBRE_APELLIDO, TELEFONO, QUEVEDOS,FECHA_DE_NACIMIENTO FROM USUARIO WHERE E_MAIL = '"
-				+ Inicio.correo + "'";
+		String sql = "SELECT ID_RESERVA, FECHA_R_E, FECHA_R_S,ADULTOS,NIÑOS,PRECIO_TOTAL,NOCHES,ID_HOTEL,E_MAIL FROM RESERVA WHERE E_MAIL = '"
+				+ Inicio.correo + "' AND ID_RESERVA = "+ reserva ;
 		try {
 			Statement st = Main.con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.isBeforeFirst()) {
 				while (rs.next()) {
-					idReserva = rs.getString("ID_RESERVA");
+					idReserva = rs.getInt("ID_RESERVA");
 					fecha_e = rs.getDate("FECHA_R_E");
 					fecha_s = rs.getDate("FECHA_R_S");
 					adultos = rs.getInt("ADULTOS");
@@ -461,7 +464,7 @@ public class Marcadores_de_Posicion {
 					precioT = rs.getInt("PRECIO_TOTAL");
 					noches = rs.getInt("NOCHES");
 					id_hotel = rs.getInt("ID_HOTEL");
-					fecha_s = rs.getDate("E_MAIL");
+					correo = rs.getString("E_MAIL");
 				}
 			} else {
 				System.out.println("No se encontró nada.");
@@ -470,6 +473,6 @@ public class Marcadores_de_Posicion {
 			System.out.println("Ha habido un error en el SELECT " + e2);
 		}
 
-		return idReserva + "," + fecha_e + "," + fecha_s + "," + adultos + ninos + "," + precioT + "," + noches + "," + id_hotel+ "," + correo;
+		return idReserva + "," + fecha_e + "," + fecha_s + "," + adultos +"," + ninos + "," + precioT + "," + noches + "," + id_hotel+ "," + correo;
 	}
 }
