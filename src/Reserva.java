@@ -196,7 +196,9 @@ public class Reserva extends JFrame implements ActionListener {
 		if (e.getSource()== BotonF ) {
 			
 			if (Inicio3 || Inicio4 ) {
-				int Q=User.Quevedos;
+				String devolver = Marcadores_de_Posicion.devolverUsuarioInfo();
+				String[] valores = devolver.split(",");
+				int Q = Integer.parseInt(String.valueOf(valores[2]));
 			
 				boolean Saldo=true;
 				
@@ -204,16 +206,15 @@ public class Reserva extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Saldo Insuficiente", "Error", JOptionPane.ERROR_MESSAGE);
 					Saldo= false;
 				}
-				if (!Saldo) {
+				if (Saldo) {
 					confirmado= Marcadores_de_Posicion.Reserva(0, FEntrada1, FSalida1, Adultos1, Niños1, A, Noches1, id_hotel1, Inicio.correo) ;
 				}
 				
-				if (confirmado || !Saldo) {
+				if (confirmado || Saldo) {
 					Marcadores_de_Posicion.actualizarQuevedos(0);
 					JOptionPane.showMessageDialog(null, "Reserva hecha con éxito", "Information", JOptionPane.ERROR_MESSAGE);
 					this.dispose();
-				}
-				else {
+				}else {
 					JOptionPane.showMessageDialog(null, "Reserva no realizada", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				 
