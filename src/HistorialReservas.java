@@ -30,7 +30,7 @@ public class HistorialReservas extends JFrame implements ActionListener {
 	private JLabel Adulto = new JLabel("ADULTO");
 	private JLabel Precio_T = new JLabel("PRECIO");
 	private JLabel idH = new JLabel("ID HOTEL");
-
+	private JLabel Estado = new JLabel("ESTADO");
 	private JPanel divContainer;
 	private JScrollPane scrollPane;
 	private ImageIcon volver = new ImageIcon("cap.png");
@@ -103,11 +103,12 @@ public class HistorialReservas extends JFrame implements ActionListener {
 		idR.setBounds(20, 10, 50, 20);
 		FeEntrada.setBounds(50, 10, 65, 20);
 		FeSalida.setBounds(150, 10, 50, 20);
-		Noche.setBounds(240, 10, 65, 20);
+		Noche.setBounds(238, 10, 65, 20);
 		Niño.setBounds(315, 10, 50, 20);
 		Adulto.setBounds(385, 10, 65, 20);
 		Precio_T.setBounds(455, 10, 65, 20);
-		idH.setBounds(550, 10, 100, 20);
+		idH.setBounds(525, 10, 100, 20);
+		Estado.setBounds(595, 10, 100, 20);
 		this.add(logo2);
 		this.add(botonVolver);
 		this.add(user2);
@@ -152,6 +153,7 @@ public class HistorialReservas extends JFrame implements ActionListener {
         
     }
 	protected void addReservas(int reservas) {
+		JButton[] botones = new JButton[reservas];
 		JPanel div = new JPanel(); 
 		div.setLayout(null);
 		for (int i = 1; i <= reservas; i++) {
@@ -162,6 +164,7 @@ public class HistorialReservas extends JFrame implements ActionListener {
 				Noche.setFont(Inicio.fuente2);
 				Niño.setFont(Inicio.fuente2);
 				Adulto.setFont(Inicio.fuente2);
+				Estado.setFont(Inicio.fuente2);
 				idH.setFont(Inicio.fuente2);
 				Precio_T.setFont(Inicio.fuente2);
 				div.add(idR);
@@ -172,6 +175,7 @@ public class HistorialReservas extends JFrame implements ActionListener {
 				div.add(Adulto);
 				div.add(idH);
 				div.add(Precio_T);
+				div.add(Estado);
 			}			
 			String res = Marcadores_de_Posicion.devolverReserva(i);
 			String [] valores = res.split(",");
@@ -187,10 +191,10 @@ public class HistorialReservas extends JFrame implements ActionListener {
 			FeEntrada.setBounds(50,height,100,20);
 			FeSalida.setBounds(150,height,100,20);
 			Noche.setBounds(240,height,100,20);
-			Niño.setBounds(270,height,100,20);
-			Adulto.setBounds(295,height,100,20);
-			Precio_T.setBounds(325,height,100,20);
-			Id_Hotel.setBounds(365,height,100,20);
+			Niño.setBounds(320,height,100,20);
+			Adulto.setBounds(390,height,100,20);
+			Precio_T.setBounds(455,height,100,20);
+			Id_Hotel.setBounds(525,height,100,20);
 			div.add(FeEntrada);
 			div.add(FeSalida);
 			div.add(Noche);

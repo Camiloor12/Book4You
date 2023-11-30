@@ -436,7 +436,7 @@ public class Marcadores_de_Posicion {
 		}
 		return false;
 	}
-	public static String devolverReserva() {
+	public static String devolverReserva(int reserva) {
 		String idReserva = "";
 		Date fecha_e = null;
 		Date fecha_s = null;
@@ -446,8 +446,8 @@ public class Marcadores_de_Posicion {
 		int noches = 0;
 		int id_hotel = 0;
 		String correo = "";
-		String sql = "SELECT NOMBRE_APELLIDO, TELEFONO, QUEVEDOS,FECHA_DE_NACIMIENTO FROM USUARIO WHERE E_MAIL = '"
-				+ Inicio.correo + "'";
+		String sql = "SELECT ID_RESERVA, FECHA_R_E, FECHA_R_S,ADULTOS,NIÑOS,PRECIO_TOTAL,NOCHES,ID_HOTEL,E_MAIL FROM RESERVA WHERE E_MAIL = '"
+				+ Inicio.correo + "' AND ID_RESERVA ="+ reserva;
 		try {
 			Statement st = Main.con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -461,7 +461,7 @@ public class Marcadores_de_Posicion {
 					precioT = rs.getInt("PRECIO_TOTAL");
 					noches = rs.getInt("NOCHES");
 					id_hotel = rs.getInt("ID_HOTEL");
-					fecha_s = rs.getDate("E_MAIL");
+					correo = rs.getString("E_MAIL");
 				}
 			} else {
 				System.out.println("No se encontró nada.");
@@ -470,7 +470,7 @@ public class Marcadores_de_Posicion {
 			System.out.println("Ha habido un error en el SELECT " + e2);
 		}
 
-		return idReserva + "," + fecha_e + "," + fecha_s + "," + adultos + ninos + "," + precioT + "," + noches + "," + id_hotel+ "," + correo;
+		return idReserva + "," + fecha_e + "," + fecha_s + "," + adultos + "," + ninos + "," + precioT + "," + noches + "," + id_hotel+ "," + correo;
 	}
 	
 	public static boolean Errorp(String CORREO) {
