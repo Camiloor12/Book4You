@@ -257,9 +257,9 @@ public class User extends JFrame implements ActionListener{
 			Quevedosn= Integer.parseInt(Fondos2.getText());
 			double x = Double.parseDouble(Fondos2.getText()) * 10;
 			 int opcion = JOptionPane.showConfirmDialog(null, "¿Desea Recargar? " + Quevedosn + " Q Equivalentes a: "+ x + "€"  , "Confirmación", JOptionPane.YES_NO_OPTION);
-			 if (opcion == JOptionPane.YES_OPTION) {
-			new Recarga(Valor);
+			  if (opcion == JOptionPane.YES_OPTION) {	
 			this.dispose();}
+			new Recarga(Valor);
 			}else if(actualizarDatos == e.getSource()) {
 			Nombre2.setVisible(false);	
 			Email2.setVisible(false);	
@@ -333,7 +333,7 @@ public class User extends JFrame implements ActionListener{
 	            	JOptionPane.showMessageDialog(null, "Changes done!", "CHANGES", JOptionPane.INFORMATION_MESSAGE);       
 	                confirmationDialog.dispose();
 	            } else {
-	            	JOptionPane.showMessageDialog(null, "Cambios no generados!", "CHANGES", JOptionPane.INFORMATION_MESSAGE); 
+	            	JOptionPane.showMessageDialog(null, "Cambios no generados!", "CHANGES", JOptionPane.ERROR_MESSAGE); 
 	            }
 	        }
 	    });

@@ -217,12 +217,14 @@ public class Marcadores_de_Posicion {
 	}
 
 	public static void actualizarQuevedos(int Valor) {
+		String devolver = devolverUsuarioInfo();
+		String[] valores = devolver.split(",");
+		int a = (Integer.parseInt(valores[2])) ;
 		if (Valor == 1) {
-			nuevaCantidadQuevedos = User.Quevedosn + User.Quevedos;
+			nuevaCantidadQuevedos = User.Quevedosn + a;
 		} else if (Valor == 0) {
-			nuevaCantidadQuevedos = Reserva.A - User.Quevedos;
-		} else if (nuevaCantidadQuevedos > 0) {
-
+			nuevaCantidadQuevedos = a - Reserva.A ;
+		}
 			Inicio.creditos.setText("Saldo Actual: " + (String.valueOf(nuevaCantidadQuevedos) + " Q"));
 			String sql = "UPDATE USUARIO SET QUEVEDOS = " + nuevaCantidadQuevedos + " WHERE E_MAIL = '" + Inicio.correo
 					+ "'";
@@ -235,10 +237,8 @@ public class Marcadores_de_Posicion {
 				System.out.println("Error al actualizar Quevedos: " + e);
 
 			}
-		} else {
-			System.out.println("error");
-		}
-
+		 
+	
 	}
 
 	public static boolean Cambio_Datos(String Correo_id, String nombre, String Correo, String Contra, int Telefono) {
@@ -471,5 +471,26 @@ public class Marcadores_de_Posicion {
 		}
 
 		return idReserva + "," + fecha_e + "," + fecha_s + "," + adultos + ninos + "," + precioT + "," + noches + "," + id_hotel+ "," + correo;
+	}
+	
+	public static boolean Errorp(String CORREO) {
+		String sql = "SELECT * FROM USUARIO WHERE E_MAIL = '" + CORREO + "'";
+
+		try {
+			Statement st = Main.con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					String CORREO2 = rs.getString("E_MAIL");
+					if (CORREO.equals(CORREO2)){ 
+						return true;
+}
+				}}}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+		
 	}
 }
