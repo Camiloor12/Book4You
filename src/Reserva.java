@@ -85,7 +85,10 @@ public class Reserva extends JFrame implements ActionListener {
 	Niño.setFont(Inicio.fuente2);
 	Adulto.setText("Adultos: " + Adultos);
 	Adulto.setFont(Inicio.fuente2);
+	 A= Marcadores_de_Posicion.calcularPrecioTotal(Noches, Niños, Adultos, precio);
+		Precio_T.setText("Precio Total: " + A  + " Q");
 
+	
 	if (Noches==1) {
 		Noches=1;
 		Noches1=Noches;
@@ -97,8 +100,7 @@ public class Reserva extends JFrame implements ActionListener {
 		Noche.setText("Noches: " + Noches);
 	}
 	
-	 A= Marcadores_de_Posicion.calcularPrecioTotal(Noches, Niños, Adultos, precio);
-	Precio_T.setText("Precio Total: " + A  + " Q");
+	
 	Precio_T.setFont(Inicio.fuente2);
 	botonVolver.setOpaque(false);
     botonVolver.setContentAreaFilled(false);
@@ -210,7 +212,7 @@ public class Reserva extends JFrame implements ActionListener {
 				
 				if (confirmado || Saldo) {
 					Marcadores_de_Posicion.actualizarQuevedos(0);
-					JOptionPane.showMessageDialog(null, "Reserva hecha con éxito", "Information", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Reserva hecha con éxito", "Information", JOptionPane.INFORMATION_MESSAGE);
 					this.dispose();
 					new Inicio();
 				}else {
@@ -218,7 +220,7 @@ public class Reserva extends JFrame implements ActionListener {
 				}
 			}
 			else {
-				JOptionPane.showMessageDialog(null, "Debes iniciar Sesion O Registrarte", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Debes iniciar Sesion O Registrarte", "Error", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}

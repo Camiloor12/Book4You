@@ -119,6 +119,7 @@ public class Registro implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(registerN == e.getSource()) { 
+			boolean a= Marcadores_de_Posicion.Errorp(EmailT.getText());
 			char [] password  = passwordT.getPassword();
 			String p1= String.valueOf(passwordT.getPassword());
 			String p2= String.valueOf(passwordT2.getPassword());
@@ -132,6 +133,10 @@ public class Registro implements ActionListener{
 			else if (!p1.equals(p2)) {
 				JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Information", JOptionPane.INFORMATION_MESSAGE);
 			}
+			else if (a) {
+				JOptionPane.showMessageDialog(null, "Correo ya registrado en la BDD", "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+			
 			
 			else {
 				Inicio.Inicio2 = DarAlta();

@@ -136,16 +136,16 @@ public class Recarga extends JFrame implements ActionListener {
          boolean si= Marcadores_de_Posicion.Fecha(Mese, 28, Año);
       if (Pagar == e.getSource()) {
 		if (!si) {
-			JOptionPane.showMessageDialog(null, "Fecha Invalida", "Information", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Fecha Invalida", "Information", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		else if (TNombre.getText().isEmpty() || TNUMT.getText().isEmpty()|| String.valueOf(TCVC.getPassword()).isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Existen Campos sin rellenar.", "Information", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Existen Campos sin rellenar.", "Information", JOptionPane.ERROR_MESSAGE);
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Compra exitosa.", "Information", JOptionPane.INFORMATION_MESSAGE);
 			Marcadores_de_Posicion.actualizarQuevedos(1);
-			new User(0);
+			new User(Valor);
 			this.dispose();
 		}
     	  
@@ -153,7 +153,7 @@ public class Recarga extends JFrame implements ActionListener {
 	}
       
       else  if (Cancelar == e.getSource()) {
-    	JOptionPane.showMessageDialog(null, "Operacion cancelada.", "Information", JOptionPane.INFORMATION_MESSAGE);
+    	JOptionPane.showMessageDialog(null, "Operacion cancelada.", "Information", JOptionPane.ERROR_MESSAGE);
 		new User(Valor);
 		this.dispose();
 	}
