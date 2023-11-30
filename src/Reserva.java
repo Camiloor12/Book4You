@@ -198,10 +198,8 @@ public class Reserva extends JFrame implements ActionListener {
 			if (Inicio3 || Inicio4 ) {
 				String devolver = Marcadores_de_Posicion.devolverUsuarioInfo();
 				String[] valores = devolver.split(",");
-				int Q = Integer.parseInt(String.valueOf(valores[2]));
-			
-				boolean Saldo=true;
-				
+				int Q = Integer.parseInt(String.valueOf(valores[2]));			
+				boolean Saldo=true;				
 				if ( A > Q) {
 					JOptionPane.showMessageDialog(null, "Saldo Insuficiente", "Error", JOptionPane.ERROR_MESSAGE);
 					Saldo= false;
