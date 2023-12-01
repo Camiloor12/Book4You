@@ -447,7 +447,7 @@ public class Marcadores_de_Posicion {
 		int id_hotel = 0;
 		String correo = "";
 		String sql = "SELECT ID_RESERVA, FECHA_R_E, FECHA_R_S,ADULTOS,NIÑOS,PRECIO_TOTAL,NOCHES,ID_HOTEL,E_MAIL FROM RESERVA WHERE E_MAIL = '"
-				+ Inicio.correo + "' AND ID_RESERVA ="+ reserva;
+				+ Inicio.correo + "' AND ID_RESERVA ="+ reserva + "ORDER BY FECHA_R_E DESC";
 		try {
 			Statement st = Main.con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -491,6 +491,42 @@ public class Marcadores_de_Posicion {
 			e.printStackTrace();
 		}
 		return false;
+		
+	}
+	
+	public static String  estado (String fecha) {
+		String Estado;
+		SimpleDateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date FechaActual = new java.util.Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(FechaActual);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+
+		Date fechaConHorasCero = calendar.getTime();
+		try {
+			java.util.Date FechaReserva = Formato.parse(fecha);
+			if (FechaReserva.equals(fechaConHorasCero)) {
+				Estado= "En proceso";
+				return Estado;
+			} else if (FechaReserva.after(fechaConHorasCero)) {
+				Estado= "Reserva Activa";
+				return Estado;
+			} else if (FechaReserva.before(fechaConHorasCero)) {
+				Estado= "Reserva Terminada";
+				return Estado;
+			}
+			else {
+				Estado= "Reserva Cancelada";
+				return Estado;
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+			
+		}
+		return null;
 		
 	}
 }

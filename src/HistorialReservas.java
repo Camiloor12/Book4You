@@ -32,11 +32,11 @@ public class HistorialReservas extends JFrame implements ActionListener {
 	private JLabel idH = new JLabel("ID HOTEL");
 	private JLabel Estado = new JLabel("ESTADO");
 	private JPanel divContainer;
+	private int Numero=0;
 	private JScrollPane scrollPane;
 	private ImageIcon volver = new ImageIcon("cap.png");
 	private JButton botonVolver = new JButton(volver);
 	private static ImageIcon user = new ImageIcon("user.png");
-	public static JButton user2 = new JButton(user);
 	public static boolean Inicio3;
 	public static boolean Inicio4;
 	public static int A;
@@ -73,7 +73,7 @@ public class HistorialReservas extends JFrame implements ActionListener {
 
 		this.setBackground(Color.white);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(700, 400);
+		this.setSize(750, 400);
 		this.setLayout(null);
 		this.setTitle("BOOK4YOU");
 		this.setIconImage(image.getImage());
@@ -92,13 +92,6 @@ public class HistorialReservas extends JFrame implements ActionListener {
 		Nom.setText(Nombre);
 		Nom.setFont(fuente);
 		Nom.setBounds(50, 255, 300, 200);
-		user2.setBounds(getWidth() - 100, 45, 60, 60);
-		user2.setBounds(getWidth() - 100, 45, 60, 60);
-		user2.setBorderPainted(false);
-		user2.setOpaque(false);
-		user2.addActionListener(this);
-		user2.setContentAreaFilled(false);
-		user2.setVisible(true);
 		scrollPane.setBounds(0, 135, this.getWidth(), 495);
 		idR.setBounds(20, 10, 50, 20);
 		FeEntrada.setBounds(50, 10, 65, 20);
@@ -108,10 +101,9 @@ public class HistorialReservas extends JFrame implements ActionListener {
 		Adulto.setBounds(385, 10, 65, 20);
 		Precio_T.setBounds(455, 10, 65, 20);
 		idH.setBounds(525, 10, 100, 20);
-		Estado.setBounds(595, 10, 100, 20);
+		Estado.setBounds(600, 10, 100, 20);
 		this.add(logo2);
 		this.add(botonVolver);
-		this.add(user2);
 		this.add(scrollPane);
 		this.setBackground(Color.white);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -121,11 +113,8 @@ public class HistorialReservas extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == botonVolver) {
-				new User(1);
+				new User(0);
 				this.dispose();
-		}
-		if (e.getSource() == user2) {
-			new User(1);
 		}
 	}
 	private JPanel createDiv(String text) {
@@ -149,7 +138,7 @@ public class HistorialReservas extends JFrame implements ActionListener {
 		scrollPane.setVisible(true);
 		addReservas(reservas);
         divContainer.setBorder(null);
-        divContainer.revalidate(); // Refresh layout
+        divContainer.revalidate(); 
         
     }
 	protected void addReservas(int reservas) {
@@ -180,13 +169,21 @@ public class HistorialReservas extends JFrame implements ActionListener {
 			String res = Marcadores_de_Posicion.devolverReserva(i);
 			String [] valores = res.split(",");
 			JLabel id_R= new JLabel(valores[0]);
+			Numero= Integer.parseInt(valores[0]);
 			JLabel FeEntrada= new JLabel(valores[1]);
 			JLabel FeSalida= new JLabel(valores[2]);
 			JLabel Noche= new JLabel(valores[3]);
 			JLabel Niño= new JLabel(valores[4]);
-			JLabel Adulto= new JLabel(valores[5]);
-			JLabel Precio_T= new JLabel(valores[6]);
+			JLabel Adulto= new JLabel(valores[6]);
+			JLabel Precio_T= new JLabel(valores[5]);
 			JLabel Id_Hotel= new JLabel(valores[7]);
+			String A= Marcadores_de_Posicion.estado(valores[1]);
+			JLabel Estado= new JLabel(A);
+			JButton Action= new JButton("Cancelar Reserva");
+			Action.addActionListener(this);
+			Marcadores_de_Posicion.estiloBoton(Action);
+			Action.setBounds(710,height,100,20);
+		
 			id_R.setBounds(20,height,50,20);
 			FeEntrada.setBounds(50,height,100,20);
 			FeSalida.setBounds(150,height,100,20);
@@ -195,6 +192,7 @@ public class HistorialReservas extends JFrame implements ActionListener {
 			Adulto.setBounds(390,height,100,20);
 			Precio_T.setBounds(455,height,100,20);
 			Id_Hotel.setBounds(525,height,100,20);
+			Estado.setBounds(590,height,100,20);
 			div.add(FeEntrada);
 			div.add(FeSalida);
 			div.add(Noche);
@@ -203,6 +201,7 @@ public class HistorialReservas extends JFrame implements ActionListener {
 			div.add(Adulto);
 			div.add(Precio_T);	
 			div.add(id_R);
+			div.add(Estado);
 			height+=35;
 	        divContainer.add(div);     
 		}
