@@ -16,8 +16,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class Marcadores_de_Posicion {
 	public static Productos p1;
@@ -92,7 +94,7 @@ public class Marcadores_de_Posicion {
 		}
 	}
 
-	protected static int Mes(String meses) {
+	public static int Mes(String meses) {
 		switch (meses) {
 		case "Enero":
 			return 1;
@@ -225,6 +227,9 @@ public class Marcadores_de_Posicion {
 		} else if (Valor == 0) {
 			nuevaCantidadQuevedos = a - Reserva.A ;
 		}
+		else if (Valor ==2 ) {
+			nuevaCantidadQuevedos=  Historial.Devolver+ a;
+		}
 			Inicio.creditos.setText("Saldo Actual: " + (String.valueOf(nuevaCantidadQuevedos) + " Q"));
 			String sql = "UPDATE USUARIO SET QUEVEDOS = " + nuevaCantidadQuevedos + " WHERE E_MAIL = '" + Inicio.correo
 					+ "'";
@@ -241,25 +246,29 @@ public class Marcadores_de_Posicion {
 	
 	}
 
-	public static boolean Cambio_Datos(String Correo_id, String nombre, String Correo, String Contra, int Telefono) {
-		String sql = "BEGIN actualizar_informacion(" + " p_correo => ?," + " p_nuevo_nombre => ?,"
-				+ " p_nuevo_telefono => ?," + " p_nuevo_correo => ?," + " p_nueva_contrasena => ?);" + " COMMIT; END;";
+	public static boolean Cambio_Datos(String Correo_id, String nombre, String Correo, String Contra, int Telefono, String fechaNacimiento) {
+	    String sql = "BEGIN actualizar_informacion(" + " p_correo => ?," + " p_nuevo_nombre => ?,"
+	            + " p_nuevo_telefono => ?," + " p_nuevo_correo => ?," + " p_nueva_contrasena => ?,"
+	            + " p_nueva_fecha_nacimiento => TO_DATE(?, 'MM/DD/YYYY'));" + " COMMIT; END;";
 
-		try {
-			PreparedStatement pstmt = Main.con.prepareStatement(sql);
-			pstmt.setString(1, Correo_id);
-			pstmt.setString(2, nombre);
-			pstmt.setInt(3, Telefono);
-			pstmt.setString(4, Correo);
-			pstmt.setString(5, Contra);
+	    try {
+	        PreparedStatement pstmt = Main.con.prepareStatement(sql);
+	        pstmt.setString(1, Correo_id);
+	        pstmt.setString(2, nombre);
+	        pstmt.setInt(3, Telefono);
+	        pstmt.setString(4, Correo);
+	        pstmt.setString(5, Contra);
+	        pstmt.setString(6,  fechaNacimiento);
 
-			pstmt.execute();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
+	        pstmt.execute();
+	        return true;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false;
 	}
+
+
 
 	public static void Obtener() {
 		String devolver = devolverUsuarioInfo();
@@ -411,10 +420,10 @@ public class Marcadores_de_Posicion {
 	}
 
 	public static boolean Reserva(int ID_RESERVA, String FECHA_R_E, String FECHA_R_S, int ADULTOS, int NIÑOS,
-			int PRECIO_TOTAL, int NOCHES, int ID_HOTEL, String E_MAIL) {
+			int PRECIO_TOTAL, int NOCHES, int ID_HOTEL, String E_MAIL, String Ciudad) {
 
-		String sql = "INSERT INTO RESERVA (ID_RESERVA, FECHA_R_E, FECHA_R_S, ADULTOS, NIÑOS, PRECIO_TOTAL, NOCHES, ID_HOTEL, E_MAIL) "
-				+ "VALUES (?, TO_DATE(?, 'DD/MM/YYYY'), TO_DATE(?, 'DD/MM/YYYY'), ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO RESERVA (ID_RESERVA, FECHA_R_E, FECHA_R_S, ADULTOS, NIÑOS, PRECIO_TOTAL, NOCHES, ID_HOTEL, E_MAIL, CIUDAD) "
+				+ "VALUES (?, TO_DATE(?, 'DD/MM/YYYY'), TO_DATE(?, 'DD/MM/YYYY'), ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			PreparedStatement ps = Main.con.prepareStatement(sql);
@@ -427,7 +436,7 @@ public class Marcadores_de_Posicion {
 			ps.setInt(7, NOCHES);
 			ps.setInt(8, ID_HOTEL);
 			ps.setString(9, E_MAIL);
-
+			ps.setString(10, Ciudad);
 			ps.executeUpdate();
 
 			return true;
@@ -436,42 +445,50 @@ public class Marcadores_de_Posicion {
 		}
 		return false;
 	}
-	public static String devolverReserva(int reserva) {
-		String idReserva = "";
-		Date fecha_e = null;
-		Date fecha_s = null;
-		int adultos = 0;
-		int ninos = 0;
-		int precioT = 0;
-		int noches = 0;
-		int id_hotel = 0;
-		String correo = "";
-		String sql = "SELECT ID_RESERVA, FECHA_R_E, FECHA_R_S,ADULTOS,NIÑOS,PRECIO_TOTAL,NOCHES,ID_HOTEL,E_MAIL FROM RESERVA WHERE E_MAIL = '"
-				+ Inicio.correo + "' AND ID_RESERVA ="+ reserva + "ORDER BY FECHA_R_E DESC";
-		try {
-			Statement st = Main.con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			if (rs.isBeforeFirst()) {
-				while (rs.next()) {
-					idReserva = rs.getString("ID_RESERVA");
-					fecha_e = rs.getDate("FECHA_R_E");
-					fecha_s = rs.getDate("FECHA_R_S");
-					adultos = rs.getInt("ADULTOS");
-					ninos = rs.getInt("NIÑOS");
-					precioT = rs.getInt("PRECIO_TOTAL");
-					noches = rs.getInt("NOCHES");
-					id_hotel = rs.getInt("ID_HOTEL");
-					correo = rs.getString("E_MAIL");
-				}
-			} else {
-				System.out.println("No se encontró nada.");
-			}
-		} catch (SQLException e2) {
-			System.out.println("Ha habido un error en el SELECT " + e2);
-		}
 
-		return idReserva + "," + fecha_e + "," + fecha_s + "," + adultos + "," + ninos + "," + precioT + "," + noches + "," + id_hotel+ "," + correo;
-	}
+    public static void devolverReserva() {
+        int idReserva = 0;
+        Date fecha_e = null;
+        Date fecha_s = null;
+        int adultos = 0;
+        int ninos = 0;
+        int precioT = 0;
+        int noches = 0;
+        int id_hotel = 0;
+        String correo = "";
+        String Ciudad= "";
+        String sql = "SELECT * FROM RESERVA WHERE E_MAIL = '"+Inicio.correo +"' ORDER BY FECHA_R_E DESC";
+        
+        try {
+            Statement st = Main.con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            if (rs.isBeforeFirst()) {
+                while (rs.next()) {
+                    idReserva = rs.getInt("ID_RESERVA");
+                    fecha_e = rs.getDate("FECHA_R_E");
+                    fecha_s = rs.getDate("FECHA_R_S");
+                    adultos = rs.getInt("ADULTOS");
+                    ninos = rs.getInt("NIÑOS");
+                    precioT = rs.getInt("PRECIO_TOTAL");
+                    noches = rs.getInt("NOCHES");
+                    id_hotel = rs.getInt("ID_HOTEL");
+                    correo = rs.getString("E_MAIL");
+                    Ciudad = rs.getString("CIUDAD");
+                    
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    String fechaEntradaString = dateFormat.format(fecha_e);
+                    String fechaSalidaString = dateFormat.format(fecha_s);
+                    
+						Historial.AgregarP(fechaEntradaString, fechaSalidaString, noches, ninos, adultos, precioT, id_hotel, idReserva, Ciudad);
+                }
+            } 
+            Historial.panel.revalidate();
+            Historial.panel.repaint(); 
+        } catch (SQLException e2) {
+            System.out.println("Ha habido un error en el SELECT " + e2);
+        }
+    }
 	
 	public static boolean Errorp(String CORREO) {
 		String sql = "SELECT * FROM USUARIO WHERE E_MAIL = '" + CORREO + "'";
@@ -494,9 +511,9 @@ public class Marcadores_de_Posicion {
 		
 	}
 	
-	public static String  estado (String fecha) {
+	public static String estado (String fecha) {
 		String Estado;
-		SimpleDateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat Formato = new SimpleDateFormat("dd-MM-yyyy");
 		java.util.Date FechaActual = new java.util.Date();
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(FechaActual);
@@ -529,4 +546,52 @@ public class Marcadores_de_Posicion {
 		return null;
 		
 	}
+	public static void Borrar(int  ID) {
+		String sql = "DELETE  FROM RESERVA WHERE ID_RESERVA = " + ID ;
+
+		try {
+			Statement st = Main.con.createStatement();
+			st.executeUpdate(sql);
+
+			}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+		
+	}
+	
+	
+	public static List<String> Ciudade() {
+		String sql = "SELECT * FROM CIUDADES";
+		 List<String> c= new ArrayList<>();
+		try {
+			Statement st = Main.con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					String Ciudades = rs.getString("CIUDADES");
+				        c.add(Ciudades);
+				}}}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
+		
+		
+	}
+	   public static boolean validarTexto(JTextField textField, int longitud) {
+	        String texto = textField.getText();
+
+	        if (!texto.matches("[0-9]+")) {
+	            return false;
+	        }
+	        if (texto.length() != longitud) {
+	            return false;
+	        }
+
+	        return true;
+	    }
+
 }

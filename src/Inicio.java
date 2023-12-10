@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.management.StringValueExp;
 import javax.swing.*;
@@ -109,9 +111,11 @@ public class Inicio extends JFrame implements ActionListener {
 	private JComboBox<Integer> Niños;
 	private int height = 360;
 	private Image fondo;
-	private JPanel divContainer; // Panel to hold divs
+	private JPanel divContainer; 
     private JScrollPane scrollPane; 
-	public static  JTextField lugar;
+    public static List<String> ciudadesDesdeBaseDeDatos = Marcadores_de_Posicion.Ciudade();
+    public static DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
+	public static  JComboBox<String> lugar;
 	public static JLabel creditos = new JLabel();
 	public static JLabel nom = new JLabel();
 	private JButton Busqueda = new JButton("Buscar");
@@ -140,7 +144,7 @@ public class Inicio extends JFrame implements ActionListener {
 	private String Salida1;
 	private String Entrada2;
 	private String Salida2;
-	
+	public static String A;
 	public Inicio() {
 		
 		con1 = new JLabel("1/9");
@@ -200,13 +204,13 @@ public class Inicio extends JFrame implements ActionListener {
 		textX = 10;
 		textY = 250;
 		x.setBounds(textX, textY, 700, 80);
-
-		lugar = new JTextField();
+		  for (String ciudad : ciudadesDesdeBaseDeDatos) {
+		        comboBoxModel.addElement(ciudad);}
+		lugar= new JComboBox<String>(comboBoxModel);
 		lugar.setForeground(Color.BLACK);
 		lugar.setBackground(new Color(255, 255, 255));
 		lugar.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100)));
 		lugar.setBounds(10, textYtf, 200, 35);
-		Marcadores_de_Posicion.Cambio1(lugar, "¿Dónde quieres ir?");
 		lugar.setFont(fuente2);
 
 		lblLugar = new JLabel("Lugar:");
@@ -384,7 +388,8 @@ public class Inicio extends JFrame implements ActionListener {
 		} else if (e.getSource() == Busqueda) {
 			Marcadores_de_Posicion.crearHotel();
 			boolean error = false;
-			boolean error2= Marcadores_de_Posicion.Ciudad(lugar.getText().toUpperCase());
+			 A= (String) lugar.getSelectedItem();
+			boolean error2= Marcadores_de_Posicion.Ciudad(A.toUpperCase());
 			if (error2) {
 			if (!error) {
 				error = controlErroresBusq(error);
@@ -896,10 +901,7 @@ public class Inicio extends JFrame implements ActionListener {
 			error = true;
 		}
 
-		if (lugar.getText().equals("¿Dónde quieres ir?")) {
-			JOptionPane.showMessageDialog(this, "No has escogido ningún destino");
-			error = true;
-		}
+		
 		return error;
 	}
 	private JPanel addHotelInfo(int apartment) {
@@ -1224,7 +1226,8 @@ public class Inicio extends JFrame implements ActionListener {
 		NombreH1.setFont(fuente3);
 		NombreH1.setBounds(380,-10,300,100);
 		Ubi.setBounds(380,60,15,15);
-		UbicaionH1= new JLabel(p.getDireccion() + ", " + p.getCp() + ", " + lugar.getText().toUpperCase());
+		String B= (String) lugar.getSelectedItem();
+		UbicaionH1= new JLabel(p.getDireccion() + ", " + p.getCp() + ", " + B.toUpperCase());
 		UbicaionH1.setBounds(400,40,350,50);
 		UbicaionH1.setFont(fuente2);
 		 descripcion1 = p.getDescripcion();

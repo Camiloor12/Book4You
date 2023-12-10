@@ -5,7 +5,7 @@ import java.sql.SQLException;
 public class Main {
 	private static final String USER = "23_24_DAM2_KBDO";
 	private static final String PWD = "123456";
-	private static final String URL = "jdbc:oracle:thin:@  oracle.ilerna.com  :1521:xe";
+	private static final String URL = "jdbc:oracle:thin:@oracle.ilerna.com :1521:xe";
 	public static Connection con = conectarBaseDatos();
 	// Si est�is desde casa, la url ser� oracle.ilerna.com y no 192.168.3.26
 

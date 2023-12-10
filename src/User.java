@@ -30,6 +30,8 @@ import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
 
+import oracle.jdbc.driver.Message;
+
 
 public class User extends JFrame implements ActionListener{
 	  private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
@@ -55,6 +57,7 @@ public class User extends JFrame implements ActionListener{
 	  private JButton Cambio_Datos2  = new JButton("Finalizar");
 	  private JButton historialReservas = new JButton("Historial de reservas");
 	  private JLabel FondosT;
+	  private boolean A = true;
 	  private JLabel Fondos = new JLabel("Fondos Actuales:");
 	  private JPasswordField passwordT = new JPasswordField("");
 	  private ImageIcon Hide = new ImageIcon("hide.png");
@@ -74,7 +77,8 @@ public class User extends JFrame implements ActionListener{
 	  protected static JLabel Fecha3;
       protected static int Valor=0;
 	  protected static JPasswordField Contra = new JPasswordField (2) ;
-	  protected JLabel Contra2= new JLabel("Pon tu Nueva Contraseña: ");
+	  protected JLabel Contra2= new JLabel("Nueva Contraseña: ");
+	  private double x=0;
 
 	  public User(int valor) {
 		  Valor= valor;
@@ -153,11 +157,15 @@ public class User extends JFrame implements ActionListener{
 	    Fecha.setFont(fuente);
 	    Email.setBounds((base1.getWidth() / 2) - 270, 75, 200, 35);
 	    Email.setFont(fuente);
-	    EmailT.setBounds((base1.getWidth() / 2) - 270, 100, 200, 35);
-	    EmailT.setFont(fuente2);
-	    EmailT.setVisible(false);
-	    Marcadores_de_Posicion.Cambio2(Email2);
 	    Email2.setBounds((base1.getWidth() / 2) - 270, 100, 200, 35);
+	    Email2.setFont(fuente2);
+	    Marcadores_de_Posicion.Cambio2(Email2);
+	    Dia.setBounds(60, 100, 60, 35);
+	    mes.setBounds(125, 100, 80, 35);
+	    Año.setBounds(215, 100, 75, 35);
+	    Dia.setVisible(false);
+	    mes.setVisible(false);
+	    Año.setVisible(false);
 	    Telefono.setBounds((base1.getWidth() / 2) + 55, 75, 200, 35);
 	    Telefono.setFont(fuente);
 	    TelefonoT.setFont(fuente2);	
@@ -205,7 +213,6 @@ public class User extends JFrame implements ActionListener{
             public void actionPerformed(ActionEvent e) {
                 // Toggle between showing and hiding the password
                 if (passwordField.getEchoChar() == 0) {
-                    // Password is currently shown, so hide it
                     passwordField.setEchoChar('\u2022'); // Replaces the password with bullets
                     ShowHideButton.setIcon(Show);
                 } else {
@@ -232,11 +239,14 @@ public class User extends JFrame implements ActionListener{
 	    base1.add(Fondos2);
 	    base1.add(Fondos22);
 	    base1.add(Nombre2);
-	    base1.add(Email2);
 	    base1.add(Telefono2);
+	    base1.add(Año);
+	    base1.add(mes);
+	    base1.add(Dia);
 	    base1.add(Fecha3);
 	    base1.add(Contra2);
 	    base1.add(Contra);
+	    base1.add(Email2);
 	    this.add(botonVolver);
 		}
 
@@ -253,14 +263,20 @@ public class User extends JFrame implements ActionListener{
 				 new Inicio();
 				 this.dispose();
 			}
-		}else if(addFondos == e.getSource()) {
+		}
+		else if(addFondos == e.getSource()) {
+		
+			 if (!Fondos2.getText().matches("[0-9]+") || Fondos2.getText().equals("0")) {
+					JOptionPane.showMessageDialog(null, "Error digito no numerico, o la recarga es inferior a 1", "Error", JOptionPane.ERROR_MESSAGE);
+		        }
+			 else {
 			Quevedosn= Integer.parseInt(Fondos2.getText());
-			double x = Double.parseDouble(Fondos2.getText()) * 10;
+			 x = Double.parseDouble(Fondos2.getText()) * 10;
 			 int opcion = JOptionPane.showConfirmDialog(null, "¿Desea Recargar? " + Quevedosn + " Q Equivalentes a: "+ x + "€"  , "Confirmación", JOptionPane.YES_NO_OPTION);
-			  if (opcion == JOptionPane.YES_OPTION) {	
-			this.dispose();}
-			new Recarga(Valor);
-			}else if(actualizarDatos == e.getSource()) {
+			  if (opcion == JOptionPane.YES_OPTION) {
+           new Recarga(Valor);	}
+			this.dispose();}}
+			else if(actualizarDatos == e.getSource()) {
 			Nombre2.setVisible(false);	
 			Email2.setVisible(false);	
 			Telefono2.setVisible(false);
@@ -273,15 +289,25 @@ public class User extends JFrame implements ActionListener{
 			Cambio_Datos2.setVisible(true);
 			Contra.setVisible(true);
 			Contra2.setVisible(true);
+			Dia.setVisible(true);
+			mes.setVisible(true);
+			Año.setVisible(true);
+			Email.setText("Fecha de Nacimiento");
 		}else if(Cambio_Datos2 == e.getSource()) {
+			 A = Marcadores_de_Posicion.validarTexto(TelefonoT, 9);
+			 if (!A) {
+            	 JOptionPane.showMessageDialog(null, "Cambios no generados! Error en el campo telefono", "Cambios", JOptionPane.ERROR_MESSAGE); 	
+			}
+			 else {
 			showConfirmationDialog();
-			Nombre2.setVisible(true);	
-			Email2.setVisible(true);	
+			Nombre2.setVisible(true);		
 			Telefono2.setVisible(true);
 			Fecha3.setVisible(true);
 			actualizarDatos.setVisible(true);
 			Fecha3.setVisible(true);
 			Fecha.setVisible(true);
+			Email2.setVisible(true);
+			Email.setText("Email");
 			A();
 			nombre.setVisible(false);
 			nombre.setText("");
@@ -293,13 +319,15 @@ public class User extends JFrame implements ActionListener{
 			Contra.setText("");
 			passwordField.setText("");
 			Contra2.setVisible(false);
+			Dia.setVisible(false);
+			mes.setVisible(false);
+			Año.setVisible(false);
+			 }
 		}
 			else if(historialReservas == e.getSource()) {
-				/*Nombre2= new JLabel (valores[0]);
-			  	Email2= new JLabel(Inicio.correo);
-			  	Telefono2= new JLabel (valores[1]);
-			  	Fecha3= new JLabel (valores[3]);*/
-				new HistorialReservas(Nombre2.getText());
+				
+				new Historial();
+				Historial.yPos=50 ;
 				this.dispose();
 		}else if (passwordT.getEchoChar() == 0) {//Ocultar password
             passwordT.setEchoChar('*');
@@ -310,7 +338,7 @@ public class User extends JFrame implements ActionListener{
         }
 	}
 	private void showConfirmationDialog() {
-	    JDialog confirmationDialog = new JDialog(this, "Confirmation", true);
+	    JDialog confirmationDialog = new JDialog(this, "Confirmacion", true);
 	    confirmationDialog.setLayout(new FlowLayout());
 	    confirmationDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	    JButton confirmButton = new JButton("Confirm");
@@ -319,21 +347,29 @@ public class User extends JFrame implements ActionListener{
 	    // Add ActionListener to the Confirm button
 	    confirmButton.addActionListener(new ActionListener() {
 	        @Override
+	        
+	       
+	        
 	        public void actionPerformed(ActionEvent e) {
 	            char[] enteredPassword = passwordField.getPassword();
-	            String enteredPasswordStr = new String(enteredPassword);
-
+	            String enteredPasswordStr = new String(enteredPassword); 
+	            Boolean A = Marcadores_de_Posicion.validarTexto(TelefonoT, 9);
+	            
+	           
 	            // Llama a selectLogin para comprobar la contraseña
 	            boolean passwordCorrect = selectLogin(Inicio.correo, enteredPassword);
-
+	            
+	           
 	            if (passwordCorrect) {
 	            	int Tel=0;
 	            	 Tel= Integer.parseInt(TelefonoT.getText());
-	            	Marcadores_de_Posicion.Cambio_Datos(Inicio.correo, nombre.getText(), EmailT.getText(), String.valueOf(Contra.getPassword()) ,Tel);
-	            	JOptionPane.showMessageDialog(null, "Changes done!", "CHANGES", JOptionPane.INFORMATION_MESSAGE);       
+	            	int Meses = Marcadores_de_Posicion.Mes((String) mes.getSelectedItem());
+	            	String Fecha= Integer.toString(Meses) + "/" + Dia.getSelectedItem() + "/" + Año.getSelectedItem(); 
+	            	Marcadores_de_Posicion.Cambio_Datos(Inicio.correo, nombre.getText(), EmailT.getText(), String.valueOf(Contra.getPassword()) ,Tel, Fecha);
+	            	JOptionPane.showMessageDialog(null, "Cambios Generados!", "Cambios", JOptionPane.INFORMATION_MESSAGE);       
 	                confirmationDialog.dispose();
 	            } else {
-	            	JOptionPane.showMessageDialog(null, "Cambios no generados!", "CHANGES", JOptionPane.ERROR_MESSAGE); 
+	            	JOptionPane.showMessageDialog(null, "Cambios no generados!", "Cambios", JOptionPane.ERROR_MESSAGE); 
 	            }
 	        }
 	    });
@@ -355,7 +391,7 @@ public class User extends JFrame implements ActionListener{
 	        }
 	    });
 
-	    confirmationDialog.add(new JLabel("Enter password: "));
+	    confirmationDialog.add(new JLabel("Ingrese su contraseña: "));
 	    confirmationDialog.add(passwordField);
 	    confirmationDialog.add(ShowHideButton);
 	    confirmationDialog.add(confirmButton);
@@ -399,11 +435,11 @@ public class User extends JFrame implements ActionListener{
 	                    Inicio.InicioS = true;
 	                    return true;
 	                } else {
-	                    JOptionPane.showMessageDialog(null, "Incorrect password. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+	                    JOptionPane.showMessageDialog(null, "Contraseña Incorrecta!", "Error", JOptionPane.ERROR_MESSAGE);
 	                }
 	            }
 	        } else {
-	            JOptionPane.showMessageDialog(null, "We couldn't find your Book4u account.", "Error", JOptionPane.ERROR_MESSAGE);
+	            JOptionPane.showMessageDialog(null, "Cuenta inexistente. ", "Error", JOptionPane.ERROR_MESSAGE);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -419,7 +455,7 @@ public class User extends JFrame implements ActionListener{
 	  	Nombre2.setText(valores[0]);
 	  	Email2.setText(Inicio.correo);
 	  	Telefono2.setText(valores[1]);
-	  	
+	  	Fecha3.setText(valores[3]);
 	}
 
 }

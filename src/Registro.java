@@ -119,25 +119,30 @@ public class Registro implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(registerN == e.getSource()) { 
+			boolean c= Marcadores_de_Posicion.validarTexto(TelefonoT, 9);
 			boolean a= Marcadores_de_Posicion.Errorp(EmailT.getText());
 			char [] password  = passwordT.getPassword();
 			String p1= String.valueOf(passwordT.getPassword());
 			String p2= String.valueOf(passwordT2.getPassword());
 			if(password.length == 0) {
-				JOptionPane.showMessageDialog(null, "Password Field must be filled", "Information", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Campos vacios por favor verifique!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 			}else if (nombreApellidos.getText().equals("Ej : Federic Gonzalez")) {
-				JOptionPane.showMessageDialog(null, "Name Field must be filled", "Information", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Campos vacios por favor verifique!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 			}else if(!EmailT.getText().contains("@" ) || !EmailT.getText().endsWith(".com")) {
-					JOptionPane.showMessageDialog(null, "Invalid email address. Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Correo Electronico invalido", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			else if (!p1.equals(p2)) {
 				JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Information", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else if (a) {
-				JOptionPane.showMessageDialog(null, "Correo ya registrado en la BDD", "ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Correo ya registrado Inicia Sesión", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
-			
-			
+			else if (!c) {
+				JOptionPane.showMessageDialog(null, "Verifica la longitud y los caracetes en el telefono.", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+			else if (String.valueOf(passwordT.getPassword()).length() != 8) {
+					JOptionPane.showMessageDialog(null, "La Contraseña debe ser de minimo 8 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+		        }
 			else {
 				Inicio.Inicio2 = DarAlta();
 				Reserva.Inicio4 = DarAlta();
@@ -180,7 +185,7 @@ public class Registro implements ActionListener{
 	        Telefono = Integer.parseInt(TelefonoT.getText());
 	    }
 	    String sql = "INSERT INTO USUARIO (E_MAIL, NOMBRE_APELLIDO, FECHA_DE_NACIMIENTO, TELEFONO, CONTRASEÑA, QUEVEDOS) " +
-	             "VALUES ('" + EmailT.getText() + "','" + nombreApellidos.getText() + "', TO_DATE('" + fecha  + "', 'MM/DD/YYYY'), '" + Telefono + "','" +
+	             "VALUES ('" + EmailT.getText() + "','" + nombreApellidos.getText() + "', TO_DATE('" + fecha  + "', 'MM/DD/YYYY'), " + Telefono + ",'" +
 	             String.valueOf(passwordT.getPassword()) + "', 0)";
 
 	    try {

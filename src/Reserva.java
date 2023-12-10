@@ -207,12 +207,12 @@ public class Reserva extends JFrame implements ActionListener {
 					Saldo= false;
 				}
 				if (Saldo) {
-					confirmado= Marcadores_de_Posicion.Reserva(0, FEntrada1, FSalida1, Adultos1, Niños1, A, Noches1, id_hotel1, Inicio.correo) ;
+					confirmado= Marcadores_de_Posicion.Reserva(0, FEntrada1, FSalida1, Adultos1, Niños1, A, Noches1, id_hotel1, Inicio.correo, Inicio.A) ;
 				}
 				
 				if (confirmado || Saldo) {
-					Marcadores_de_Posicion.actualizarQuevedos(0);
 					JOptionPane.showMessageDialog(null, "Reserva hecha con éxito", "Information", JOptionPane.INFORMATION_MESSAGE);
+					Marcadores_de_Posicion.actualizarQuevedos(0);
 					this.dispose();
 					new Inicio();
 				}else {

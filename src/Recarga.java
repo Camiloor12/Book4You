@@ -58,7 +58,6 @@ public class Recarga extends JFrame implements ActionListener {
 		  botonVolver.setOpaque(false);
 		  botonVolver.setContentAreaFilled(false);
 		  botonVolver.addActionListener(this);
-		  botonVolver.addActionListener(this);
 		  botonVolver.setBounds(6, 60, 40, 40);
 		  TNombre= new JTextField();
 		  Nombre= new JLabel("NOMBRE:");
@@ -75,8 +74,11 @@ public class Recarga extends JFrame implements ActionListener {
 		  TNUMT.setBounds(300,170,200,35);
 		  TNUMT.setFont(Inicio.fuente2);
 		  Mes= new JComboBox<>(meses);
+		  String[] fechaActual = Marcadores_de_Posicion.obtenerFechaActual();
+			String Mes1= Marcadores_de_Posicion.Mes2(Integer.parseInt(fechaActual[1]));
 		  Mes.setBounds(80,240,110,35);
 		  Mes.setFont(Inicio.fuente2);
+		  Mes.setSelectedItem(Mes1);
 		  MES=new JLabel ("MES ");;
 		  MES.setForeground(Color.white);
 		  MES.setBounds(80,210,120,35);
@@ -108,7 +110,7 @@ public class Recarga extends JFrame implements ActionListener {
 	      Cancelar.setBackground(Color.white);
 	      Cancelar.setContentAreaFilled(true);
 		 
-		
+	      this.setIconImage(image.getImage());
 		  this.add(AÑO);
 		  this.add(Años);
 		  this.add(CVC);
@@ -131,6 +133,9 @@ public class Recarga extends JFrame implements ActionListener {
    
     
      public void actionPerformed(ActionEvent e) {
+    	 JTextField C= new JTextField(String.valueOf(TCVC.getPassword()));
+    	 boolean A= Marcadores_de_Posicion.validarTexto(TNUMT, 16);
+    	 boolean B= Marcadores_de_Posicion.validarTexto(C, 3);
     	 String Mese = (String) Mes.getSelectedItem();
          int Año = (int) Años.getSelectedItem();
          boolean si= Marcadores_de_Posicion.Fecha(Mese, 28, Año);
@@ -141,6 +146,12 @@ public class Recarga extends JFrame implements ActionListener {
 		
 		else if (TNombre.getText().isEmpty() || TNUMT.getText().isEmpty()|| String.valueOf(TCVC.getPassword()).isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Existen Campos sin rellenar.", "Information", JOptionPane.ERROR_MESSAGE);
+		}
+		else if (!A) {
+			JOptionPane.showMessageDialog(null, "Verifique el numero de digitos o los caracteres en el n° de Tarjeta", "Information", JOptionPane.ERROR_MESSAGE);
+		}
+		else if (!B) {
+			JOptionPane.showMessageDialog(null, "Verifique el numero de digitos o los caracteres en el CVC", "Information", JOptionPane.ERROR_MESSAGE);
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Compra exitosa.", "Information", JOptionPane.INFORMATION_MESSAGE);
