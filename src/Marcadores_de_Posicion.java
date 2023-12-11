@@ -401,9 +401,6 @@ public class Marcadores_de_Posicion {
 	}
 
 	public static int calcularPrecioTotal(int noches, int cantidadNinos, int cantidadAdultos, int precioBasePorNoche) {
-		if (noches != 1) {
-			noches--;
-		}
 
 		int precioAdulto = precioBasePorNoche;
 		int Precionniño = precioBasePorNoche / 2;

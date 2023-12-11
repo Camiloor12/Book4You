@@ -62,7 +62,9 @@ public class Registro implements ActionListener{
 		    nameSurn.setFont(fuente);
 		    password.setBounds((p.getWidth() / 2) - 115, 230, 200, 35);
 		    passwordT.setBounds((p.getWidth() / 2) - 115, 255, 200, 35);
+		    new passwords(450, 260,passwordT,p);
 		    password2.setBounds((p.getWidth() / 2) - 115, 285, 200, 35);
+		    new passwords(450, 313,passwordT2,p);
 		    password2.setFont(fuente);
 		    passwordT2.setBounds((p.getWidth() / 2) - 115, 310, 200, 35);
 		    registerN.setBounds((p.getWidth() / 2) - 115, 365, 200, 35);
@@ -144,7 +146,8 @@ public class Registro implements ActionListener{
 					JOptionPane.showMessageDialog(null, "La Contraseña debe ser de minimo 8 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
 		        }
 			else {
-				Inicio.Inicio2 = DarAlta();
+				Inicio.Inicio2 = false;
+				Inicio.InicioS = true;
 				Reserva.Inicio4 = DarAlta();
 				if (Valor ==1) {
 					Reserva.Inicio4=true;
@@ -194,7 +197,7 @@ public class Registro implements ActionListener{
 	        JOptionPane.showMessageDialog(null, "Usuario Creado con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
 	        return true;
 	    } catch (SQLException e2) {
-	        System.out.println("Ha habido un error en el Insert " + e2);
+	    	
 	    }
 		return false;
 	}

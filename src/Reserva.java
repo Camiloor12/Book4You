@@ -95,7 +95,6 @@ public class Reserva extends JFrame implements ActionListener {
 		Noche.setText("Noches: " + Noches);
 	}
 	else {
-		Noches=Noches-1;
 		Noches1=Noches;
 		Noche.setText("Noches: " + Noches);
 	}

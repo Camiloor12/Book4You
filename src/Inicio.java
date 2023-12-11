@@ -374,12 +374,14 @@ public class Inicio extends JFrame implements ActionListener {
 			animation();
 		}else if (e.getSource() == botonLogOut) {
 			if (!InicioS || Inicio2) {
-				JOptionPane.showMessageDialog(null, "Try and log in or create an account first !", "Information",
+				JOptionPane.showMessageDialog(null, "Vuelve a intentarlo! o crea una cuenta", "Information",
 						JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				JOptionPane.showMessageDialog(null, "Logged out succesfully !", "Information",
+				JOptionPane.showMessageDialog(null, "Logout exitoso!", "Information",
 						JOptionPane.INFORMATION_MESSAGE);
 				InicioS = false;
+				Reserva.Inicio3 = false;
+				Reserva.Inicio4 = false;
 				InicioSesion();
 			}
 		} else if (e.getSource() == user2) {
@@ -909,7 +911,7 @@ public class Inicio extends JFrame implements ActionListener {
 			NochesTH1 = new JLabel("Noches: " + String.valueOf(valorInt));	
 		}
 		else if (valorInt != 1) {
-			NochesTH1 = new JLabel("Noches: " + String.valueOf(valorInt-1));
+			NochesTH1 = new JLabel("Noches: " + String.valueOf(valorInt));
 		}	
 		JPanel div = null;
 		JLabel valoracion = new JLabel("Valoraciones:");

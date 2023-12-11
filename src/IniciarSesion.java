@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -43,7 +44,6 @@ public class IniciarSesion implements ActionListener {
 		IniciarS.setBounds(540, 85, 200, 35);
 		IniciarS.addActionListener(this);
 		CrearC.addActionListener(this);
-		ShowHideButton.addActionListener(this);
 		CrearC.setBounds(330, 85, 200, 35);
 		Marcadores_de_Posicion.estiloBoton(IniciarS);
 		Marcadores_de_Posicion.estiloBoton(CrearC);
@@ -53,10 +53,7 @@ public class IniciarSesion implements ActionListener {
 		EmailT.setFont(fuente);
 		password.setBounds(540, 5, 200, 35);
 		passwordT.setBounds(540, 35, 200, 35);
-		ShowHideButton.setBorderPainted(false);
-		ShowHideButton.setOpaque(false);
-		ShowHideButton.setContentAreaFilled(false);
-		ShowHideButton.setBounds(744, 38, 30, 30);
+		new passwords(744,38,passwordT,b);
 		b.add(Email);
 		b.add(EmailT);
 		b.add(password);
@@ -64,7 +61,7 @@ public class IniciarSesion implements ActionListener {
 		b.add(IniciarS);
 		b.add(CrearC);
 		b.add(botonVolver);
-		b.add(ShowHideButton);
+		
 		botonVolver.setVisible(true);
 		passwordT.addKeyListener(new KeyAdapter() {
             @Override
@@ -104,13 +101,7 @@ public class IniciarSesion implements ActionListener {
 		} else if (CrearC == e.getSource()) {
 			new Registro(0);
 			b.dispose();
-		}else if (passwordT.getEchoChar() == 0) {//Ocultar password
-            passwordT.setEchoChar('*');
-            ShowHideButton.setIcon(Show);
-        } else {//Mostrar password
-            passwordT.setEchoChar((char) 0);
-            ShowHideButton.setIcon(Hide);
-        }
+		}
 
 	}
 

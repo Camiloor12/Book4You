@@ -96,6 +96,7 @@ public class Recarga extends JFrame implements ActionListener {
 		  CVC.setFont(Inicio.fuente2);
 	      TCVC=  new JPasswordField();
 	      TCVC.setBounds(300,240,200,35);
+	      new passwords(465, 243,TCVC,this);
 	      TCVC.setFont(Inicio.fuente2);
 	      Pagar = new JButton("PAGAR");
 	      Marcadores_de_Posicion.estiloBoton(Pagar);

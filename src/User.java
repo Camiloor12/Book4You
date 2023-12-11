@@ -79,7 +79,9 @@ public class User extends JFrame implements ActionListener{
 	  protected static JPasswordField Contra = new JPasswordField (2) ;
 	  protected JLabel Contra2= new JLabel("Nueva Contraseña: ");
 	  private double x=0;
-
+	  private JPanel base1 = new JPanel();
+	  private passwords p = new passwords((775/2)+215,25,Contra,base1);
+	  private JButton bttn = p.gButtn();
 	  public User(int valor) {
 		  Valor= valor;
 		String devolver = Marcadores_de_Posicion.devolverUsuarioInfo();
@@ -129,7 +131,6 @@ public class User extends JFrame implements ActionListener{
         ShowHideButton.setOpaque(false);
         ShowHideButton.setContentAreaFilled(false);
 	    botonVolver.setBorderPainted(false);
-	    JPanel base1 = new JPanel();
 	    base1.setBackground(Color.WHITE);
         base1.setBounds(10, 138, getWidth() - 35 , 407);     
         base1.setLayout(null);
@@ -208,6 +209,9 @@ public class User extends JFrame implements ActionListener{
 	    Contra2.setFont(fuente);
 	    Contra.setVisible(false);
 	    Contra2.setVisible(false);
+	
+		
+		bttn.setVisible(false);
 	    ShowHideButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -293,11 +297,16 @@ public class User extends JFrame implements ActionListener{
 			mes.setVisible(true);
 			Año.setVisible(true);
 			Email.setText("Fecha de Nacimiento");
+			bttn.setVisible(true);
+			p.sButtn(bttn);
 		}else if(Cambio_Datos2 == e.getSource()) {
 			 A = Marcadores_de_Posicion.validarTexto(TelefonoT, 9);
-			 if (!A) {
+			 if (!A && !TelefonoT.getText().equals("0")) {
             	 JOptionPane.showMessageDialog(null, "Cambios no generados! Error en el campo telefono", "Cambios", JOptionPane.ERROR_MESSAGE); 	
 			}
+			 else  if (String.valueOf(Contra.getPassword()).length() != 8 && !String.valueOf(Contra.getPassword()).isEmpty()) {
+            	 JOptionPane.showMessageDialog(null, "La contraseña debe ser de minimo 8 caracteres. ", "Cambios", JOptionPane.ERROR_MESSAGE); 	
+		        }
 			 else {
 			showConfirmationDialog();
 			Nombre2.setVisible(true);		
@@ -322,6 +331,8 @@ public class User extends JFrame implements ActionListener{
 			Dia.setVisible(false);
 			mes.setVisible(false);
 			Año.setVisible(false);
+			bttn.setVisible(false);
+			p.sButtn(bttn);
 			 }
 		}
 			else if(historialReservas == e.getSource()) {
